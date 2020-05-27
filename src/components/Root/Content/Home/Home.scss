@@ -1,0 +1,19 @@
+@import 'src/assets/styles/variables';
+
+.Home {
+  .Section {
+    .MuiPaper-root {
+      height: 20rem;
+    }
+  }
+
+  .CovidImg {
+    @media (max-width: $break-md) {
+      width: 8rem;
+    }
+
+    @media (min-width: $break-md-plus) {
+      width: 10rem;
+    }
+  }
+}

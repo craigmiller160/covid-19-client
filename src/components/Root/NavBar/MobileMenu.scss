@@ -1,0 +1,27 @@
+@mixin item {
+  cursor: pointer;
+  padding-left: 2rem;
+  text-transform: uppercase;
+}
+
+.MobileMenu {
+  .MuiDrawer-paper {
+    background-color: #3f51b5;
+    color: white;
+    width: 20rem;
+  }
+
+  .title {
+    @include item;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .item {
+    @include item;
+    &.active {
+      color: rgba(0,0,0,0.87);
+      background-color: #e0e0e0;
+    }
+  }
+}

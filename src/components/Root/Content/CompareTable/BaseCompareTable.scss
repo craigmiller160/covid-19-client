@@ -1,0 +1,39 @@
+@import 'src/assets/styles/variables';
+
+.CompareTable {
+  margin-top: 2rem;
+  .Table {
+    width: 100%;
+  }
+
+  .FilterForm {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .MuiPaper-root {
+      padding: 1rem 0;
+    }
+
+    .Filters {
+      width: 100%;
+
+      .SearchBtn {
+        height: 100%;
+        margin: 1rem 0;
+      }
+
+      .FilterField {
+        width: 20rem;
+
+        &.spacing {
+          margin: 1rem 0;
+        }
+
+        &.long {
+          width: 30rem;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,25 @@
+@import 'src/assets/styles/variables';
+
+.Search {
+  margin: 2rem auto;
+  padding: 1rem 0;
+  @media (max-width: $break-md-plus) {
+    width: 70%;
+  }
+
+  @media (max-width: $break-md) {
+    width: 100%;
+  }
+
+  .search-box-wrapper {
+    .search-box {
+      width: 100%;
+    }
+  }
+
+  .date-wrapper {
+    .date-item {
+      width: 50%;
+    }
+  }
+}

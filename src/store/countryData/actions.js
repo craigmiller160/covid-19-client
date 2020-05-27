@@ -1,0 +1,86 @@
+import {
+    getCountriesList,
+    getCountryCurrentData,
+    getCountryHistoricalData,
+    getWorldHistoricalData
+} from '../../services';
+import countryDataSlice from './slice';
+import coreSlice from '../core/slice';
+import { handleError } from '../utilityActions';
+import moment from 'moment';
+import { COUNTRY_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
+import { worldOption } from '../../util/countryOptions';
+import { change } from 'redux-form';
+import {
+    COUNTRY_COMPARE_FORM,
+    orderOptions,
+    rankByOptions
+} from '../../components/Root/Content/CompareTable/BaseCompareTable';
+
+export const loadCountries = () => async (dispatch) => {
+    try {
+        const res = await getCountriesList();
+        dispatch(countryDataSlice.actions.setCountries(formatCountryData(res.data)));
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error loading country list'));
+    }
+};
+
+const formatCountryData = (data) =>
+    data.map((country) => ({
+        label: country.displayLocation,
+        value: country.location
+    }));
+
+export const loadCountryHistoricalData = () => async (dispatch, getState) => {
+    try {
+        const formValues = getState().form[COUNTRY_SEARCH_FORM]?.values ?? {};
+        dispatch(coreSlice.actions.setLoading(true));
+
+        const values = {
+            ...formValues,
+            location: formValues.location || worldOption
+        };
+
+        dispatch(change(COUNTRY_SEARCH_FORM, 'location', values.location));
+
+        const startDate = values.startDate ? moment(values.startDate).format('YYYY-MM-DD') : undefined;
+        const endDate = values.endDate ? moment(values.endDate).format('YYYY-MM-DD') : undefined;
+
+        let res;
+        if (values.location.value === worldOption.value) {
+            res = await getWorldHistoricalData(startDate, endDate);
+        } else {
+            res = await getCountryHistoricalData(values.location.value, startDate, endDate);
+        }
+        dispatch(countryDataSlice.actions.setHistoricalData(res.data));
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error loading country historical data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
+    }
+};
+
+export const loadCountryCurrentData = () => async (dispatch, getState) => {
+    try {
+        dispatch(coreSlice.actions.setLoading(true));
+        const { sortKey, sortOrder  } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
+
+        const realSortKey = sortKey || rankByOptions[0];
+        const realSortOrder = sortOrder || orderOptions[0];
+
+        dispatch(change(COUNTRY_COMPARE_FORM, 'sortKey', realSortKey));
+        dispatch(change(COUNTRY_COMPARE_FORM, 'sortOrder', realSortOrder));
+
+        const res = await getCountryCurrentData(realSortKey.value, realSortOrder.value);
+        const formattedData = res.data.map((record, index) => ({
+            ...record,
+            rank: index + 1
+        }));
+        dispatch(countryDataSlice.actions.setCurrentData(formattedData));
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error loading country current data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
+    }
+};

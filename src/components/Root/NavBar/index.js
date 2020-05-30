@@ -12,9 +12,11 @@ import createMenuItems from './menuItems';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import displaySlice, {SECTION_HOME} from '../../../store/display/slice';
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 
 const NavBar = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const loading = useSelector((state) => state.core.loading);
     const selectedSection = useSelector((state) => state.display.selectedSection);
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -29,8 +31,7 @@ const NavBar = () => {
         setMenuOpen(false);
     };
 
-    const menuItems = createMenuItems(dispatch, selectedSection);
-    const goHome = () => dispatch(displaySlice.actions.setSelectedSection(SECTION_HOME));
+    const menuItems = createMenuItems(dispatch, location.pathname);
 
     return (
         <div>
@@ -42,37 +43,38 @@ const NavBar = () => {
                             <MenuIcon />
                         </IconButton>
                     }
-                    <Button variant="text" color="inherit" onClick={ goHome }>
-                        <Typography className="title" variant="h6" noWrap>COVID-19 Data</Typography>
+                    <Button variant="text" color="inherit">
+                        <NavLink
+                            to="/"
+                            exact
+                            className="NavLink"
+                        >
+                            <Typography className="title" variant="h6" noWrap>COVID-19 Data</Typography>
+                        </NavLink>
                     </Button>
                     {
                         !loading && isNotPhone &&
                         <>
                             <div className="left">
                                 {
-                                    menuItems.left.map((item) => (
+                                    menuItems.left.map((item, index) => (
                                         <Button
-                                            key={ item.id }
+                                            key={ index }
                                             variant={ item.active ? 'contained' : 'text' }
                                             color={ item.active ? 'default' : 'inherit' }
                                             onClick={ item.onClick }
                                         >
-                                            { item.label }
+                                            <NavLink
+                                                to={ item.to }
+                                                exact={ item.exact }
+                                                className="NavLink"
+                                            >
+                                                { item.label }
+                                            </NavLink>
                                         </Button>
                                     ))
                                 }
                             </div>
-                            {
-                                menuItems.right.map((item) => (
-                                    <Button
-                                        key={ item.id }
-                                        color="inherit"
-                                        onClick={ item.onClick }
-                                    >
-                                        { item.label }
-                                    </Button>
-                                ))
-                            }
                         </>
                     }
                 </Toolbar>

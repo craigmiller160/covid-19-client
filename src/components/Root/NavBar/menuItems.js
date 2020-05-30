@@ -32,13 +32,13 @@ const createMenuItems = (dispatch, selected, closeMenu) => {
     ];
 
     const right = [];
-    if (isLocalhost) {
-        right.push({
-            id: -1,
-            label: 'Update Data',
-            onClick: () => dispatch(downloadNewData())
-        });
-    }
+    // if (isLocalhost) {
+    //     right.push({
+    //         id: -1,
+    //         label: 'Update Data',
+    //         onClick: () => dispatch(downloadNewData())
+    //     });
+    // }
 
     return {
         left,

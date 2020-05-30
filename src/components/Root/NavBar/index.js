@@ -18,7 +18,6 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const loading = useSelector((state) => state.core.loading);
-    const selectedSection = useSelector((state) => state.display.selectedSection);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('md'));

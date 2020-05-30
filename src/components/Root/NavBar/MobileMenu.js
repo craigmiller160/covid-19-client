@@ -7,21 +7,18 @@ import createMenuItems from './menuItems';
 import './MobileMenu.scss';
 import Typography from '@material-ui/core/Typography';
 import displaySlice, {SECTION_HOME} from '../../../store/display/slice';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const MobileMenu = (props) => {
     const dispatch = useDispatch();
-    const selectedSection = useSelector((state) => state.display.selectedSection);
+    const location = useLocation();
     const {
         isMenuOpen,
         handleMenuClose
     } = props;
 
-    const menuItems = createMenuItems(dispatch, selectedSection, handleMenuClose);
+    const menuItems = createMenuItems(dispatch, location.pathname, handleMenuClose);
     const mergedMenuItems = [...menuItems.left, ...menuItems.right];
-    const goHome = () => {
-        handleMenuClose();
-        dispatch(displaySlice.actions.setSelectedSection(SECTION_HOME));
-    };
 
     return (
         <Drawer
@@ -29,22 +26,34 @@ const MobileMenu = (props) => {
             open={ isMenuOpen }
             onClose={ handleMenuClose }
         >
-            <Typography
-                className="title"
-                variant="h6"
-                noWrap
-                onClick={ goHome }
+            <NavLink
+                to="/"
+                exact
+                className="NavLink"
             >
-                COVID-19 Data
-            </Typography>
+                <Typography
+                    className="title"
+                    variant="h6"
+                    noWrap
+                    onClick={ handleMenuClose }
+                >
+                    COVID-19 Data
+                </Typography>
+            </NavLink>
             {
-                mergedMenuItems.map((item) => (
+                mergedMenuItems.map((item, index) => (
                     <ListItem
-                        key={ item.id }
+                        key={ index }
                         className={ `item ${item.active ? 'active' : ''}` }
                         onClick={ item.onClick }
                     >
-                        <ListItemText>{ item.label }</ListItemText>
+                        <NavLink
+                            to={ item.to }
+                            exact={ item.exact }
+                            className="NavLink"
+                        >
+                            <ListItemText>{ item.label }</ListItemText>
+                        </NavLink>
                     </ListItem>
                 ))
             }

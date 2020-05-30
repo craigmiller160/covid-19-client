@@ -25,7 +25,7 @@ import CountryCompareTable from './CompareTable/CountryCompareTable';
 import StateCompareTable from './CompareTable/StateCompareTable';
 import coreSlice from '../../../store/core/slice';
 import Home from './Home';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 const getData = (selectedSection) => {
     switch (selectedSection) {
@@ -145,6 +145,7 @@ const Content = () => {
                     exact
                     component={ Home }
                 />
+                <Redirect to="/" />
             </Switch>
         </Container>
     );

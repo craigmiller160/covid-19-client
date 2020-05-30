@@ -1,8 +1,12 @@
 import React from 'react';
 import BaseHistoricalTable from './BaseHistoricalTable';
+import StateSearch from '../Search/StateSearch';
 
 const StateHistoricalTable = () => (
-    <BaseHistoricalTable isState />
+    <div>
+        <StateSearch />
+        <BaseHistoricalTable isState />
+    </div>
 );
 
 export default StateHistoricalTable;

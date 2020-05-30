@@ -1,8 +1,12 @@
 import React from 'react';
 import BaseHistoricalTable from './BaseHistoricalTable';
+import CountrySearch from '../Search/CountrySearch';
 
 const CountryHistoricalTable = () => (
-    <BaseHistoricalTable />
+    <div>
+        <CountrySearch />
+        <BaseHistoricalTable />
+    </div>
 );
 
 export default CountryHistoricalTable;

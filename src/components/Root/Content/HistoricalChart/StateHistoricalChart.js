@@ -1,8 +1,12 @@
 import React from 'react';
 import BaseHistoricalChart from './BaseHistoricalChart';
+import StateSearch from '../Search/StateSearch';
 
 const StateHistoricalChart = () => (
-    <BaseHistoricalChart isState />
+    <div>
+        <StateSearch />
+        <BaseHistoricalChart isState />
+    </div>
 );
 
 export default StateHistoricalChart;

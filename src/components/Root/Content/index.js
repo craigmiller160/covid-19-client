@@ -25,6 +25,7 @@ import CountryCompareTable from './CompareTable/CountryCompareTable';
 import StateCompareTable from './CompareTable/StateCompareTable';
 import coreSlice from '../../../store/core/slice';
 import Home from './Home';
+import { Route, Switch } from 'react-router-dom';
 
 const getData = (selectedSection) => {
     switch (selectedSection) {
@@ -98,6 +99,7 @@ const Content = () => {
     }, []); // eslint-disable-line
 
     useEffect(() => {
+        // TODO move all these loading actions to individual components
         const load = async () => {
             const load = getLoad(selectedSection);
             if (load) {
@@ -109,9 +111,6 @@ const Content = () => {
         load();
     }, [dispatch, selectedSection, started]);
 
-    const Data = getData(selectedSection);
-    const Search = getSearch(selectedSection);
-
     return (
         <Container className="Content">
             <Alert />
@@ -122,10 +121,29 @@ const Content = () => {
             }
             {
                 (!loading && state.started) &&
-                <div>
-                    <Search />
-                    <Data />
-                </div>
+                <Switch>
+                    <Route
+                        path="/country/history/data"
+                        component={ CountryHistoricalTable }
+                    />
+                    <Route
+                        path="/country/history/chart"
+                        component={ CountryHistoricalChart }
+                    />
+                    <Route
+                        path="/state/history/data"
+                        component={ StateHistoricalTable }
+                    />
+                    <Route
+                        path="/state/history/chart"
+                        component={ StateHistoricalChart }
+                    />
+                    <Route
+                        path="/"
+                        exact
+                        component={ Home }
+                    />
+                </Switch>
             }
         </Container>
     );

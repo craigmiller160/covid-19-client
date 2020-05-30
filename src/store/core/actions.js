@@ -40,6 +40,9 @@ export const loadLists = () => async (dispatch) => {
 };
 
 const formatDownloadDate = (downloadDate) => {
+    if (!downloadDate) {
+        return 'No Data';
+    }
     return moment(downloadDate, 'YYYY-MM-DD HH:mm:ssZ')
         .format('YYYY-MM-DD HH:mm:ss');
 };

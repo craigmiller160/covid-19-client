@@ -1,9 +1,10 @@
-import { downloadNewData } from '../../../store/core/actions';
 import displaySlice, {
-    SECTION_COUNTRY_HIST_DATA,
+    SECTION_COUNTRY_COMPARE_DATA,
     SECTION_COUNTRY_HIST_CHARTS,
-    SECTION_STATE_HIST_DATA,
-    SECTION_STATE_HIST_CHARTS, SECTION_COUNTRY_COMPARE_DATA, SECTION_STATE_COMPARE_DATA
+    SECTION_COUNTRY_HIST_DATA,
+    SECTION_STATE_COMPARE_DATA,
+    SECTION_STATE_HIST_CHARTS,
+    SECTION_STATE_HIST_DATA
 } from '../../../store/display/slice';
 
 const menuItemCreator = (dispatch, selected, closeMenu) =>(id, label) => ({
@@ -20,7 +21,6 @@ const menuItemCreator = (dispatch, selected, closeMenu) =>(id, label) => ({
 
 const createMenuItems = (dispatch, selected, closeMenu) => {
     const createMenuItem = menuItemCreator(dispatch, selected, closeMenu);
-    // const isLocalhost = window.location.hostname === 'localhost';
 
     const left = [
         createMenuItem(SECTION_COUNTRY_HIST_DATA, 'Country History Data'),
@@ -32,13 +32,6 @@ const createMenuItems = (dispatch, selected, closeMenu) => {
     ];
 
     const right = [];
-    // if (isLocalhost) {
-    //     right.push({
-    //         id: -1,
-    //         label: 'Update Data',
-    //         onClick: () => dispatch(downloadNewData())
-    //     });
-    // }
 
     return {
         left,

@@ -24,3 +24,5 @@ const useLoading = (props) => {
 
     return Component;
 };
+
+export default useLoading;

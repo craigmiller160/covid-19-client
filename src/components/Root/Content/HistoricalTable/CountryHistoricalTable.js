@@ -4,29 +4,24 @@ import CountrySearch from '../Search/CountrySearch';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import Loading from '../Loading';
+import useLoading from '../../../hooks/useLoading';
 
 const CountryHistoricalTable = () => {
-    const loading = useSelector((state) => state.core.loading);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadCountryHistoricalData());
-    }, []);
+    const loader = () => dispatch(loadCountryHistoricalData());
+    const Component = () => (
+        <div>
+            <CountrySearch />
+            <BaseHistoricalTable />
+        </div>
+    );
+    const DisplayComponent = useLoading({
+        loader,
+        component: Component
+    });
 
     return (
-        <div>
-            {
-                loading &&
-                <Loading />
-            }
-            {
-                !loading &&
-                <div>
-                    <CountrySearch />
-                    <BaseHistoricalTable />
-                </div>
-            }
-        </div>
+        <DisplayComponent />
     );
 }
 

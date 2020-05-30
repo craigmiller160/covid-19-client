@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// TODO loading, started no longer necessary
 const initialState = {
     loading: false,
     error: null,

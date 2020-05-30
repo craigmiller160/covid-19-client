@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import './BaseHistoricalChart.scss';
 import Button from '@material-ui/core/Button';
-import { useHistory, useLocation } from 'react-router';
+import { Redirect, useHistory, useLocation } from 'react-router';
 
 const PATH_NEW_CASES = 'newcases';
 const PATH_TOTAL_CASES = 'totalcases';
@@ -66,7 +66,6 @@ const BaseHistoricalChart = (props) => {
     const history = useHistory();
     const selector = isState ? stateSelector : countrySelector;
     const basePath = isState ? '/state/history/chart' : '/country/history/chart';
-    const dispatch = useDispatch();
     const data = useSelector(selector, shallowEqual);
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
@@ -78,7 +77,7 @@ const BaseHistoricalChart = (props) => {
     const { dataKey, dataName } = getChartKeys(location);
 
     if (location.pathname.endsWith('/history/chart')) {
-        history.push(`${basePath}/${PATH_TOTAL_CASES}`);
+        return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
     }
 
     return (

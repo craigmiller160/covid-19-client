@@ -133,6 +133,14 @@ const Content = () => {
                     component={ StateHistoricalChart }
                 />
                 <Route
+                    path="/country/compare"
+                    component={ CountryCompareTable }
+                />
+                <Route
+                    path="/state/compare"
+                    component={ StateCompareTable }
+                />
+                <Route
                     path="/"
                     exact
                     component={ Home }

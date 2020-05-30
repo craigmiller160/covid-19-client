@@ -2,11 +2,10 @@ import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import createMenuItems from './menuItems';
 import './MobileMenu.scss';
 import Typography from '@material-ui/core/Typography';
-import displaySlice, {SECTION_HOME} from '../../../store/display/slice';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const MobileMenu = (props) => {

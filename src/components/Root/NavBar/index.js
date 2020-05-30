@@ -11,8 +11,7 @@ import MobileMenu from './MobileMenu';
 import createMenuItems from './menuItems';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import displaySlice, {SECTION_HOME} from '../../../store/display/slice';
-import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
     const dispatch = useDispatch();

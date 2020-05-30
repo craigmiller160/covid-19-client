@@ -1,4 +1,4 @@
-import {getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList} from '../../services';
+import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList } from '../../services';
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
 import moment from 'moment';

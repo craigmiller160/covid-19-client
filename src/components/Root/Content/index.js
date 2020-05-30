@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Container from '@material-ui/core/Container';
 import Alert from './Alert';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from './Loading';
 import './Content.scss';
 import { loadLists, loadMetadata } from '../../../store/core/actions';
 import { loadCountryCurrentData, loadCountryHistoricalData } from '../../../store/countryData/actions';
@@ -12,10 +11,11 @@ import { loadStateCurrentData, loadStateHistoricalData } from '../../../store/st
 import {
     SECTION_COUNTRY_COMPARE_DATA,
     SECTION_COUNTRY_HIST_CHARTS,
-    SECTION_COUNTRY_HIST_DATA, SECTION_STATE_COMPARE_DATA,
+    SECTION_COUNTRY_HIST_DATA,
+    SECTION_HOME,
+    SECTION_STATE_COMPARE_DATA,
     SECTION_STATE_HIST_CHARTS,
-    SECTION_STATE_HIST_DATA,
-    SECTION_HOME
+    SECTION_STATE_HIST_DATA
 } from '../../../store/display/slice';
 import CountryHistoricalTable from './HistoricalTable/CountryHistoricalTable';
 import CountryHistoricalChart from './HistoricalChart/CountryHistoricalChart';

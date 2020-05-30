@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import BaseHistoricalTable from './BaseHistoricalTable';
 import CountrySearch from '../Search/CountrySearch';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
-import Loading from '../Loading';
 import useLoading from '../../../hooks/useLoading';
 
 const Component = () => (

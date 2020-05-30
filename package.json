@@ -1,6 +1,6 @@
 {
   "name": "@craigmiller160/covid-19-client",
-  "version": "1.7.0-beta",
+  "version": "1.7.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "1.x",

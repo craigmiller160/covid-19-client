@@ -6,15 +6,16 @@ import { loadCountryHistoricalData } from '../../../../store/countryData/actions
 import Loading from '../Loading';
 import useLoading from '../../../hooks/useLoading';
 
+const Component = () => (
+    <div>
+        <CountrySearch />
+        <BaseHistoricalTable />
+    </div>
+);
+
 const CountryHistoricalTable = () => {
     const dispatch = useDispatch();
     const loader = () => dispatch(loadCountryHistoricalData());
-    const Component = () => (
-        <div>
-            <CountrySearch />
-            <BaseHistoricalTable />
-        </div>
-    );
     const DisplayComponent = useLoading({
         loader,
         component: Component

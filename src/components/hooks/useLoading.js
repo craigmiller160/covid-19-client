@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../Root/Content/Loading';
+import { useSelector } from 'react-redux';
 
 const useLoading = (props) => {
     const {
         loader,
         component
     } = props;
-    const [state, setState] = useState({ loading: true });
+    const loading = useSelector((state) => state.core.loading);
 
     const Component = component;
 
     useEffect(() => {
-        const doLoad = async () => {
-            await loader();
-            setState({ loading: false });
-        };
-        doLoad();
+        loader();
     }, []);
 
-    if (state.loading) {
+    if (loading) {
         return Loading;
     }
 

@@ -115,36 +115,29 @@ const Content = () => {
         <Container className="Content">
             <Alert />
             <h3>Last updated: { downloadDate }</h3>
-            {
-                (loading || !state.started) &&
-                <Loading />
-            }
-            {
-                (!loading && state.started) &&
-                <Switch>
-                    <Route
-                        path="/country/history/data"
-                        component={ CountryHistoricalTable }
-                    />
-                    <Route
-                        path="/country/history/chart"
-                        component={ CountryHistoricalChart }
-                    />
-                    <Route
-                        path="/state/history/data"
-                        component={ StateHistoricalTable }
-                    />
-                    <Route
-                        path="/state/history/chart"
-                        component={ StateHistoricalChart }
-                    />
-                    <Route
-                        path="/"
-                        exact
-                        component={ Home }
-                    />
-                </Switch>
-            }
+            <Switch>
+                <Route
+                    path="/country/history/data"
+                    component={ CountryHistoricalTable }
+                />
+                <Route
+                    path="/country/history/chart"
+                    component={ CountryHistoricalChart }
+                />
+                <Route
+                    path="/state/history/data"
+                    component={ StateHistoricalTable }
+                />
+                <Route
+                    path="/state/history/chart"
+                    component={ StateHistoricalChart }
+                />
+                <Route
+                    path="/"
+                    exact
+                    component={ Home }
+                />
+            </Switch>
         </Container>
     );
 };

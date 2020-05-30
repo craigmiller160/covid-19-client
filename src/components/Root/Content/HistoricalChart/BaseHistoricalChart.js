@@ -9,10 +9,20 @@ import './BaseHistoricalChart.scss';
 import Button from '@material-ui/core/Button';
 import { useHistory, useLocation } from 'react-router';
 
-const CHART_NEW_CASES = 'newcases';
-const CHART_TOTAL_DEATHS = 'totaldeaths';
-const CHART_NEW_DEATHS = 'newdeaths';
-const CHART_TOTAL_CASES = 'totalcases';
+const PATH_NEW_CASES = 'newcases';
+const PATH_TOTAL_CASES = 'totalcases';
+const PATH_NEW_DEATHS = 'newdeaths';
+const PATH_TOTAL_DEATHS = 'totaldeaths';
+
+const DATA_KEY_NEW_CASES = 'newCases';
+const DATA_KEY_TOTAL_CASES = 'totalCases';
+const DATA_KEY_NEW_DEATHS = 'newDeaths';
+const DATA_KEY_TOTAL_DEATHS = 'totalDeaths';
+
+const DATA_NAME_NEW_CASES = 'New Cases';
+const DATA_NAME_TOTAL_CASES = 'Total Cases';
+const DATA_NAME_NEW_DEATHS = 'New Deaths';
+const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 
 const countrySelector = (state) => state.countryData.historicalData;
 const stateSelector = (state) => state.stateData.historicalData;
@@ -24,22 +34,22 @@ const getChartKeys = (location) => {
     let dataKey;
     let dataName;
     switch (chartType) {
-        case CHART_NEW_CASES:
-            dataKey = 'newCases';
-            dataName = 'New Cases';
+        case PATH_NEW_CASES:
+            dataKey = DATA_KEY_NEW_CASES;
+            dataName = DATA_NAME_NEW_CASES;
             break;
-        case CHART_TOTAL_DEATHS:
-            dataKey = 'totalDeaths';
-            dataName = 'Total Deaths';
+        case PATH_TOTAL_DEATHS:
+            dataKey = DATA_KEY_TOTAL_DEATHS;
+            dataName = DATA_NAME_TOTAL_DEATHS;
             break;
-        case CHART_NEW_DEATHS:
-            dataKey = 'newDeaths';
-            dataName = 'New Deaths';
+        case PATH_NEW_DEATHS:
+            dataKey = DATA_KEY_NEW_DEATHS;
+            dataName = DATA_NAME_NEW_DEATHS;
             break;
-        case CHART_TOTAL_CASES:
+        case PATH_TOTAL_CASES:
         default:
-            dataKey = 'totalCases';
-            dataName = 'Total Cases';
+            dataKey = DATA_KEY_TOTAL_CASES;
+            dataName = DATA_NAME_TOTAL_CASES;
             break;
     }
     return {
@@ -68,7 +78,7 @@ const BaseHistoricalChart = (props) => {
     const { dataKey, dataName } = getChartKeys(location);
 
     if (location.pathname.endsWith('/history/chart')) {
-        history.push(`${basePath}/${CHART_TOTAL_CASES}`);
+        history.push(`${basePath}/${PATH_TOTAL_CASES}`);
     }
 
     return (
@@ -100,29 +110,29 @@ const BaseHistoricalChart = (props) => {
             >
                 <Button
                     variant="contained"
-                    color={ dataKey === 'totalCases' ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${CHART_TOTAL_CASES}`) }
+                    color={ dataKey === DATA_KEY_TOTAL_CASES ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${PATH_TOTAL_CASES}`) }
                 >
                     Total Cases
                 </Button>
                 <Button
                     variant="contained"
-                    color={ dataKey === 'newCases' ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${CHART_NEW_CASES}`) }
+                    color={ dataKey === DATA_KEY_NEW_CASES ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${PATH_NEW_CASES}`) }
                 >
                     New Cases
                 </Button>
                 <Button
                     variant="contained"
-                    color={ dataKey === 'totalDeaths' ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${CHART_TOTAL_DEATHS}`) }
+                    color={ dataKey === DATA_KEY_TOTAL_DEATHS ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${PATH_TOTAL_DEATHS}`) }
                 >
                     Total Deaths
                 </Button>
                 <Button
                     variant="contained"
-                    color={ dataKey === 'newDeaths' ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${CHART_NEW_DEATHS}`) }
+                    color={ dataKey === DATA_KEY_NEW_DEATHS ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${PATH_NEW_DEATHS}`) }
                 >
                     New Deaths
                 </Button>

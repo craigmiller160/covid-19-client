@@ -55,9 +55,9 @@ const BaseHistoricalChart = (props) => {
     const location = useLocation();
     const history = useHistory();
     const selector = isState ? stateSelector : countrySelector;
+    const basePath = isState ? '/state/history/chart' : '/country/history/chart';
     const dispatch = useDispatch();
     const data = useSelector(selector, shallowEqual);
-    const selectedChart = useSelector((state) => state.display.selectedChart);
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];
@@ -68,7 +68,7 @@ const BaseHistoricalChart = (props) => {
     const { dataKey, dataName } = getChartKeys(location);
 
     if (location.pathname.endsWith('/history/chart')) {
-        history.push(`${location.pathname}/${CHART_TOTAL_CASES}`);
+        history.push(`${basePath}/${CHART_TOTAL_CASES}`);
     }
 
     return (
@@ -100,29 +100,29 @@ const BaseHistoricalChart = (props) => {
             >
                 <Button
                     variant="contained"
-                    color={ selectedChart === CHART_TOTAL_CASES ? 'primary' : 'default' }
-                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_CASES)) }
+                    color={ dataKey === 'totalCases' ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${CHART_TOTAL_CASES}`) }
                 >
                     Total Cases
                 </Button>
                 <Button
                     variant="contained"
-                    color={ selectedChart === CHART_NEW_CASES ? 'primary' : 'default' }
-                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_CASES)) }
+                    color={ dataKey === 'newCases' ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${CHART_NEW_CASES}`) }
                 >
                     New Cases
                 </Button>
                 <Button
                     variant="contained"
-                    color={ selectedChart === CHART_TOTAL_DEATHS ? 'primary' : 'default' }
-                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_DEATHS)) }
+                    color={ dataKey === 'totalDeaths' ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${CHART_TOTAL_DEATHS}`) }
                 >
                     Total Deaths
                 </Button>
                 <Button
                     variant="contained"
-                    color={ selectedChart === CHART_NEW_DEATHS ? 'primary' : 'default' }
-                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_DEATHS)) }
+                    color={ dataKey === 'newDeaths' ? 'primary' : 'default' }
+                    onClick={ () => history.push(`${basePath}/${CHART_NEW_DEATHS}`) }
                 >
                     New Deaths
                 </Button>

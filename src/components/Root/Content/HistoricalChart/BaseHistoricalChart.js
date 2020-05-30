@@ -7,34 +7,23 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import './BaseHistoricalChart.scss';
 import Button from '@material-ui/core/Button';
-import displaySlice, {
-    CHART_NEW_CASES,
-    CHART_NEW_DEATHS,
-    CHART_TOTAL_CASES,
-    CHART_TOTAL_DEATHS
-} from '../../../../store/display/slice';
+import { useHistory, useLocation } from 'react-router';
+
+const CHART_NEW_CASES = 'newcases';
+const CHART_TOTAL_DEATHS = 'totaldeaths';
+const CHART_NEW_DEATHS = 'newdeaths';
+const CHART_TOTAL_CASES = 'totalcases';
 
 const countrySelector = (state) => state.countryData.historicalData;
 const stateSelector = (state) => state.stateData.historicalData;
 
-const BaseHistoricalChart = (props) => {
-    const {
-        isState
-    } = props;
-    const selector = isState ? stateSelector : countrySelector;
-    const dispatch = useDispatch();
-    const data = useSelector(selector, shallowEqual);
-    const selectedChart = useSelector((state) => state.display.selectedChart);
-    const theme = useTheme();
-    const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
-    const chartData = data ? data.slice().reverse() : [];
-
-    // const chartWidth = isNotPhone ? 800 : 390;
-    const chartHeight = isNotPhone ? 500 : 300;
+const getChartKeys = (location) => {
+    const pathParts = location.pathname.split('/');
+    const chartType = pathParts[pathParts.length - 1];
 
     let dataKey;
     let dataName;
-    switch (selectedChart) {
+    switch (chartType) {
         case CHART_NEW_CASES:
             dataKey = 'newCases';
             dataName = 'New Cases';
@@ -52,6 +41,34 @@ const BaseHistoricalChart = (props) => {
             dataKey = 'totalCases';
             dataName = 'Total Cases';
             break;
+    }
+    return {
+        dataKey,
+        dataName
+    };
+};
+
+const BaseHistoricalChart = (props) => {
+    const {
+        isState
+    } = props;
+    const location = useLocation();
+    const history = useHistory();
+    const selector = isState ? stateSelector : countrySelector;
+    const dispatch = useDispatch();
+    const data = useSelector(selector, shallowEqual);
+    const selectedChart = useSelector((state) => state.display.selectedChart);
+    const theme = useTheme();
+    const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
+    const chartData = data ? data.slice().reverse() : [];
+
+    // const chartWidth = isNotPhone ? 800 : 390;
+    const chartHeight = isNotPhone ? 500 : 300;
+
+    const { dataKey, dataName } = getChartKeys(location);
+
+    if (location.pathname.endsWith('/history/chart')) {
+        history.push(`${location.pathname}/${CHART_TOTAL_CASES}`);
     }
 
     return (
@@ -84,28 +101,28 @@ const BaseHistoricalChart = (props) => {
                 <Button
                     variant="contained"
                     color={ selectedChart === CHART_TOTAL_CASES ? 'primary' : 'default' }
-                    onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_CASES)) }
+                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_CASES)) }
                 >
                     Total Cases
                 </Button>
                 <Button
                     variant="contained"
                     color={ selectedChart === CHART_NEW_CASES ? 'primary' : 'default' }
-                    onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_CASES)) }
+                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_CASES)) }
                 >
                     New Cases
                 </Button>
                 <Button
                     variant="contained"
                     color={ selectedChart === CHART_TOTAL_DEATHS ? 'primary' : 'default' }
-                    onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_DEATHS)) }
+                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_TOTAL_DEATHS)) }
                 >
                     Total Deaths
                 </Button>
                 <Button
                     variant="contained"
                     color={ selectedChart === CHART_NEW_DEATHS ? 'primary' : 'default' }
-                    onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_DEATHS)) }
+                    // onClick={ () => dispatch(displaySlice.actions.setSelectedChart(CHART_NEW_DEATHS)) }
                 >
                     New Deaths
                 </Button>

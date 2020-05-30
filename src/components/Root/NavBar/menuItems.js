@@ -1,5 +1,5 @@
 const menuItemCreator = (dispatch, pathname, closeMenu) => ({ label, to, exact = false }) => {
-    const active = exact ? to === pathname : pathname !== '/' && to.startsWith(pathname);
+    const active = exact ? to === pathname : pathname !== '/' && pathname.startsWith(to);
     return {
         label,
         to,
@@ -37,11 +37,13 @@ const createMenuItems = (dispatch, pathname, closeMenu) => {
         }),
         createMenuItem({
             label: 'Compare Country Data',
-            to: '/country/compare'
+            to: '/country/compare',
+            exact: true
         }),
         createMenuItem({
             label: 'Compare State Data',
-            to: '/state/compare'
+            to: '/state/compare',
+            exact: true
         })
     ];
 

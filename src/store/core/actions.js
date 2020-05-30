@@ -12,7 +12,6 @@ export const downloadNewData = () => async (dispatch) => {
 
         dispatch(loadLists());
         dispatch(loadMetadata());
-        dispatch(coreSlice.actions.setStarted(false));
     } catch (ex) {
         dispatch(handleError(ex, 'Error downloading data'));
     } finally {

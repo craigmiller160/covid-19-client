@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// TODO loading, started no longer necessary
 const initialState = {
     loading: false,
     error: null,
     downloadDate: null,
-    started: false
 };
 
 const setLoading = (state, action) => {
@@ -20,17 +18,12 @@ const setDownloadDate = (state, action) => {
     state.downloadDate = action.payload;
 };
 
-const setStarted = (state, action) => {
-    state.started = action.payload;
-};
-
 export default createSlice({
     name: 'core',
     initialState,
     reducers: {
         setLoading,
         setError,
-        setDownloadDate,
-        setStarted
+        setDownloadDate
     }
 });

@@ -20,7 +20,7 @@ const menuItemCreator = (dispatch, selected, closeMenu) =>(id, label) => ({
 
 const createMenuItems = (dispatch, selected, closeMenu) => {
     const createMenuItem = menuItemCreator(dispatch, selected, closeMenu);
-    const isLocalhost = window.location.hostname === 'localhost';
+    // const isLocalhost = window.location.hostname === 'localhost';
 
     const left = [
         createMenuItem(SECTION_COUNTRY_HIST_DATA, 'Country History Data'),

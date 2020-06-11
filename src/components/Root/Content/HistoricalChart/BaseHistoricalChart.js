@@ -69,10 +69,11 @@ const BaseHistoricalChart = (props) => {
     const location = useLocation();
     const history = useHistory();
     const basePath = isState ? '/state/history/chart' : '/country/history/chart';
-    const { data } = useHistoryData({ isState });
+    const { data, location: selectedLocation } = useHistoryData({ isState });
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];
+    const showMoreOptions = isState && selectedLocation.value !== 'United_States_of_America';
 
     // const chartWidth = isNotPhone ? 800 : 390;
     const chartHeight = isNotPhone ? 500 : 300;
@@ -140,20 +141,23 @@ const BaseHistoricalChart = (props) => {
                         New Deaths
                     </Button>
                 </Grid>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    className="buttons"
-                >
-                    <Button
-                        variant="contained"
-                        color={ dataKey === DATA_KEY_NEW_TESTS ? 'primary' : 'default' }
-                        onClick={ () => history.push(`${basePath}/${PATH_NEW_TESTS}`) }
+                {
+                    showMoreOptions &&
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        className="buttons"
                     >
-                        New Tests
-                    </Button>
-                </Grid>
+                        <Button
+                            variant="contained"
+                            color={ dataKey === DATA_KEY_NEW_TESTS ? 'primary' : 'default' }
+                            onClick={ () => history.push(`${basePath}/${PATH_NEW_TESTS}`) }
+                        >
+                            New Tests
+                        </Button>
+                    </Grid>
+                }
             </div>
         </Grid>
     );

@@ -101,41 +101,56 @@ const BaseHistoricalChart = (props) => {
                     <Line type="monotone" dataKey={ dataKey } stroke="#ff7300" yAxisId={ 0 } />
                 </LineChart>
             </ResponsiveContainer>
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                className="buttons"
-            >
-                <Button
-                    variant="contained"
-                    color={ dataKey === DATA_KEY_TOTAL_CASES ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${PATH_TOTAL_CASES}`) }
+            <div className="ButtonContainer">
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    className="buttons"
                 >
-                    Total Cases
-                </Button>
-                <Button
-                    variant="contained"
-                    color={ dataKey === DATA_KEY_NEW_CASES ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${PATH_NEW_CASES}`) }
+                    <Button
+                        variant="contained"
+                        color={ dataKey === DATA_KEY_TOTAL_CASES ? 'primary' : 'default' }
+                        onClick={ () => history.push(`${basePath}/${PATH_TOTAL_CASES}`) }
+                    >
+                        Total Cases
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color={ dataKey === DATA_KEY_NEW_CASES ? 'primary' : 'default' }
+                        onClick={ () => history.push(`${basePath}/${PATH_NEW_CASES}`) }
+                    >
+                        New Cases
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color={ dataKey === DATA_KEY_TOTAL_DEATHS ? 'primary' : 'default' }
+                        onClick={ () => history.push(`${basePath}/${PATH_TOTAL_DEATHS}`) }
+                    >
+                        Total Deaths
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color={ dataKey === DATA_KEY_NEW_DEATHS ? 'primary' : 'default' }
+                        onClick={ () => history.push(`${basePath}/${PATH_NEW_DEATHS}`) }
+                    >
+                        New Deaths
+                    </Button>
+                </Grid>
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    className="buttons"
                 >
-                    New Cases
-                </Button>
-                <Button
-                    variant="contained"
-                    color={ dataKey === DATA_KEY_TOTAL_DEATHS ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${PATH_TOTAL_DEATHS}`) }
-                >
-                    Total Deaths
-                </Button>
-                <Button
-                    variant="contained"
-                    color={ dataKey === DATA_KEY_NEW_DEATHS ? 'primary' : 'default' }
-                    onClick={ () => history.push(`${basePath}/${PATH_NEW_DEATHS}`) }
-                >
-                    New Deaths
-                </Button>
-            </Grid>
+                    <Button
+                        variant="contained"
+                        color={ dataKey === '' ? 'primary' : 'default' }
+                    >
+                        New Tests
+                    </Button>
+                </Grid>
+            </div>
         </Grid>
     );
 };

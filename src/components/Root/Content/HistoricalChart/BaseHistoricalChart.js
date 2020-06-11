@@ -14,18 +14,21 @@ const PATH_TOTAL_CASES = 'totalcases';
 const PATH_NEW_DEATHS = 'newdeaths';
 const PATH_TOTAL_DEATHS = 'totaldeaths';
 const PATH_NEW_TESTS = 'newtests';
+const PATH_POS_TESTS = 'positivetests';
 
 const DATA_KEY_NEW_CASES = 'newCases';
 const DATA_KEY_TOTAL_CASES = 'totalCases';
 const DATA_KEY_NEW_DEATHS = 'newDeaths';
 const DATA_KEY_TOTAL_DEATHS = 'totalDeaths';
 const DATA_KEY_NEW_TESTS = 'newTests';
+const DATA_KEY_POS_TESTS = 'newPositivePercent';
 
 const DATA_NAME_NEW_CASES = 'New Cases';
 const DATA_NAME_TOTAL_CASES = 'Total Cases';
 const DATA_NAME_NEW_DEATHS = 'New Deaths';
 const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 const DATA_NAME_NEW_TESTS = 'New Tests';
+const DATA_NAME_POS_TESTS = 'New Positive Test %';
 
 const getChartKeys = (location) => {
     const pathParts = location.pathname.split('/');
@@ -49,6 +52,10 @@ const getChartKeys = (location) => {
         case PATH_NEW_TESTS:
             dataKey = DATA_KEY_NEW_TESTS;
             dataName = DATA_NAME_NEW_TESTS;
+            break;
+        case PATH_POS_TESTS:
+            dataKey = DATA_KEY_POS_TESTS;
+            dataName = DATA_NAME_POS_TESTS;
             break;
         case PATH_TOTAL_CASES:
         default:
@@ -117,28 +124,28 @@ const BaseHistoricalChart = (props) => {
                         color={ dataKey === DATA_KEY_TOTAL_CASES ? 'primary' : 'default' }
                         onClick={ () => history.push(`${basePath}/${PATH_TOTAL_CASES}`) }
                     >
-                        Total Cases
+                        { DATA_NAME_TOTAL_CASES }
                     </Button>
                     <Button
                         variant="contained"
                         color={ dataKey === DATA_KEY_NEW_CASES ? 'primary' : 'default' }
                         onClick={ () => history.push(`${basePath}/${PATH_NEW_CASES}`) }
                     >
-                        New Cases
+                        { DATA_NAME_NEW_CASES }
                     </Button>
                     <Button
                         variant="contained"
                         color={ dataKey === DATA_KEY_TOTAL_DEATHS ? 'primary' : 'default' }
                         onClick={ () => history.push(`${basePath}/${PATH_TOTAL_DEATHS}`) }
                     >
-                        Total Deaths
+                        { DATA_NAME_TOTAL_DEATHS }
                     </Button>
                     <Button
                         variant="contained"
                         color={ dataKey === DATA_KEY_NEW_DEATHS ? 'primary' : 'default' }
                         onClick={ () => history.push(`${basePath}/${PATH_NEW_DEATHS}`) }
                     >
-                        New Deaths
+                        { DATA_NAME_NEW_DEATHS }
                     </Button>
                 </Grid>
                 {
@@ -154,7 +161,14 @@ const BaseHistoricalChart = (props) => {
                             color={ dataKey === DATA_KEY_NEW_TESTS ? 'primary' : 'default' }
                             onClick={ () => history.push(`${basePath}/${PATH_NEW_TESTS}`) }
                         >
-                            New Tests
+                            { DATA_NAME_NEW_TESTS }
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color={ dataKey === DATA_KEY_POS_TESTS ? 'primary' : 'default' }
+                            onClick={ () => history.push(`${basePath}/${PATH_POS_TESTS}`) }
+                        >
+                            { DATA_NAME_POS_TESTS }
                         </Button>
                     </Grid>
                 }

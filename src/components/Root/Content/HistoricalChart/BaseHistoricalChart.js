@@ -8,6 +8,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import './BaseHistoricalChart.scss';
 import Button from '@material-ui/core/Button';
 import { Redirect, useHistory, useLocation } from 'react-router';
+import useHistoryData from '../../../hooks/useHistoryData';
 
 const PATH_NEW_CASES = 'newcases';
 const PATH_TOTAL_CASES = 'totalcases';
@@ -26,9 +27,6 @@ const DATA_NAME_TOTAL_CASES = 'Total Cases';
 const DATA_NAME_NEW_DEATHS = 'New Deaths';
 const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 const DATA_NAME_NEW_TESTS = 'New Tests';
-
-const countrySelector = (state) => state.countryData.historicalData;
-const stateSelector = (state) => state.stateData.historicalData;
 
 const getChartKeys = (location) => {
     const pathParts = location.pathname.split('/');
@@ -71,9 +69,8 @@ const BaseHistoricalChart = (props) => {
     } = props;
     const location = useLocation();
     const history = useHistory();
-    const selector = isState ? stateSelector : countrySelector;
     const basePath = isState ? '/state/history/chart' : '/country/history/chart';
-    const data = useSelector(selector, shallowEqual);
+    const { data } = useHistoryData({ isState });
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];

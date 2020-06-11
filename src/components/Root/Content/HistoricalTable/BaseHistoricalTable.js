@@ -4,6 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { shallowEqual, useSelector } from 'react-redux';
 import Table from '../../../ui/Table';
+import useHistoryData from '../../../hooks/useHistoryData';
 
 const calcMortality = (entry) => {
     if (entry.totalCases === 0) {
@@ -12,9 +13,6 @@ const calcMortality = (entry) => {
     const value = (entry.totalDeaths / entry.totalCases) * 100;
     return `${value.toFixed(2)}%`;
 };
-
-const countrySelector = (state) => state.countryData.historicalData;
-const stateSelector = (state) => state.stateData.historicalData;
 
 const columnNames = [
     'Date',
@@ -30,8 +28,7 @@ const BaseHistoricalTable = (props) => {
     const {
         isState
     } = props;
-    const selector = isState ? stateSelector : countrySelector;
-    const data = useSelector(selector, shallowEqual);
+    const { data } = useHistoryData({ isState });
 
     const fullData = [...data];
     if (fullData.length > 0) {

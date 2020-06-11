@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { shallowEqual, useSelector } from 'react-redux';
 import Table from '../../../ui/Table';
 import useHistoryData from '../../../hooks/useHistoryData';
 

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: covid-19-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: covid-19-client
+  template:
+    metadata:
+      labels:
+        app: covid-19-client
+    spec:
+      containers:
+        - name: covid-19-client
+          image: localhost:32000/covid-19-client:1.

@@ -14,6 +14,5 @@ sudo docker build \
   .
 sudo docker push $tag
 
-sudo microk8s kubectl apply -f configmap.yml
 sudo microk8s kubectl apply -f deployment.yml
 sudo microk8s kubectl rollout restart deployment $name

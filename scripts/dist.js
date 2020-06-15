@@ -7,7 +7,14 @@ const cwd = process.cwd();
 const version = packageJson.version;
 const name = packageJson.name.replace('@craigmiller160/', '');
 
-const output = fs.createWriteStream(path.resolve(cwd, `deploy/build/${name}-${version}.zip`));
+const outputDir = path.resolve(cwd, 'deploy/build');
+if (fs.existsSync(outputDir)) {
+    fs.rmdirSync(outputDir, { recursive: true });
+}
+
+fs.mkdirSync(outputDir);
+
+const output = fs.createWriteStream(path.resolve(outputDir, `${name}-${version}.zip`));
 const archive = archiver('zip');
 
 archive.on('warning', (err) => {

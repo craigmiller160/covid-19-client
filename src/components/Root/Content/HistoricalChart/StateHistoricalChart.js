@@ -8,6 +8,7 @@ import useLoading from '../../../hooks/useLoading';
 const Component = () => (
     <div>
         <StateSearch />
+        <p>Additional data is available for states that is not available nationally. Please select an individual state to see it.</p>
         <BaseHistoricalChart isState />
     </div>
 );

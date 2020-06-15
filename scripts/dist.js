@@ -7,7 +7,7 @@ const cwd = process.cwd();
 const version = packageJson.version;
 const name = packageJson.name.replace('@craigmiller160/', '');
 
-const output = fs.createWriteStream(path.resolve(cwd, `build/${name}-${version}.zip`));
+const output = fs.createWriteStream(path.resolve(cwd, `deploy/build/${name}-${version}.zip`));
 const archive = archiver('zip');
 
 archive.on('warning', (err) => {

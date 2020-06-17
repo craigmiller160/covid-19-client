@@ -37,5 +37,4 @@ build() {
 
 check_artifact_version
 check_deployment_version
-
 build

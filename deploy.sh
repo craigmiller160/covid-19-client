@@ -5,14 +5,18 @@ version=$(cat package.json | grep \"version\" | sed 's/^\s*"version":\s\?"//g' |
 registry=localhost:32000
 tag=$registry/$name:$version
 
-echo "Building $name:$version"
+build() {
+  echo "Building $name:$version"
 
-cd deploy
-sudo docker build \
-  --network=host \
-  -t $tag \
-  .
-sudo docker push $tag
+  cd deploy
+  sudo docker build \
+    --network=host \
+    -t $tag \
+    .
+  sudo docker push $tag
 
-sudo microk8s kubectl apply -f deployment.yml
-sudo microk8s kubectl rollout restart deployment $name
+  sudo microk8s kubectl apply -f deployment.yml
+  sudo microk8s kubectl rollout restart deployment $name
+}
+
+build

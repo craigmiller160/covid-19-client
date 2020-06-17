@@ -13,6 +13,14 @@ check_artifact_version() {
   fi
 }
 
+check_deployment_version() {
+  deployment_version=$(cat deploy/deployment.yml | grep $registry | sed "s/^.*$registry\/$name://g")
+  if [ $version != $deployment_version ]; then
+    echo "Project version $version does not equal deployment.yml version $deployment_version"
+    exit 1
+  fi
+}
+
 build() {
   echo "Building $name:$version"
 
@@ -28,7 +36,6 @@ build() {
 }
 
 check_artifact_version
-
-exit 0 # TODO delete this
+check_deployment_version
 
 build

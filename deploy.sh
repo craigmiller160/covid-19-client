@@ -5,6 +5,14 @@ version=$(cat package.json | grep \"version\" | sed 's/^\s*"version":\s\?"//g' |
 registry=localhost:32000
 tag=$registry/$name:$version
 
+check_artifact_version() {
+  artifact_version=$(ls deploy/build | grep zip | sed 's/\.zip$//g' | sed "s/^$name-//g")
+  if [ $version != $artifact_version ]; then
+    echo "Project version $version does not equal artifact version $artifact_version"
+    exit 1
+  fi
+}
+
 build() {
   echo "Building $name:$version"
 
@@ -18,5 +26,9 @@ build() {
   sudo microk8s kubectl apply -f deployment.yml
   sudo microk8s kubectl rollout restart deployment $name
 }
+
+check_artifact_version
+
+exit 0 # TODO delete this
 
 build

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import moment from 'moment';
@@ -41,6 +41,8 @@ const DateField = (props) => {
                         disableToolbar
                         variant="outlined"
                         value={ value }
+                        onBlur={ () => console.log('OnBlur') } // TODO trying this
+                        onFocus={ () => console.log('OnFocus') } // TODO trying this
                         onChange={ (value) => {
                             const formattedValue = moment(value).format('YYYY-MM-DD');
                             rfProps.input.onChange(formattedValue);

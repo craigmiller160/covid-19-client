@@ -60,8 +60,12 @@ export const loadStateHistoricalData = ({ field, value } = {}) => async (dispatc
     }
 };
 
-export const loadStateCurrentData = () => async (dispatch, getState) => {
+export const loadStateCurrentData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
+        if (field) {
+            dispatch(change(STATE_COMPARE_FORM, field, value));
+        }
+
         dispatch(coreSlice.actions.setLoading(true));
         const { sortKey, sortOrder } = getState().form[STATE_COMPARE_FORM]?.values ?? {};
 

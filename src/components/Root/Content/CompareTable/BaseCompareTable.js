@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
 import { AutocompleteField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import Paper from '@material-ui/core/Paper';
@@ -57,9 +56,10 @@ const BaseCompareTable = (props) => {
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
-    const countrySubmit = () => dispatch(loadCountryCurrentData());
-    const stateSubmit = () => dispatch(loadStateCurrentData());
+    const countrySubmit = (value) => dispatch(loadCountryCurrentData(value));
+    const stateSubmit = (value) => dispatch(loadStateCurrentData(value));
     const onSubmit = isState ? stateSubmit : countrySubmit;
+    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
 
     let filteredData = data;
     if (formValues.location?.length > 0) {
@@ -98,6 +98,7 @@ const BaseCompareTable = (props) => {
                             className="FilterField spacing"
                             options={ rankByOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
+                            onChange={ onChangeSubmit }
                             renderInput={ (params) =>
                                 <TextField
                                     { ...params }
@@ -111,6 +112,7 @@ const BaseCompareTable = (props) => {
                             className="FilterField spacing"
                             options={ orderOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
+                            onChange={ onChangeSubmit }
                             renderInput={ (params) =>
                                 <TextField
                                     { ...params }
@@ -120,14 +122,6 @@ const BaseCompareTable = (props) => {
                             }
                             name="sortOrder"
                         />
-                        <Button
-                            className="SearchBtn"
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                        >
-                            Search
-                        </Button>
                     </Grid>
                     <Grid
                         className="Filters"

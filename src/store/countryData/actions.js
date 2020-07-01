@@ -65,8 +65,12 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
     }
 };
 
-export const loadCountryCurrentData = () => async (dispatch, getState) => {
+export const loadCountryCurrentData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
+        if (field) {
+            dispatch(change(COUNTRY_COMPARE_FORM, field, value));
+        }
+
         dispatch(coreSlice.actions.setLoading(true));
         const { sortKey, sortOrder  } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
 

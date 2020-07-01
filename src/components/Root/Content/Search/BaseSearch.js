@@ -52,6 +52,7 @@ const BaseSearch = (props) => {
                             getOptionLabel={ (option) => option.label ?? '' }
                             onChange={ (arg1, arg2, previousValue, fieldName) => {
                                 console.log('OnChange', arg1, arg2, previousValue, fieldName); // TODO delete this
+                                onSubmit();
                             } }
                             renderInput={ (params) =>
                                 <TextField

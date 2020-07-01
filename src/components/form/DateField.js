@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import moment from 'moment';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
 /*
@@ -23,25 +24,30 @@ const DateField = (props) => {
         onChange
     } = props;
 
-    // TODO non-serializable value warning occurs here... figure out how to fix it. not catastrophic yet
     // TODO typing in a date value breaks this here
 
     return (
         <Field
             name={ name }
             onChange={ onChange }
-            component={ (rfProps) => (
-                <KeyboardDatePicker
-                    className={ className }
-                    label={ label }
-                    format="yyyy-MM-dd"
-                    margin="normal"
-                    disableToolbar
-                    variant="outlined"
-                    value={ rfProps.input.value || defaultValue }
-                    onChange={ (value) => rfProps.input.onChange(value) }
-                />
-            ) }
+            component={ (rfProps) => {
+                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : defaultValue;
+                return (
+                    <KeyboardDatePicker
+                        className={ className }
+                        label={ label }
+                        format="yyyy-MM-dd"
+                        margin="normal"
+                        disableToolbar
+                        variant="outlined"
+                        value={ value }
+                        onChange={ (value) => {
+                            const formattedValue = moment(value).format('YYYY-MM-DD');
+                            rfProps.input.onChange(formattedValue);
+                        } }
+                    />
+                );
+            } }
         />
     );
 };

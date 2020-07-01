@@ -28,6 +28,7 @@ const BaseSearch = (props) => {
     const countrySubmit = (value) => dispatch(loadCountryHistoricalData(value));
     const stateSubmit = (value) => dispatch(loadStateHistoricalData(value)); // TODO integrate into action
     const onSubmit = isState ? stateSubmit : countrySubmit;
+    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
 
     return (
         <Paper className="Search">
@@ -49,9 +50,7 @@ const BaseSearch = (props) => {
                             className="search-box"
                             options={ locations }
                             getOptionLabel={ (option) => option.label ?? '' }
-                            onChange={ (value, arg2, arg3, fieldName) => {
-                                onSubmit({ field: fieldName, value });
-                            } }
+                            onChange={ onChangeSubmit }
                             renderInput={ (params) =>
                                 <TextField
                                     { ...params }
@@ -73,6 +72,7 @@ const BaseSearch = (props) => {
                                 name="startDate"
                                 label="Start Date"
                                 defaultValue={ new Date('2019-12-01T00:00:00.000Z') }
+                                onChange={ onChangeSubmit }
                             />
                         </Grid>
                         <Grid item className="date-item">
@@ -80,6 +80,7 @@ const BaseSearch = (props) => {
                                 name="endDate"
                                 label="End Date"
                                 defaultValue={ new Date('2021-12-31T00:00:00.000Z') }
+                                onChange={ onChangeSubmit }
                             />
                         </Grid>
                     </Grid>

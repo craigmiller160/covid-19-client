@@ -19,14 +19,17 @@ const DateField = (props) => {
         name,
         className,
         label,
-        defaultValue
+        defaultValue,
+        onChange
     } = props;
 
     // TODO non-serializable value warning occurs here... figure out how to fix it. not catastrophic yet
+    // TODO typing in a date value breaks this here
 
     return (
         <Field
             name={ name }
+            onChange={ onChange }
             component={ (rfProps) => (
                 <KeyboardDatePicker
                     className={ className }
@@ -46,7 +49,8 @@ DateField.propTypes = {
     name: PropTypes.string.isRequired,
     className: PropTypes.string,
     label: PropTypes.string,
-    defaultValue: PropTypes.instanceOf(Date)
+    defaultValue: PropTypes.instanceOf(Date),
+    onChange: PropTypes.func
 };
 
 export default DateField;

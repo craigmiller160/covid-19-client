@@ -29,14 +29,19 @@ const DateField = (props) => {
         focus = value;
     };
 
-    // TODO detect enter key when focused
-
     return (
         <Field
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
                 const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : moment(defaultValue).toDate();
+
+                const keyOnChange = (newValue) => {
+                    if (moment(newValue).isValid() && !moment(value).isSame(moment(newValue))) {
+                        rfProps.input.onChange(newValue);
+                    }
+                };
+
                 return (
                     <KeyboardDatePicker
                         className={ className }
@@ -48,15 +53,18 @@ const DateField = (props) => {
                         value={ value }
                         onBlur={ (event) => {
                             setFocus(false);
-                            if (moment(event.target.value).isValid() && !moment(value).isSame(moment(event.target.value))) {
-                                rfProps.input.onChange(event.target.value);
-                            }
+                            keyOnChange(event.target.value);
                         } }
                         onFocus={ () => setFocus(true) }
                         onChange={ (value) => {
                             if (!focus) {
                                 const formattedValue = moment(value).format('YYYY-MM-DD');
                                 rfProps.input.onChange(formattedValue);
+                            }
+                        } }
+                        onKeyDown={ (event) => {
+                            if (event.key === 'Enter') {
+                                keyOnChange(event.target.value);
                             }
                         } }
                     />

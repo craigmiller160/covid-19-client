@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import moment from 'moment';
@@ -24,14 +24,19 @@ const DateField = (props) => {
         onChange
     } = props;
 
-    // TODO typing in a date value breaks this here
+    let focus = false;
+    const setFocus = (value) => {
+        focus = value;
+    };
+
+    // TODO detect enter key when focused
 
     return (
         <Field
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
-                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : defaultValue;
+                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : moment(defaultValue).toDate();
                 return (
                     <KeyboardDatePicker
                         className={ className }
@@ -41,11 +46,18 @@ const DateField = (props) => {
                         disableToolbar
                         variant="outlined"
                         value={ value }
-                        onBlur={ () => console.log('OnBlur') } // TODO trying this
-                        onFocus={ () => console.log('OnFocus') } // TODO trying this
+                        onBlur={ (event) => {
+                            setFocus(false);
+                            if (!moment(value).isSame(moment(event.target.value))) {
+                                rfProps.input.onChange(event.target.value);
+                            }
+                        } }
+                        onFocus={ () => setFocus(true) }
                         onChange={ (value) => {
-                            const formattedValue = moment(value).format('YYYY-MM-DD');
-                            rfProps.input.onChange(formattedValue);
+                            if (!focus) {
+                                const formattedValue = moment(value).format('YYYY-MM-DD');
+                                rfProps.input.onChange(formattedValue);
+                            }
                         } }
                     />
                 );
@@ -57,7 +69,7 @@ DateField.propTypes = {
     name: PropTypes.string.isRequired,
     className: PropTypes.string,
     label: PropTypes.string,
-    defaultValue: PropTypes.instanceOf(Date),
+    defaultValue: PropTypes.string,
     onChange: PropTypes.func
 };
 

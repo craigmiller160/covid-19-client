@@ -15,6 +15,7 @@ const PATH_NEW_DEATHS = 'newdeaths';
 const PATH_TOTAL_DEATHS = 'totaldeaths';
 const PATH_NEW_TESTS = 'newtests';
 const PATH_POS_TESTS = 'positivetests';
+const PATH_NEW_HOSPITAL = 'newhospital';
 
 const DATA_KEY_NEW_CASES = 'newCases';
 const DATA_KEY_TOTAL_CASES = 'totalCases';
@@ -22,6 +23,7 @@ const DATA_KEY_NEW_DEATHS = 'newDeaths';
 const DATA_KEY_TOTAL_DEATHS = 'totalDeaths';
 const DATA_KEY_NEW_TESTS = 'newTests';
 const DATA_KEY_POS_TESTS = 'newPositivePercent';
+const DATA_KEY_NEW_HOSPITAL = 'newHospitalized';
 
 const DATA_NAME_NEW_CASES = 'New Cases';
 const DATA_NAME_TOTAL_CASES = 'Total Cases';
@@ -29,6 +31,7 @@ const DATA_NAME_NEW_DEATHS = 'New Deaths';
 const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 const DATA_NAME_NEW_TESTS = 'New Tests';
 const DATA_NAME_POS_TESTS = 'New Positive Test %';
+const DATA_NAME_NEW_HOSPITAL = 'New Hospitalizations';
 
 const getChartKeys = (location) => {
     const pathParts = location.pathname.split('/');
@@ -56,6 +59,10 @@ const getChartKeys = (location) => {
         case PATH_POS_TESTS:
             dataKey = DATA_KEY_POS_TESTS;
             dataName = DATA_NAME_POS_TESTS;
+            break;
+        case PATH_NEW_HOSPITAL:
+            dataKey = DATA_KEY_NEW_HOSPITAL;
+            dataName = DATA_NAME_NEW_HOSPITAL;
             break;
         case PATH_TOTAL_CASES:
         default:
@@ -90,6 +97,8 @@ const BaseHistoricalChart = (props) => {
     if (location.pathname.endsWith('/history/chart')) {
         return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
     }
+
+    // TODO redirect to default if national data
 
     return (
         <Grid
@@ -169,6 +178,13 @@ const BaseHistoricalChart = (props) => {
                             onClick={ () => history.push(`${basePath}/${PATH_POS_TESTS}`) }
                         >
                             { DATA_NAME_POS_TESTS }
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary': 'default' }
+                            onClick={ () => history.push(`${basePath}/${PATH_NEW_HOSPITAL}`) }
+                        >
+                            { DATA_NAME_NEW_HOSPITAL }
                         </Button>
                     </Grid>
                 }

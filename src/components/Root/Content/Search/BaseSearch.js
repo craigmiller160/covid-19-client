@@ -50,6 +50,9 @@ const BaseSearch = (props) => {
                             className="search-box"
                             options={ locations }
                             getOptionLabel={ (option) => option.label ?? '' }
+                            onChange={ (arg1, arg2, previousValue, fieldName) => {
+                                console.log('OnChange', arg1, arg2, previousValue, fieldName); // TODO delete this
+                            } }
                             renderInput={ (params) =>
                                 <TextField
                                     { ...params }

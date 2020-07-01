@@ -22,6 +22,8 @@ const DateField = (props) => {
         defaultValue
     } = props;
 
+    // TODO non-serializable value warning occurs here... figure out how to fix it. not catastrophic yet
+
     return (
         <Field
             name={ name }

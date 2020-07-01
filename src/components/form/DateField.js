@@ -48,7 +48,7 @@ const DateField = (props) => {
                         value={ value }
                         onBlur={ (event) => {
                             setFocus(false);
-                            if (!moment(value).isSame(moment(event.target.value))) {
+                            if (moment(event.target.value).isValid() && !moment(value).isSame(moment(event.target.value))) {
                                 rfProps.input.onChange(event.target.value);
                             }
                         } }

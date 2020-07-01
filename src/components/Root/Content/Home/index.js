@@ -32,7 +32,7 @@ const Home = () => {
                     <h1>Sources</h1>
                     <h3>This application would not be possible without data from the following sources.</h3>
                     <p><strong>European Centre for Disease Control (ECDC):</strong> for providing the raw COVID case statistics for countries world-wide, along with their population.</p>
-                    <p><strong>The COVID Project:</strong> for providing the raw COVID case statistics for US states.</p>
+                    <p><strong>The COVID Tracking Project:</strong> for providing the raw COVID case statistics for US states.</p>
                     <p><strong>US Census Bureau:</strong> for providing US state population data.</p>
                 </Paper>
             </Grid>

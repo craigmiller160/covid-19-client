@@ -26,7 +26,7 @@ const BaseSearch = (props) => {
     const searchLabel = isState ? 'State' : 'Country';
     const initialLocation = isState ? usOption : worldOption;
     const countrySubmit = (value) => dispatch(loadCountryHistoricalData(value));
-    const stateSubmit = (value) => dispatch(loadStateHistoricalData(value)); // TODO integrate into action
+    const stateSubmit = (value) => dispatch(loadStateHistoricalData(value));
     const onSubmit = isState ? stateSubmit : countrySubmit;
     const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
 

@@ -27,8 +27,12 @@ const formatStateData = (data) =>
         value: state.location
     }));
 
-export const loadStateHistoricalData = () => async (dispatch, getState) => {
+export const loadStateHistoricalData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
+        if (field) {
+            dispatch(change(STATE_SEARCH_FORM, field, value));
+        }
+
         const formValues = getState().form[STATE_SEARCH_FORM]?.values ?? {};
         dispatch(coreSlice.actions.setLoading(true));
 

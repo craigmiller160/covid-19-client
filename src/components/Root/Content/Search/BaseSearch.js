@@ -5,7 +5,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import './BaseSearch.scss';
 import { AutocompleteField, DateField, Form } from '../../../form';
-import Button from '@material-ui/core/Button';
 import { usOption, worldOption } from '../../../../util/countryOptions';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
@@ -26,9 +25,10 @@ const BaseSearch = (props) => {
     const formName = isState ? STATE_SEARCH_FORM : COUNTRY_SEARCH_FORM;
     const searchLabel = isState ? 'State' : 'Country';
     const initialLocation = isState ? usOption : worldOption;
-    const countrySubmit = () => dispatch(loadCountryHistoricalData());
-    const stateSubmit = () => dispatch(loadStateHistoricalData());
+    const countrySubmit = (value) => dispatch(loadCountryHistoricalData(value));
+    const stateSubmit = (value) => dispatch(loadStateHistoricalData(value));
     const onSubmit = isState ? stateSubmit : countrySubmit;
+    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
 
     return (
         <Paper className="Search">
@@ -50,6 +50,7 @@ const BaseSearch = (props) => {
                             className="search-box"
                             options={ locations }
                             getOptionLabel={ (option) => option.label ?? '' }
+                            onChange={ onChangeSubmit }
                             renderInput={ (params) =>
                                 <TextField
                                     { ...params }
@@ -71,6 +72,7 @@ const BaseSearch = (props) => {
                                 name="startDate"
                                 label="Start Date"
                                 defaultValue={ new Date('2019-12-01T00:00:00.000Z') }
+                                onChange={ onChangeSubmit }
                             />
                         </Grid>
                         <Grid item className="date-item">
@@ -78,15 +80,9 @@ const BaseSearch = (props) => {
                                 name="endDate"
                                 label="End Date"
                                 defaultValue={ new Date('2021-12-31T00:00:00.000Z') }
+                                onChange={ onChangeSubmit }
                             />
                         </Grid>
-                    </Grid>
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                    >
-                        <Button variant="contained" color="primary" type="submit">Search</Button>
                     </Grid>
                 </Form>
             </Grid>

@@ -32,8 +32,12 @@ const formatCountryData = (data) =>
         value: country.location
     }));
 
-export const loadCountryHistoricalData = () => async (dispatch, getState) => {
+export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
+        if (field) {
+            dispatch(change(COUNTRY_SEARCH_FORM, field, value));
+        }
+
         const formValues = getState().form[COUNTRY_SEARCH_FORM]?.values ?? {};
         dispatch(coreSlice.actions.setLoading(true));
 
@@ -61,8 +65,12 @@ export const loadCountryHistoricalData = () => async (dispatch, getState) => {
     }
 };
 
-export const loadCountryCurrentData = () => async (dispatch, getState) => {
+export const loadCountryCurrentData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
+        if (field) {
+            dispatch(change(COUNTRY_COMPARE_FORM, field, value));
+        }
+
         dispatch(coreSlice.actions.setLoading(true));
         const { sortKey, sortOrder  } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
 

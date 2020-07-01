@@ -10,12 +10,14 @@ const AutocompleteField = (props) => {
         getOptionLabel,
         renderInput,
         name,
-        multiple
+        multiple,
+        onChange
     } = props;
 
     return (
         <Field
             name={ name }
+            onChange={ onChange }
             component={ (rfProps) => (
                 <Autocomplete
                     multiple={ multiple }
@@ -40,7 +42,8 @@ AutocompleteField.propTypes = {
     getOptionLabel: PropTypes.func.isRequired,
     renderInput: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
-    multiple: PropTypes.bool
+    multiple: PropTypes.bool,
+    onChange: PropTypes.func
 };
 AutocompleteField.defaultProps = {
     multiple: false

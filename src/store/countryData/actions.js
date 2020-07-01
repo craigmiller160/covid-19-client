@@ -7,7 +7,6 @@ import {
 import countryDataSlice from './slice';
 import coreSlice from '../core/slice';
 import { handleError } from '../utilityActions';
-import moment from 'moment';
 import { COUNTRY_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
 import { worldOption } from '../../util/countryOptions';
 import { change } from 'redux-form';
@@ -48,14 +47,11 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
 
         dispatch(change(COUNTRY_SEARCH_FORM, 'location', values.location));
 
-        const startDate = values.startDate ? moment(values.startDate).format('YYYY-MM-DD') : undefined;
-        const endDate = values.endDate ? moment(values.endDate).format('YYYY-MM-DD') : undefined;
-
         let res;
         if (values.location.value === worldOption.value) {
-            res = await getWorldHistoricalData(startDate, endDate);
+            res = await getWorldHistoricalData(values.startDate, values.endDate);
         } else {
-            res = await getCountryHistoricalData(values.location.value, startDate, endDate);
+            res = await getCountryHistoricalData(values.location.value, values.startDate, values.endDate);
         }
         dispatch(countryDataSlice.actions.setHistoricalData(res.data));
     } catch (ex) {

@@ -1,7 +1,6 @@
 import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList } from '../../services';
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
-import moment from 'moment';
 import coreSlice from '../core/slice';
 import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
 import { usOption } from '../../util/countryOptions';
@@ -43,14 +42,11 @@ export const loadStateHistoricalData = ({ field, value } = {}) => async (dispatc
 
         dispatch(change(STATE_SEARCH_FORM, 'location', values.location));
 
-        const startDate = values.startDate ? moment(values.startDate).format('YYYY-MM-DD') : undefined;
-        const endDate = values.endDate ? moment(values.endDate).format('YYYY-MM-DD') : undefined;
-
         let res;
         if (values.location.value === usOption.value) {
-            res = await getCountryHistoricalData(values.location.value, startDate, endDate);
+            res = await getCountryHistoricalData(values.location.value, values.startDate, values.endDate);
         } else {
-            res = await getStateHistoricalData(values.location.value, startDate, endDate);
+            res = await getStateHistoricalData(values.location.value, values.startDate, values.endDate);
         }
         dispatch(stateDataSlice.actions.setHistoricalData(res.data));
     } catch (ex) {

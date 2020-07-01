@@ -71,7 +71,7 @@ const BaseSearch = (props) => {
                             <DateField
                                 name="startDate"
                                 label="Start Date"
-                                defaultValue={ new Date('2019-12-01T00:00:00.000Z') }
+                                defaultValue="2019-11-30"
                                 onChange={ onChangeSubmit }
                             />
                         </Grid>
@@ -79,7 +79,7 @@ const BaseSearch = (props) => {
                             <DateField
                                 name="endDate"
                                 label="End Date"
-                                defaultValue={ new Date('2021-12-31T00:00:00.000Z') }
+                                defaultValue="2021-12-31"
                                 onChange={ onChangeSubmit }
                             />
                         </Grid>

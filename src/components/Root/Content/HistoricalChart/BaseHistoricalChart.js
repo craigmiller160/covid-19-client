@@ -31,7 +31,7 @@ const DATA_NAME_NEW_DEATHS = 'New Deaths';
 const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 const DATA_NAME_NEW_TESTS = 'New Tests';
 const DATA_NAME_POS_TESTS = 'New Positive Test %';
-const DATA_NAME_NEW_HOSPITAL = 'New Hospitalizations';
+const DATA_NAME_NEW_HOSPITAL = 'New Hospital';
 
 const getChartKeys = (location) => {
     const pathParts = location.pathname.split('/');

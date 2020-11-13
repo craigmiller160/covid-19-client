@@ -29,9 +29,7 @@ import { AutocompleteField, Form } from '../../../form';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import Table from '../../../ui/Table';
-
-export const COUNTRY_COMPARE_FORM = 'countryCompare';
-export const STATE_COMPARE_FORM = 'stateCompare';
+import { COUNTRY_COMPARE_FORM, orderOptions, rankByOptions, STATE_COMPARE_FORM } from './compareTableConstants';
 
 const countrySelector = (state) => state.countryData.currentData;
 const stateSelector = (state) => state.stateData.currentData;
@@ -47,18 +45,6 @@ const createColumnNames = (isState) => ([
     'Cases Per-Million',
     'Deaths Per-Million'
 ]);
-
-export const rankByOptions = [
-    { label: 'Total Cases', value: 'totalCases' },
-    { label: 'Total Deaths', value: 'totalDeaths' },
-    { label: 'Cases Per-Million', value: 'totalCasesPerMillion' },
-    { label: 'Deaths Per-Million', value: 'totalDeathsPerMillion' }
-];
-
-export const orderOptions = [
-    { label: 'Highest to Lowest', value: 'desc' },
-    { label: 'Lowest to Highest', value: 'asc' }
-];
 
 const BaseCompareTable = (props) => {
     const {

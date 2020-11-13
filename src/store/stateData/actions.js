@@ -27,7 +27,13 @@ import {
     orderOptions,
     rankByOptions,
     STATE_COMPARE_FORM
-} from '../../components/Root/Content/CompareTable/BaseCompareTable';
+} from '../../components/Root/Content/CompareTable/compareTableConstants';
+
+const formatStateData = (data) =>
+    data.map((state) => ({
+        label: state.displayLocation,
+        value: state.location
+    }));
 
 export const loadStates = () => async (dispatch) => {
     try {
@@ -37,12 +43,6 @@ export const loadStates = () => async (dispatch) => {
         dispatch(handleError(ex, 'Error loading state list'));
     }
 };
-
-const formatStateData = (data) =>
-    data.map((state) => ({
-        label: state.displayLocation,
-        value: state.location
-    }));
 
 export const loadStateHistoricalData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {

@@ -16,13 +16,6 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import '@craigmiller160/web-config/polyfills';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import './index.scss';
-
-ReactDOM.render(
-    <App />,
-  document.getElementById('root')
-);
+module.exports = {
+    title: 'COVID-19 Data'
+};

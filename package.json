@@ -24,6 +24,7 @@
     "redux-form": "^8.3.6"
   },
   "scripts": {
+    "start": "web-config-scripts devServer",
     "lint": "web-config-scripts lint"
   },
   "devDependencies": {

@@ -23,18 +23,19 @@ import { handleError } from '../utilityActions';
 import { loadCountries } from '../countryData/actions';
 import { loadStates } from '../stateData/actions';
 
-export const downloadNewData = () => async (dispatch) => {
-    try {
-        dispatch(coreSlice.actions.setLoading(true));
-        await downloadData();
-
-        dispatch(loadLists());
-        dispatch(loadMetadata());
-    } catch (ex) {
-        dispatch(handleError(ex, 'Error downloading data'));
-    } finally {
-        dispatch(coreSlice.actions.setLoading(false));
+const formatDownloadDate = (downloadDate) => {
+    if (!downloadDate) {
+        return 'No Data';
     }
+    return moment(downloadDate, 'YYYY-MM-DD HH:mm:ssZ')
+        .format('YYYY-MM-DD HH:mm:ss');
+};
+
+export const loadLists = () => async (dispatch) => {
+    dispatch(coreSlice.actions.setLoading(true));
+    dispatch(loadCountries());
+    dispatch(loadStates());
+    dispatch(coreSlice.actions.setLoading(false));
 };
 
 export const loadMetadata = () => async (dispatch) => {
@@ -49,17 +50,16 @@ export const loadMetadata = () => async (dispatch) => {
     }
 };
 
-export const loadLists = () => async (dispatch) => {
-    dispatch(coreSlice.actions.setLoading(true));
-    dispatch(loadCountries());
-    dispatch(loadStates());
-    dispatch(coreSlice.actions.setLoading(false));
-};
+export const downloadNewData = () => async (dispatch) => {
+    try {
+        dispatch(coreSlice.actions.setLoading(true));
+        await downloadData();
 
-const formatDownloadDate = (downloadDate) => {
-    if (!downloadDate) {
-        return 'No Data';
+        dispatch(loadLists());
+        dispatch(loadMetadata());
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error downloading data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
     }
-    return moment(downloadDate, 'YYYY-MM-DD HH:mm:ssZ')
-        .format('YYYY-MM-DD HH:mm:ss');
 };

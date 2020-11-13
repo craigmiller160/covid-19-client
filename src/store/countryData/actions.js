@@ -26,13 +26,19 @@ import {
 import countryDataSlice from './slice';
 import coreSlice from '../core/slice';
 import { handleError } from '../utilityActions';
-import { COUNTRY_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
+import { COUNTRY_SEARCH_FORM } from '../../components/Root/Content/Search/searchConstants';
 import { worldOption } from '../../util/countryOptions';
 import {
     COUNTRY_COMPARE_FORM,
     orderOptions,
     rankByOptions
-} from '../../components/Root/Content/CompareTable/BaseCompareTable';
+} from '../../components/Root/Content/CompareTable/compareTableConstants';
+
+const formatCountryData = (data) =>
+    data.map((country) => ({
+        label: country.displayLocation,
+        value: country.location
+    }));
 
 export const loadCountries = () => async (dispatch) => {
     try {
@@ -42,12 +48,6 @@ export const loadCountries = () => async (dispatch) => {
         dispatch(handleError(ex, 'Error loading country list'));
     }
 };
-
-const formatCountryData = (data) =>
-    data.map((country) => ({
-        label: country.displayLocation,
-        value: country.location
-    }));
 
 export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {

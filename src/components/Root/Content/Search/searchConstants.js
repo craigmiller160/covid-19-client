@@ -16,32 +16,5 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-    historicalData: [],
-    currentData: [],
-    countries: []
-};
-
-const setCountries = (draft, action) => {
-    draft.countries = action.payload;
-};
-
-const setHistoricalData = (draft, action) => {
-    draft.historicalData = action.payload;
-};
-
-const setCurrentData = (draft, action) => {
-    draft.currentData = action.payload;
-};
-
-export default createSlice({
-    name: 'countryData',
-    initialState,
-    reducers: {
-        setCountries,
-        setHistoricalData,
-        setCurrentData
-    }
-});
+export const COUNTRY_SEARCH_FORM = 'countrySearch';
+export const STATE_SEARCH_FORM = 'stateSearch';

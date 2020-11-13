@@ -24,16 +24,16 @@ const initialState = {
     downloadDate: null
 };
 
-const setLoading = (state, action) => {
-    state.loading = action.payload;
+const setLoading = (draft, action) => {
+    draft.loading = action.payload;
 };
 
-const setError = (state, action) => {
-    state.error = action.payload;
+const setError = (draft, action) => {
+    draft.error = action.payload;
 };
 
-const setDownloadDate = (state, action) => {
-    state.downloadDate = action.payload;
+const setDownloadDate = (draft, action) => {
+    draft.downloadDate = action.payload;
 };
 
 export default createSlice({

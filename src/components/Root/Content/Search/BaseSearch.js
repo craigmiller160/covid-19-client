@@ -27,9 +27,8 @@ import { AutocompleteField, DateField, Form } from '../../../form';
 import { usOption, worldOption } from '../../../../util/countryOptions';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
+import { COUNTRY_SEARCH_FORM, STATE_SEARCH_FORM } from './searchConstants';
 
-export const COUNTRY_SEARCH_FORM = 'countrySearch';
-export const STATE_SEARCH_FORM = 'stateSearch';
 const countriesSelector = (state) => state.countryData.countries;
 const statesSelector = (state) => state.stateData.states;
 

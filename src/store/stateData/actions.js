@@ -21,7 +21,7 @@ import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, 
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
 import coreSlice from '../core/slice';
-import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
+import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/searchConstants';
 import { usOption } from '../../util/countryOptions';
 import {
     orderOptions,

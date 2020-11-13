@@ -51,7 +51,7 @@ const NavBar = () => {
 
     return (
         <div>
-            <AppBar position="static" className="NavBar" >
+            <AppBar position="static" className="NavBar">
                 <Toolbar>
                     {
                         !isNotPhone && !loading &&
@@ -73,9 +73,9 @@ const NavBar = () => {
                         <>
                             <div className="left">
                                 {
-                                    menuItems.left.map((item, index) => (
+                                    menuItems.left.map((item) => (
                                         <Button
-                                            key={ index }
+                                            key={ item.to }
                                             variant={ item.active ? 'contained' : 'text' }
                                             color={ item.active ? 'default' : 'inherit' }
                                             onClick={ item.onClick }

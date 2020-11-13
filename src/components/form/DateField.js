@@ -52,7 +52,8 @@ const DateField = (props) => {
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
-                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : moment(defaultValue).toDate();
+                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() :
+                    moment(defaultValue).toDate();
 
                 const keyOnChange = (newValue) => {
                     if (moment(newValue).isValid() && !moment(value).isSame(moment(newValue))) {
@@ -74,9 +75,9 @@ const DateField = (props) => {
                             keyOnChange(event.target.value);
                         } }
                         onFocus={ () => setFocus(true) }
-                        onChange={ (value) => {
+                        onChange={ (changeValue) => {
                             if (!focus) {
-                                const formattedValue = moment(value).format('YYYY-MM-DD');
+                                const formattedValue = moment(changeValue).format('YYYY-MM-DD');
                                 rfProps.input.onChange(formattedValue);
                             }
                         } }

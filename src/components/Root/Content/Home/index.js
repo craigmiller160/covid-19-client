@@ -22,8 +22,7 @@ import Paper from '@material-ui/core/Paper';
 import './Home.scss';
 import covidImg from '../../../../assets/images/2760147.svg';
 
-const Home = () => {
-    return (
+const Home = () => (
         <Grid
             className="Home"
             container
@@ -56,6 +55,5 @@ const Home = () => {
             </Grid>
         </Grid>
     );
-};
 
 export default Home;

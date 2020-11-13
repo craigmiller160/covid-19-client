@@ -18,11 +18,11 @@
 
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import Root from './Root';
-import store from '../store';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { BrowserRouter } from 'react-router-dom';
+import store from '../store';
+import Root from './Root';
 
 const App = () => (
     <ReduxProvider store={ store }>

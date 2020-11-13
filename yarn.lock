@@ -1107,10 +1107,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@craigmiller160/web-config@^2.0.2":
-  version "2.0.2"
-  resolved "http://localhost:30000/@craigmiller160%2fweb-config/-/web-config-2.0.2.tgz#12c5e7a240eb703fe4d1373764b6b45601df6508"
-  integrity sha512-8neuqJ16JyD09DDMKERmYI9CVqDX31MTJJJxdtjNQvz4zi+4uMUy8SyJGAclJ1gNgVh3Iiz4OkXIQG26uMkHIw==
+"@craigmiller160/web-config@^2.0.3":
+  version "2.0.3"
+  resolved "http://localhost:30000/@craigmiller160%2fweb-config/-/web-config-2.0.3.tgz#c20c9fe4c67da028cdec633fc532b1bd95e9f496"
+  integrity sha512-B81zHGBue5sVXszTVkP3tIB2lG4bNeUXZt889SMXoGft5quBlEV+UJzWlyf5Px3ImMEaO/PrjLaZZW8kFJxn8g==
   dependencies:
     "@babel/core" "^7.12.3"
     "@babel/plugin-transform-runtime" "^7.12.1"

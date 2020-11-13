@@ -35,7 +35,7 @@ const MobileMenu = (props) => {
     } = props;
 
     const menuItems = createMenuItems(dispatch, location.pathname, handleMenuClose);
-    const mergedMenuItems = [...menuItems.left, ...menuItems.right];
+    const mergedMenuItems = [ ...menuItems.left, ...menuItems.right ];
 
     return (
         <Drawer

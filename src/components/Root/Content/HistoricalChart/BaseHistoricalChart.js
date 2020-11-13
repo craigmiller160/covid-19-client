@@ -199,7 +199,7 @@ const BaseHistoricalChart = (props) => {
                         </Button>
                         <Button
                             variant="contained"
-                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary': 'default' }
+                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary' : 'default' }
                             onClick={ () => history.push(`${basePath}/${PATH_NEW_HOSPITAL}`) }
                         >
                             { DATA_NAME_NEW_HOSPITAL }

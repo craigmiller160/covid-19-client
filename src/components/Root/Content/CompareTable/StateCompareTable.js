@@ -17,8 +17,8 @@
  */
 
 import React from 'react';
-import BaseCompareTable from './BaseCompareTable';
 import { useDispatch } from 'react-redux';
+import BaseCompareTable from './BaseCompareTable';
 import useLoading from '../../../hooks/useLoading';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 

@@ -22,11 +22,11 @@ import Grid from '@material-ui/core/Grid';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import './BaseSearch.scss';
+import Paper from '@material-ui/core/Paper';
 import { AutocompleteField, DateField, Form } from '../../../form';
 import { usOption, worldOption } from '../../../../util/countryOptions';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
-import Paper from '@material-ui/core/Paper';
 
 export const COUNTRY_SEARCH_FORM = 'countrySearch';
 export const STATE_SEARCH_FORM = 'stateSearch';
@@ -74,8 +74,7 @@ const BaseSearch = (props) => {
                                     { ...params }
                                     label={ searchLabel }
                                     variant="outlined"
-                                />
-                            }
+                                />}
                             name="location"
                         />
                     </Grid>

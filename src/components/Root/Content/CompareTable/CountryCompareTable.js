@@ -17,14 +17,14 @@
  */
 
 import React from 'react';
-import BaseCompareTable from './BaseCompareTable';
 import { useDispatch } from 'react-redux';
+import BaseCompareTable from './BaseCompareTable';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
 
 const Component = () => <BaseCompareTable />;
 
-const CountryCompareTable = () =>{
+const CountryCompareTable = () => {
     const dispatch = useDispatch();
     const loader = () => dispatch(loadCountryCurrentData());
     const DisplayComponent = useLoading({

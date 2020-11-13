@@ -46,9 +46,7 @@ const AutocompleteField = (props) => {
                     renderInput={ renderInput }
                     onChange={ (event, newValue) => rfProps.input.onChange(newValue) }
                     value={ rfProps.input.value }
-                    getOptionSelected={ (option, value) => {
-                        return option.value === value.value;
-                    } }
+                    getOptionSelected={ (option, value) => option.value === value.value }
                 />
             ) }
         />

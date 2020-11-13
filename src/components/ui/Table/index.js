@@ -37,7 +37,7 @@ const Table = (props) => {
         dataRow,
         rootClassName
     } = props;
-    const [state, setState] = useState({
+    const [ state, setState ] = useState({
         page: 0
     });
 

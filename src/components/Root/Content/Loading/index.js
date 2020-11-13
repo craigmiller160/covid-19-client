@@ -25,12 +25,10 @@ const spinnerStyle = {
     height: '100%'
 };
 
-const Loading = () => {
-    return (
+const Loading = () => (
         <div className="Loading" >
             <CircularProgress style={ spinnerStyle } />
         </div>
     );
-};
 
 export default Loading;

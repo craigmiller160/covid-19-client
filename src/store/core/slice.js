@@ -21,7 +21,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     loading: false,
     error: null,
-    downloadDate: null,
+    downloadDate: null
 };
 
 const setLoading = (state, action) => {

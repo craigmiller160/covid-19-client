@@ -16,13 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { change } from 'redux-form';
 import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList } from '../../services';
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
 import coreSlice from '../core/slice';
 import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
 import { usOption } from '../../util/countryOptions';
-import { change } from 'redux-form';
 import {
     orderOptions,
     rankByOptions,

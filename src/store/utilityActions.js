@@ -35,6 +35,6 @@ export const handleError = (ex, message) => (dispatch) => {
             details: ex.message
         };
     }
-    console.log(ex);
+    console.error(ex);
     dispatch(dataSlice.actions.setError(errorPayload));
 };

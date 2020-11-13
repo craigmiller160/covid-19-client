@@ -22,4 +22,4 @@ const usOption = { label: 'United States of America', value: 'United_States_of_A
 export {
     worldOption,
     usOption
-}
+};

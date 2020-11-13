@@ -19,16 +19,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import Table from '../../../ui/Table';
 import TableRow from '@material-ui/core/TableRow';
 import { TableCell } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
-import { AutocompleteField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import { AutocompleteField, Form } from '../../../form';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
-import Paper from '@material-ui/core/Paper';
+import Table from '../../../ui/Table';
 
 export const COUNTRY_COMPARE_FORM = 'countryCompare';
 export const STATE_COMPARE_FORM = 'stateCompare';
@@ -82,8 +82,7 @@ const BaseCompareTable = (props) => {
     let filteredData = data;
     if (formValues.location?.length > 0) {
         filteredData = filteredData.filter((element) =>
-            formValues.location.find((location) => location.value === element.location)
-        );
+            formValues.location.find((location) => location.value === element.location));
     }
 
     return (
@@ -122,8 +121,7 @@ const BaseCompareTable = (props) => {
                                     { ...params }
                                     label="Rank By"
                                     variant="outlined"
-                                />
-                            }
+                                />}
                             name="sortKey"
                         />
                         <AutocompleteField
@@ -136,8 +134,7 @@ const BaseCompareTable = (props) => {
                                     { ...params }
                                     label="Order"
                                     variant="outlined"
-                                />
-                            }
+                                />}
                             name="sortOrder"
                         />
                     </Grid>
@@ -157,8 +154,7 @@ const BaseCompareTable = (props) => {
                                     { ...params }
                                     label={ locationFilterLabel }
                                     variant="outlined"
-                                />
-                            }
+                                />}
                             name="location"
                         />
                     </Grid>

@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import moment from 'moment'; // TODO get rid of this
 import { downloadData, getMetadata } from '../../services';
 import coreSlice from './slice';
-import moment from 'moment'; // TODO get rid of this
 import { handleError } from '../utilityActions';
 import { loadCountries } from '../countryData/actions';
 import { loadStates } from '../stateData/actions';

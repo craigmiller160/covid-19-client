@@ -16,6 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { change } from 'redux-form';
 import {
     getCountriesList,
     getCountryCurrentData,
@@ -27,7 +28,6 @@ import coreSlice from '../core/slice';
 import { handleError } from '../utilityActions';
 import { COUNTRY_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
 import { worldOption } from '../../util/countryOptions';
-import { change } from 'redux-form';
 import {
     COUNTRY_COMPARE_FORM,
     orderOptions,
@@ -86,7 +86,7 @@ export const loadCountryCurrentData = ({ field, value } = {}) => async (dispatch
         }
 
         dispatch(coreSlice.actions.setLoading(true));
-        const { sortKey, sortOrder  } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
+        const { sortKey, sortOrder } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
 
         const realSortKey = sortKey || rankByOptions[0];
         const realSortOrder = sortOrder || orderOptions[0];

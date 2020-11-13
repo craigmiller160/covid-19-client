@@ -18,7 +18,7 @@
 
 import { downloadData, getMetadata } from '../../services';
 import coreSlice from './slice';
-import moment from 'moment';
+import moment from 'moment'; // TODO get rid of this
 import { handleError } from '../utilityActions';
 import { loadCountries } from '../countryData/actions';
 import { loadStates } from '../stateData/actions';

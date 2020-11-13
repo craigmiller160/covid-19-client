@@ -19,7 +19,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import moment from 'moment';
+import moment from 'moment'; // TODO get rid of this
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
 /*

@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@craigmiller160/web-config": "^2.0.2",
     "archiver": "^3.1.1",
     "cross-env": "^7.0.2",
     "node-sass": "^4.14.1"

@@ -71,7 +71,7 @@ const DateField = (props) => {
                     }
                 };
 
-                const onChange = (newValue) => {
+                const innerOnChange = (newValue) => {
                     if (!focus.current) {
                         const formattedValue = format(newValue, 'yyyy-MM-dd');
                         rfProps.input.onChange(formattedValue);
@@ -91,8 +91,10 @@ const DateField = (props) => {
                             focus.current = false;
                             keyOnChange(event.target.value);
                         } }
-                        onFocus={ () => focus.current = true }
-                        onChange={ onChange }
+                        onFocus={ () => {
+                            focus.current = true;
+                        } }
+                        onChange={ innerOnChange }
                         onKeyDown={ (event) => {
                             if (event.key === 'Enter') {
                                 keyOnChange(event.target.value);

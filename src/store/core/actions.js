@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import moment from 'moment'; // TODO get rid of this
+import { parse, format } from 'date-fns';
 import { downloadData, getMetadata } from '../../services';
 import coreSlice from './slice';
 import { handleError } from '../utilityActions';
@@ -27,8 +27,8 @@ const formatDownloadDate = (downloadDate) => {
     if (!downloadDate) {
         return 'No Data';
     }
-    return moment(downloadDate, 'YYYY-MM-DD HH:mm:ssZ')
-        .format('YYYY-MM-DD HH:mm:ss');
+    const parsedDate = parse(downloadDate, 'yyyy-MM-dd HH:mm:ssXXX', new Date());
+    return format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
 };
 
 export const loadLists = () => async (dispatch) => {

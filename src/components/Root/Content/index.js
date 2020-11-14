@@ -46,7 +46,10 @@ const Content = () => {
     return (
         <Container className="Content">
             <Alert />
-            <h3>Last updated: { downloadDate }</h3>
+            <h3>
+                <span>Last updated: </span>
+                <span>{ downloadDate }</span>
+            </h3>
             <Switch>
                 <Route
                     path="/country/history/data"

@@ -35,7 +35,10 @@ const Home = () => (
             >
                 <Paper>
                     <h1>Welcome to COVID 19 Statistics</h1>
-                    <h3>This application presents accurate data, both raw statistics and analysis on the COVID 19 pandemic.</h3>
+                    <h3>
+                        <span>This application presents accurate data, both raw statistics </span>
+                        <span>and analysis on the COVID 19 pandemic.</span>
+                    </h3>
                     <img className="CovidImg" src={ covidImg } alt="COVID Icon" />
                 </Paper>
             </Grid>
@@ -48,9 +51,19 @@ const Home = () => (
                 <Paper>
                     <h1>Sources</h1>
                     <h3>This application would not be possible without data from the following sources.</h3>
-                    <p><strong>European Centre for Disease Control (ECDC):</strong> for providing the raw COVID case statistics for countries world-wide, along with their population.</p>
-                    <p><strong>The COVID Tracking Project:</strong> for providing the raw COVID case statistics for US states.</p>
-                    <p><strong>US Census Bureau:</strong> for providing US state population data.</p>
+                    <p>
+                        <strong>European Centre for Disease Control (ECDC): </strong>
+                        <span>for providing the raw COVID case statistics for countries world-wide, </span>
+                        <span>along with their population.</span>
+                    </p>
+                    <p>
+                        <strong>The COVID Tracking Project: </strong>
+                        <span>for providing the raw COVID case statistics for US states.</span>
+                    </p>
+                    <p>
+                        <strong>US Census Bureau: </strong>
+                        <span>for providing US state population data.</span>
+                    </p>
                 </Paper>
             </Grid>
         </Grid>

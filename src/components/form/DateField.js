@@ -20,7 +20,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import parse from 'date-fns/parse/index';
-import moment from 'moment'; // TODO get rid of this
+import isValid from 'date-fns/isValid/index';
+import isEqual from 'date-fns/isEqual/index';
+import format from 'date-fns/format/index';
 import { KeyboardDatePicker } from '@material-ui/pickers'; // TODO this is probably a bundle problem
 
 /*
@@ -66,9 +68,15 @@ const DateField = (props) => {
                 const value = parseValue(rfProps.input.value, defaultValue);
 
                 const keyOnChange = (newValue) => {
-                    if (moment(newValue).isValid() && !moment(value).isSame(moment(newValue))) {
+                    const parsedNewValue = parse(newValue, DATE_FORMAT, new Date());
+                    if (isValid(parsedNewValue) && !isEqual(value, parsedNewValue)) {
                         rfProps.input.onChange(newValue);
                     }
+                };
+
+                const onChange = (newValue) => {
+                    const formattedValue = format(newValue, 'yyyy-MM-dd');
+                    rfProps.input.onChange(formattedValue);
                 };
 
                 return (
@@ -85,12 +93,7 @@ const DateField = (props) => {
                             keyOnChange(event.target.value);
                         } }
                         onFocus={ () => setFocus(true) }
-                        onChange={ (changeValue) => {
-                            if (!focus) {
-                                const formattedValue = moment(changeValue).format('YYYY-MM-DD');
-                                rfProps.input.onChange(formattedValue);
-                            }
-                        } }
+                        onChange={ onChange }
                         onKeyDown={ (event) => {
                             if (event.key === 'Enter') {
                                 keyOnChange(event.target.value);

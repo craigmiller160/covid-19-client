@@ -42,7 +42,7 @@ const Form = (props) => {
 Form.propTypes = {
     className: PropTypes.string,
     handleSubmit: PropTypes.func,
-    children: PropTypes.elementType
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
 const ReduxForm = reduxForm({})(Form);

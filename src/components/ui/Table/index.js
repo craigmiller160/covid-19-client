@@ -68,7 +68,7 @@ const Table = (props) => {
                         {
                             dataToDisplay.map((record, index) => (
                                 <DataRow
-                                    key={ index }
+                                    key={ record._id } // eslint-disable-line no-underscore-dangle
                                     index={ index }
                                     record={ record }
                                 />

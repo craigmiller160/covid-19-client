@@ -50,6 +50,7 @@ const BaseHistoricalTable = (props) => {
     const fullData = [ ...data ];
     if (fullData.length > 0) {
         fullData.unshift({
+            _id: 'CURRENT',
             date: 'CURRENT',
             newCases: 'N/A',
             totalCases: data[0].totalCases,

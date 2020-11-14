@@ -117,8 +117,6 @@ const BaseHistoricalChart = (props) => {
         return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
     }
 
-    // TODO redirect to default if national data
-
     return (
         <Grid
             container

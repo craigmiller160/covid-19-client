@@ -23,7 +23,7 @@ import parse from 'date-fns/parse/index';
 import isValid from 'date-fns/isValid/index';
 import isEqual from 'date-fns/isEqual/index';
 import format from 'date-fns/format/index';
-import { KeyboardDatePicker } from '@material-ui/pickers'; // TODO this is probably a bundle problem
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 /*
  * Necessary when using this:

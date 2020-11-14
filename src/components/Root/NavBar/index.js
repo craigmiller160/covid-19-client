@@ -25,17 +25,17 @@ import './NavBar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MobileMenu from './MobileMenu';
-import createMenuItems from './menuItems';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { NavLink, useLocation } from 'react-router-dom';
+import createMenuItems from './menuItems';
+import MobileMenu from './MobileMenu';
 
 const NavBar = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const loading = useSelector((state) => state.core.loading);
-    const [isMenuOpen, setMenuOpen] = useState(false);
+    const [ isMenuOpen, setMenuOpen ] = useState(false);
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -51,7 +51,7 @@ const NavBar = () => {
 
     return (
         <div>
-            <AppBar position="static" className="NavBar" >
+            <AppBar position="static" className="NavBar">
                 <Toolbar>
                     {
                         !isNotPhone && !loading &&
@@ -73,9 +73,9 @@ const NavBar = () => {
                         <>
                             <div className="left">
                                 {
-                                    menuItems.left.map((item, index) => (
+                                    menuItems.left.map((item) => (
                                         <Button
-                                            key={ index }
+                                            key={ item.to }
                                             variant={ item.active ? 'contained' : 'text' }
                                             color={ item.active ? 'default' : 'inherit' }
                                             onClick={ item.onClick }

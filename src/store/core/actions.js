@@ -16,25 +16,27 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import parse from 'date-fns/parse/index';
+import format from 'date-fns/format/index';
 import { downloadData, getMetadata } from '../../services';
 import coreSlice from './slice';
-import moment from 'moment';
 import { handleError } from '../utilityActions';
 import { loadCountries } from '../countryData/actions';
 import { loadStates } from '../stateData/actions';
 
-export const downloadNewData = () => async (dispatch) => {
-    try {
-        dispatch(coreSlice.actions.setLoading(true));
-        await downloadData();
-
-        dispatch(loadLists());
-        dispatch(loadMetadata());
-    } catch (ex) {
-        dispatch(handleError(ex, 'Error downloading data'));
-    } finally {
-        dispatch(coreSlice.actions.setLoading(false));
+const formatDownloadDate = (downloadDate) => {
+    if (!downloadDate) {
+        return 'No Data';
     }
+    const parsedDate = parse(downloadDate, 'yyyy-MM-dd HH:mm:ssXXX', new Date());
+    return format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+};
+
+export const loadLists = () => async (dispatch) => {
+    dispatch(coreSlice.actions.setLoading(true));
+    dispatch(loadCountries());
+    dispatch(loadStates());
+    dispatch(coreSlice.actions.setLoading(false));
 };
 
 export const loadMetadata = () => async (dispatch) => {
@@ -49,17 +51,16 @@ export const loadMetadata = () => async (dispatch) => {
     }
 };
 
-export const loadLists = () => async (dispatch) => {
-    dispatch(coreSlice.actions.setLoading(true));
-    dispatch(loadCountries());
-    dispatch(loadStates());
-    dispatch(coreSlice.actions.setLoading(false));
-};
+export const downloadNewData = () => async (dispatch) => {
+    try {
+        dispatch(coreSlice.actions.setLoading(true));
+        await downloadData();
 
-const formatDownloadDate = (downloadDate) => {
-    if (!downloadDate) {
-        return 'No Data';
+        dispatch(loadLists());
+        dispatch(loadMetadata());
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error downloading data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
     }
-    return moment(downloadDate, 'YYYY-MM-DD HH:mm:ssZ')
-        .format('YYYY-MM-DD HH:mm:ss');
 };

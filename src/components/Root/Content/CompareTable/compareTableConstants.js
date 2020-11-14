@@ -16,11 +16,17 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-body {
-    padding: 0;
-    margin: 0;
-}
+export const COUNTRY_COMPARE_FORM = 'countryCompare';
+export const STATE_COMPARE_FORM = 'stateCompare';
 
-* {
-    font-family: Roboto;
-}
+export const rankByOptions = [
+    { label: 'Total Cases', value: 'totalCases' },
+    { label: 'Total Deaths', value: 'totalDeaths' },
+    { label: 'Cases Per-Million', value: 'totalCasesPerMillion' },
+    { label: 'Deaths Per-Million', value: 'totalDeathsPerMillion' }
+];
+
+export const orderOptions = [
+    { label: 'Highest to Lowest', value: 'desc' },
+    { label: 'Lowest to Highest', value: 'asc' }
+];

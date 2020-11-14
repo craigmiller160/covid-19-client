@@ -16,10 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import moment from 'moment';
+import parse from 'date-fns/parse/index';
+import isValid from 'date-fns/isValid/index';
+import isEqual from 'date-fns/isEqual/index';
+import format from 'date-fns/format/index';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
 /*
@@ -33,6 +36,16 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
  * </MuiPickerUtilsProvider>
  */
 
+const DATE_FORMAT = 'yyyy-MM-dd';
+
+const parseValue = (value, defaultValue) => {
+    if (value) {
+        return parse(value, DATE_FORMAT, new Date());
+    }
+
+    return parse(defaultValue, DATE_FORMAT, new Date());
+};
+
 const DateField = (props) => {
     const {
         name,
@@ -42,21 +55,26 @@ const DateField = (props) => {
         onChange
     } = props;
 
-    let focus = false;
-    const setFocus = (value) => {
-        focus = value;
-    };
+    const focus = useRef(false);
 
     return (
         <Field
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
-                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() : moment(defaultValue).toDate();
+                const value = parseValue(rfProps.input.value, defaultValue);
 
                 const keyOnChange = (newValue) => {
-                    if (moment(newValue).isValid() && !moment(value).isSame(moment(newValue))) {
+                    const parsedNewValue = parse(newValue, DATE_FORMAT, new Date());
+                    if (isValid(parsedNewValue) && !isEqual(value, parsedNewValue)) {
                         rfProps.input.onChange(newValue);
+                    }
+                };
+
+                const innerOnChange = (newValue) => {
+                    if (!focus.current) {
+                        const formattedValue = format(newValue, 'yyyy-MM-dd');
+                        rfProps.input.onChange(formattedValue);
                     }
                 };
 
@@ -70,16 +88,13 @@ const DateField = (props) => {
                         variant="outlined"
                         value={ value }
                         onBlur={ (event) => {
-                            setFocus(false);
+                            focus.current = false;
                             keyOnChange(event.target.value);
                         } }
-                        onFocus={ () => setFocus(true) }
-                        onChange={ (value) => {
-                            if (!focus) {
-                                const formattedValue = moment(value).format('YYYY-MM-DD');
-                                rfProps.input.onChange(formattedValue);
-                            }
+                        onFocus={ () => {
+                            focus.current = true;
                         } }
+                        onChange={ innerOnChange }
                         onKeyDown={ (event) => {
                             if (event.key === 'Enter') {
                                 keyOnChange(event.target.value);

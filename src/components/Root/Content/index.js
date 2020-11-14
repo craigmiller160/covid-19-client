@@ -18,8 +18,9 @@
 
 import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
-import Alert from './Alert';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Alert from './Alert';
 import './Content.scss';
 import { loadLists, loadMetadata } from '../../../store/core/actions';
 import CountryHistoricalTable from './HistoricalTable/CountryHistoricalTable';
@@ -29,7 +30,6 @@ import StateHistoricalChart from './HistoricalChart/StateHistoricalChart';
 import CountryCompareTable from './CompareTable/CountryCompareTable';
 import StateCompareTable from './CompareTable/StateCompareTable';
 import Home from './Home';
-import { Redirect, Route, Switch } from 'react-router-dom';
 
 const Content = () => {
     const downloadDate = useSelector((state) => state.core.downloadDate);
@@ -46,7 +46,10 @@ const Content = () => {
     return (
         <Container className="Content">
             <Alert />
-            <h3>Last updated: { downloadDate }</h3>
+            <h3>
+                <span>Last updated: </span>
+                <span>{ downloadDate }</span>
+            </h3>
             <Switch>
                 <Route
                     path="/country/history/data"

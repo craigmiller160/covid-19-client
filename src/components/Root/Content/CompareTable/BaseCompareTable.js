@@ -19,19 +19,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import Table from '../../../ui/Table';
 import TableRow from '@material-ui/core/TableRow';
-import { TableCell } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
-import { AutocompleteField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import { AutocompleteField, Form } from '../../../form';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
-import Paper from '@material-ui/core/Paper';
-
-export const COUNTRY_COMPARE_FORM = 'countryCompare';
-export const STATE_COMPARE_FORM = 'stateCompare';
+import Table from '../../../ui/Table';
+import { COUNTRY_COMPARE_FORM, orderOptions, rankByOptions, STATE_COMPARE_FORM } from './compareTableConstants';
 
 const countrySelector = (state) => state.countryData.currentData;
 const stateSelector = (state) => state.stateData.currentData;
@@ -47,18 +45,6 @@ const createColumnNames = (isState) => ([
     'Cases Per-Million',
     'Deaths Per-Million'
 ]);
-
-export const rankByOptions = [
-    { label: 'Total Cases', value: 'totalCases' },
-    { label: 'Total Deaths', value: 'totalDeaths' },
-    { label: 'Cases Per-Million', value: 'totalCasesPerMillion' },
-    { label: 'Deaths Per-Million', value: 'totalDeathsPerMillion' }
-];
-
-export const orderOptions = [
-    { label: 'Highest to Lowest', value: 'desc' },
-    { label: 'Lowest to Highest', value: 'asc' }
-];
 
 const BaseCompareTable = (props) => {
     const {
@@ -82,8 +68,7 @@ const BaseCompareTable = (props) => {
     let filteredData = data;
     if (formValues.location?.length > 0) {
         filteredData = filteredData.filter((element) =>
-            formValues.location.find((location) => location.value === element.location)
-        );
+            formValues.location.find((location) => location.value === element.location));
     }
 
     return (
@@ -117,13 +102,13 @@ const BaseCompareTable = (props) => {
                             options={ rankByOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
                             onChange={ onChangeSubmit }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label="Rank By"
                                     variant="outlined"
                                 />
-                            }
+                            ) }
                             name="sortKey"
                         />
                         <AutocompleteField
@@ -131,13 +116,13 @@ const BaseCompareTable = (props) => {
                             options={ orderOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
                             onChange={ onChangeSubmit }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label="Order"
                                     variant="outlined"
                                 />
-                            }
+                            ) }
                             name="sortOrder"
                         />
                     </Grid>
@@ -152,13 +137,13 @@ const BaseCompareTable = (props) => {
                             className="FilterField long"
                             options={ listWithoutTotalElement }
                             getOptionLabel={ (option) => option?.label ?? [] }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label={ locationFilterLabel }
                                     variant="outlined"
                                 />
-                            }
+                            ) }
                             name="location"
                         />
                     </Grid>
@@ -178,7 +163,8 @@ const BaseCompareTable = (props) => {
                         <TableCell>{ record.totalCasesPerMillion?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalDeathsPerMillion?.toLocaleString() ?? 'N/A' }</TableCell>
                     </TableRow>
-                ) } />
+                ) }
+            />
         </Grid>
     );
 };

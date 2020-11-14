@@ -17,8 +17,8 @@
  */
 
 import { useEffect } from 'react';
-import Loading from '../Root/Content/Loading';
 import { useSelector } from 'react-redux';
+import Loading from '../Root/Content/Loading';
 
 const useLoading = (props) => {
     const {

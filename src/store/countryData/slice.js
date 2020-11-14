@@ -24,16 +24,16 @@ const initialState = {
     countries: []
 };
 
-const setCountries = (state, action) => {
-    state.countries = action.payload;
+const setCountries = (draft, action) => {
+    draft.countries = action.payload;
 };
 
-const setHistoricalData = (state, action) => {
-    state.historicalData = action.payload;
+const setHistoricalData = (draft, action) => {
+    draft.historicalData = action.payload;
 };
 
-const setCurrentData = (state, action) => {
-    state.currentData = action.payload;
+const setCurrentData = (draft, action) => {
+    draft.currentData = action.payload;
 };
 
 export default createSlice({
@@ -44,4 +44,4 @@ export default createSlice({
         setHistoricalData,
         setCurrentData
     }
-})
+});

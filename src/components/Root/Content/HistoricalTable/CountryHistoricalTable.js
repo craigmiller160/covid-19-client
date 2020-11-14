@@ -17,9 +17,9 @@
  */
 
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import BaseHistoricalTable from './BaseHistoricalTable';
 import CountrySearch from '../Search/CountrySearch';
-import { useDispatch } from 'react-redux';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
 
@@ -41,6 +41,6 @@ const CountryHistoricalTable = () => {
     return (
         <DisplayComponent />
     );
-}
+};
 
 export default CountryHistoricalTable;

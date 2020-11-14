@@ -17,16 +17,19 @@
  */
 
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import BaseHistoricalChart from './BaseHistoricalChart';
 import StateSearch from '../Search/StateSearch';
-import { useDispatch } from 'react-redux';
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
 import useLoading from '../../../hooks/useLoading';
 
 const Component = () => (
     <div>
         <StateSearch />
-        <p>Additional data is available for states that is not available nationally. Please select an individual state to see it.</p>
+        <p>
+            <span>Additional data is available for states that is not available nationally. </span>
+            <span>Please select an individual state to see it.</span>
+        </p>
         <BaseHistoricalChart isState />
     </div>
 );

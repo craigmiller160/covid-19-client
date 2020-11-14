@@ -25,7 +25,7 @@ import useHistoryData from '../../../hooks/useHistoryData';
 
 const calcMortality = (entry) => {
     if (entry.totalCases === 0) {
-        return `0.00%`;
+        return '0.00%';
     }
     const value = (entry.totalDeaths / entry.totalCases) * 100;
     return `${value.toFixed(2)}%`;
@@ -47,9 +47,10 @@ const BaseHistoricalTable = (props) => {
     } = props;
     const { data } = useHistoryData({ isState });
 
-    const fullData = [...data];
+    const fullData = [ ...data ];
     if (fullData.length > 0) {
         fullData.unshift({
+            _id: 'CURRENT',
             date: 'CURRENT',
             newCases: 'N/A',
             totalCases: data[0].totalCases,

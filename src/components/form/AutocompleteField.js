@@ -46,9 +46,7 @@ const AutocompleteField = (props) => {
                     renderInput={ renderInput }
                     onChange={ (event, newValue) => rfProps.input.onChange(newValue) }
                     value={ rfProps.input.value }
-                    getOptionSelected={ (option, value) => {
-                        return option.value === value.value;
-                    } }
+                    getOptionSelected={ (option, value) => option.value === value.value }
                 />
             ) }
         />
@@ -56,7 +54,10 @@ const AutocompleteField = (props) => {
 };
 AutocompleteField.propTypes = {
     className: PropTypes.string,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+        label: PropTypes.string
+    })).isRequired,
     getOptionLabel: PropTypes.func.isRequired,
     renderInput: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,

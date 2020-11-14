@@ -17,9 +17,9 @@
  */
 
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import BaseHistoricalChart from './BaseHistoricalChart';
 import CountrySearch from '../Search/CountrySearch';
-import { useDispatch } from 'react-redux';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
 

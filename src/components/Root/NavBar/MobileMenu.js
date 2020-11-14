@@ -17,14 +17,15 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useDispatch } from 'react-redux';
-import createMenuItems from './menuItems';
-import './MobileMenu.scss';
 import Typography from '@material-ui/core/Typography';
 import { NavLink, useLocation } from 'react-router-dom';
+import createMenuItems from './menuItems';
+import './MobileMenu.scss';
 
 const MobileMenu = (props) => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const MobileMenu = (props) => {
     } = props;
 
     const menuItems = createMenuItems(dispatch, location.pathname, handleMenuClose);
-    const mergedMenuItems = [...menuItems.left, ...menuItems.right];
+    const mergedMenuItems = [ ...menuItems.left, ...menuItems.right ];
 
     return (
         <Drawer
@@ -58,9 +59,9 @@ const MobileMenu = (props) => {
                 </Typography>
             </NavLink>
             {
-                mergedMenuItems.map((item, index) => (
+                mergedMenuItems.map((item) => (
                     <ListItem
-                        key={ index }
+                        key={ item.to }
                         className={ `item ${item.active ? 'active' : ''}` }
                         onClick={ item.onClick }
                     >
@@ -76,6 +77,10 @@ const MobileMenu = (props) => {
             }
         </Drawer>
     );
+};
+MobileMenu.propTypes = {
+    isMenuOpen: PropTypes.bool,
+    handleMenuClose: PropTypes.func.isRequired
 };
 
 export default MobileMenu;

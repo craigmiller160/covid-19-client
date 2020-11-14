@@ -105,7 +105,8 @@ const BaseHistoricalChart = (props) => {
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];
-    const showMoreOptions = isState && selectedLocation?.value !== null && selectedLocation?.value !== 'United_States_of_America';
+    const showMoreOptions = isState && selectedLocation?.value !== null &&
+        selectedLocation?.value !== 'United_States_of_America';
 
     // const chartWidth = isNotPhone ? 800 : 390;
     const chartHeight = isNotPhone ? 500 : 300;
@@ -115,8 +116,6 @@ const BaseHistoricalChart = (props) => {
     if (location.pathname.endsWith('/history/chart')) {
         return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
     }
-
-    // TODO redirect to default if national data
 
     return (
         <Grid
@@ -199,7 +198,7 @@ const BaseHistoricalChart = (props) => {
                         </Button>
                         <Button
                             variant="contained"
-                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary': 'default' }
+                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary' : 'default' }
                             onClick={ () => history.push(`${basePath}/${PATH_NEW_HOSPITAL}`) }
                         >
                             { DATA_NAME_NEW_HOSPITAL }

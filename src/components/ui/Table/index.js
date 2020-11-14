@@ -26,7 +26,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { TableCell } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
 
 const rowsPerPage = 20;
 
@@ -37,7 +37,7 @@ const Table = (props) => {
         dataRow,
         rootClassName
     } = props;
-    const [state, setState] = useState({
+    const [ state, setState ] = useState({
         page: 0
     });
 
@@ -58,8 +58,8 @@ const Table = (props) => {
                     <TableHead>
                         <TableRow>
                             {
-                                columnNames.map((name, index) => (
-                                    <TableCell key={ index }>{ name }</TableCell>
+                                columnNames.map((name) => (
+                                    <TableCell key={ name }>{ name }</TableCell>
                                 ))
                             }
                         </TableRow>
@@ -68,7 +68,7 @@ const Table = (props) => {
                         {
                             dataToDisplay.map((record, index) => (
                                 <DataRow
-                                    key={ index }
+                                    key={ record._id } // eslint-disable-line no-underscore-dangle
                                     index={ index }
                                     record={ record }
                                 />
@@ -92,7 +92,7 @@ const Table = (props) => {
     );
 };
 Table.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.arrayOf(PropTypes.any).isRequired,
     columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
     dataRow: PropTypes.elementType.isRequired,
     rootClassName: PropTypes.string

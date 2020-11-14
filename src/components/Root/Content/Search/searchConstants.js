@@ -16,15 +16,5 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import NavBar from './NavBar';
-import Content from './Content';
-
-const Root = () => (
-    <div>
-        <NavBar />
-        <Content />
-    </div>
-);
-
-export default Root;
+export const COUNTRY_SEARCH_FORM = 'countrySearch';
+export const STATE_SEARCH_FORM = 'stateSearch';

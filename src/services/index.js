@@ -16,8 +16,8 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import api from './api';
 import qs from 'qs';
+import api from './api';
 
 export const getCountryHistoricalData = (country, startDate, endDate) =>
     api.get(`/country/historical/${country}?${qs.stringify({ startDate, endDate })}`);

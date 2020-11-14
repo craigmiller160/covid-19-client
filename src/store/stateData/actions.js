@@ -16,18 +16,24 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { change } from 'redux-form';
 import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList } from '../../services';
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
 import coreSlice from '../core/slice';
-import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/BaseSearch';
+import { STATE_SEARCH_FORM } from '../../components/Root/Content/Search/searchConstants';
 import { usOption } from '../../util/countryOptions';
-import { change } from 'redux-form';
 import {
     orderOptions,
     rankByOptions,
     STATE_COMPARE_FORM
-} from '../../components/Root/Content/CompareTable/BaseCompareTable';
+} from '../../components/Root/Content/CompareTable/compareTableConstants';
+
+const formatStateData = (data) =>
+    data.map((state) => ({
+        label: state.displayLocation,
+        value: state.location
+    }));
 
 export const loadStates = () => async (dispatch) => {
     try {
@@ -37,12 +43,6 @@ export const loadStates = () => async (dispatch) => {
         dispatch(handleError(ex, 'Error loading state list'));
     }
 };
-
-const formatStateData = (data) =>
-    data.map((state) => ({
-        label: state.displayLocation,
-        value: state.location
-    }));
 
 export const loadStateHistoricalData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {

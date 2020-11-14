@@ -21,13 +21,13 @@ import dataSlice from './core/slice';
 export const handleError = (ex, message) => (dispatch) => {
     let errorPayload;
     if (ex.response) {
-        let message = ex.response.data;
-        if (typeof message === 'object') {
-            message = ex.response.data.message;
+        let exMessage = ex.response.data;
+        if (typeof exMessage === 'object') {
+            exMessage = ex.response.data.message;
         }
         errorPayload = {
-            title: message,
-            details: `Status: ${ex.response.status}. Message: ${message}`
+            title: exMessage,
+            details: `Status: ${ex.response.status}. Message: ${exMessage}`
         };
     } else {
         errorPayload = {
@@ -35,6 +35,6 @@ export const handleError = (ex, message) => (dispatch) => {
             details: ex.message
         };
     }
-    console.log(ex);
+    console.error(ex);
     dispatch(dataSlice.actions.setError(errorPayload));
 };

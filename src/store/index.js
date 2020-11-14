@@ -18,10 +18,10 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import coreSlice from './core/slice';
 import countryDataSlice from './countryData/slice';
 import stateDataSlice from './stateData/slice';
-import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
     core: coreSlice.reducer,

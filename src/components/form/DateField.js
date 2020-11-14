@@ -19,6 +19,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import parse from 'date-fns/parse/index';
 import moment from 'moment'; // TODO get rid of this
 import { KeyboardDatePicker } from '@material-ui/pickers'; // TODO this is probably a bundle problem
 
@@ -32,6 +33,16 @@ import { KeyboardDatePicker } from '@material-ui/pickers'; // TODO this is proba
  *      // Pickers go here
  * </MuiPickerUtilsProvider>
  */
+
+const DATE_FORMAT = 'yyyy-MM-dd';
+
+const parseValue = (value, defaultValue) => {
+    if (value) {
+        return parse(value, DATE_FORMAT, new Date());
+    }
+
+    return parse(defaultValue, DATE_FORMAT, new Date());
+};
 
 const DateField = (props) => {
     const {
@@ -52,8 +63,7 @@ const DateField = (props) => {
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
-                const value = rfProps.input.value ? moment(rfProps.input.value).toDate() :
-                    moment(defaultValue).toDate();
+                const value = parseValue(rfProps.input.value, defaultValue);
 
                 const keyOnChange = (newValue) => {
                     if (moment(newValue).isValid() && !moment(value).isSame(moment(newValue))) {

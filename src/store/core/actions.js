@@ -16,7 +16,8 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { parse, format } from 'date-fns';
+import parse from 'date-fns/parse/index';
+import format from 'date-fns/format/index';
 import { downloadData, getMetadata } from '../../services';
 import coreSlice from './slice';
 import { handleError } from '../utilityActions';

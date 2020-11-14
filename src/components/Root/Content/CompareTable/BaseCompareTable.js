@@ -20,7 +20,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import TableRow from '@material-ui/core/TableRow';
-import { TableCell } from '@material-ui/core';
+import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
 import TextField from '@material-ui/core/TextField';
@@ -102,12 +102,13 @@ const BaseCompareTable = (props) => {
                             options={ rankByOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
                             onChange={ onChangeSubmit }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label="Rank By"
                                     variant="outlined"
-                                />}
+                                />
+                            ) }
                             name="sortKey"
                         />
                         <AutocompleteField
@@ -115,12 +116,13 @@ const BaseCompareTable = (props) => {
                             options={ orderOptions }
                             getOptionLabel={ (option) => option.label ?? '' }
                             onChange={ onChangeSubmit }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label="Order"
                                     variant="outlined"
-                                />}
+                                />
+                            ) }
                             name="sortOrder"
                         />
                     </Grid>
@@ -135,12 +137,13 @@ const BaseCompareTable = (props) => {
                             className="FilterField long"
                             options={ listWithoutTotalElement }
                             getOptionLabel={ (option) => option?.label ?? [] }
-                            renderInput={ (params) =>
+                            renderInput={ (params) => (
                                 <TextField
                                     { ...params }
                                     label={ locationFilterLabel }
                                     variant="outlined"
-                                />}
+                                />
+                            ) }
                             name="location"
                         />
                     </Grid>
@@ -160,7 +163,8 @@ const BaseCompareTable = (props) => {
                         <TableCell>{ record.totalCasesPerMillion?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalDeathsPerMillion?.toLocaleString() ?? 'N/A' }</TableCell>
                     </TableRow>
-                ) } />
+                ) }
+            />
         </Grid>
     );
 };

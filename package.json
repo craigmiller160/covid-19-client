@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "web-config-scripts webpack",
+    "prepDeploy": "web-config-scripts prepDeploy",
     "start": "web-config-scripts devServer",
     "lint": "web-config-scripts lint"
   },

@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import parse from 'date-fns/parse/index';
@@ -55,10 +55,7 @@ const DateField = (props) => {
         onChange
     } = props;
 
-    let focus = false;
-    const setFocus = (value) => {
-        focus = value;
-    };
+    const focus = useRef(false);
 
     return (
         <Field
@@ -75,8 +72,10 @@ const DateField = (props) => {
                 };
 
                 const onChange = (newValue) => {
-                    const formattedValue = format(newValue, 'yyyy-MM-dd');
-                    rfProps.input.onChange(formattedValue);
+                    if (!focus.current) {
+                        const formattedValue = format(newValue, 'yyyy-MM-dd');
+                        rfProps.input.onChange(formattedValue);
+                    }
                 };
 
                 return (
@@ -89,10 +88,10 @@ const DateField = (props) => {
                         variant="outlined"
                         value={ value }
                         onBlur={ (event) => {
-                            setFocus(false);
+                            focus.current = false;
                             keyOnChange(event.target.value);
                         } }
-                        onFocus={ () => setFocus(true) }
+                        onFocus={ () => focus.current = true }
                         onChange={ onChange }
                         onKeyDown={ (event) => {
                             if (event.key === 'Enter') {

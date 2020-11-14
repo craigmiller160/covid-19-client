@@ -29,6 +29,7 @@
     "@babel/runtime": "^7.12.5"
   },
   "scripts": {
+    "build": "web-config-scripts webpack",
     "start": "web-config-scripts devServer",
     "lint": "web-config-scripts lint"
   },

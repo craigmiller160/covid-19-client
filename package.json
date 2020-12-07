@@ -35,6 +35,6 @@
     "lint": "web-config-scripts lint"
   },
   "devDependencies": {
-    "@craigmiller160/web-config": "file:.yalc/@craigmiller160/web-config"
+    "@craigmiller160/web-config": "^2.3.0"
   }
 }

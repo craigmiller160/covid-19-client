@@ -19,6 +19,7 @@
 module.exports = {
     title: 'COVID-19 Data',
     devServerPort: 7001,
+    devServerHttps: true,
     devServerProxy: {
         '/api': {
             target: 'http://localhost:7005',

@@ -1100,12 +1100,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@craigmiller160/web-config@^2.1.0":
-  version "2.1.0"
-  resolved "http://localhost:30000/@craigmiller160%2fweb-config/-/web-config-2.1.0.tgz#592e34c2b2dbee0e39de33480ad41ce6f20c7146"
-  integrity sha512-hxNcLkAeodCB/2haaFeChXYBFFY/W9vqFr64RXrhZ+1svwLXeWg07Gjl4WJ+CsXKCV8PRfg0Lzr1twjumm7OVw==
+"@craigmiller160/web-config@file:.yalc/@craigmiller160/web-config":
+  version "2.3.0-beta"
   dependencies:
     "@babel/core" "^7.12.3"
+    "@babel/plugin-transform-modules-commonjs" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.12.1"
     "@babel/preset-env" "^7.12.1"
     "@babel/preset-react" "^7.12.5"

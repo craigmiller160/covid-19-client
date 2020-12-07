@@ -18,11 +18,14 @@
 
 module.exports = {
     title: 'COVID-19 Data',
+    publicPath: '/covid-19',
     devServerPort: 7001,
+    devServerHttps: true,
     devServerProxy: {
         '/api': {
-            target: 'http://localhost:7005',
+            target: 'https://localhost:7005',
             changeOrigin: true,
+            secure: false,
             pathRewrite: {
                 '^/api': ''
             }

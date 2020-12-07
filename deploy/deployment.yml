@@ -16,11 +16,12 @@ spec:
         - name: covid-19-client
           image: localhost:32000/covid-19-client:1.11.0
           ports:
-            - containerPort: 80
+            - containerPort: 443
           livenessProbe:
             httpGet:
               path: /healthcheck
-              port: 80
+              port: 443
+              scheme: HTTPS
             initialDelaySeconds: 10
             periodSeconds: 300
 ---
@@ -33,7 +34,7 @@ spec:
   selector:
     app: covid-19-client
   ports:
-    - port: 80
-      targetPort: 80
+    - port: 443
+      targetPort: 443
       nodePort: 31000
       protocol: TCP

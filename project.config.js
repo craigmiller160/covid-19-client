@@ -22,7 +22,7 @@ module.exports = {
     devServerPort: 7001,
     devServerHttps: true,
     devServerProxy: {
-        '/api': {
+        '/covid-19/api': {
             target: 'https://localhost:7005',
             changeOrigin: true,
             secure: false,

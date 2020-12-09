@@ -30,11 +30,10 @@ kind: Service
 metadata:
   name: covid-19-client-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: covid-19-client
   ports:
     - port: 443
       targetPort: 443
-      nodePort: 31000
       protocol: TCP

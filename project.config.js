@@ -27,8 +27,9 @@ module.exports = {
             changeOrigin: true,
             secure: false,
             pathRewrite: {
-                '^/api': ''
-            }
+                '^/covid-19/api': ''
+            },
+            logLevel: 'debug'
         }
     }
 };

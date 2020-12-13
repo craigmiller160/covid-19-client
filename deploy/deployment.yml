@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: covid-19-client
-          image: localhost:32000/covid-19-client:1.12.0-beta.17
+          image: localhost:32000/covid-19-client:1.11.2
           ports:
             - containerPort: 443
           livenessProbe:

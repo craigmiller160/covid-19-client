@@ -29,7 +29,7 @@
     "@babel/runtime": "^7.12.5"
   },
   "scripts": {
-    "build": "web-config-scripts lint && web-config-scripts webpack",
+    "build": "web-config-scripts lint && web-config-scripts webpack && web-config-scripts prepDeploy",
     "forceBuild": "web-config-scripts webpack",
     "prepDeploy": "web-config-scripts prepDeploy",
     "start": "web-config-scripts devServer",

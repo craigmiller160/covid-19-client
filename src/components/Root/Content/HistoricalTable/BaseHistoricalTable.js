@@ -35,7 +35,6 @@ const columnNames = [
     'Date',
     'New Cases',
     'Total Cases',
-    'Case Doubling (Days)',
     'New Deaths',
     'Total Deaths',
     'Total Mortality Rate'
@@ -69,7 +68,6 @@ const BaseHistoricalTable = (props) => {
                     <TableCell>{ record.date }</TableCell>
                     <TableCell>{ record.newCases?.toLocaleString() }</TableCell>
                     <TableCell>{ record.totalCases?.toLocaleString() }</TableCell>
-                    <TableCell>{ record.caseDoubleDays?.toLocaleString() }</TableCell>
                     <TableCell>{ record.newDeaths?.toLocaleString() }</TableCell>
                     <TableCell>{ record.totalDeaths?.toLocaleString() }</TableCell>
                     <TableCell>{ calcMortality(record) }</TableCell>

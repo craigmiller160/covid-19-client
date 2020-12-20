@@ -62,7 +62,7 @@ const Home = () => (
                         <span>by Disease.sh.</span>
                     </p>
                     <p>
-                        <strong>John's Hopkins: </strong>
+                        <strong>John&apos;s Hopkins: </strong>
                         <span>For being the source of many of the COVID stats provided</span>
                         <span>by Disease.sh.</span>
                     </p>

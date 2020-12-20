@@ -52,9 +52,19 @@ const Home = () => (
                     <h1>Sources</h1>
                     <h3>This application would not be possible without data from the following sources.</h3>
                     <p>
-                        <strong>European Centre for Disease Control (ECDC): </strong>
-                        <span>for providing the raw COVID case statistics for countries world-wide, </span>
-                        <span>along with their population.</span>
+                        <strong>Disease.sh: </strong>
+                        <span>for providing the API for all COVID stats, population data,</span>
+                        <span>etc worldwide.</span>
+                    </p>
+                    <p>
+                        <strong>Worldometers: </strong>
+                        <span>For being the source of many of the COVID stats provided</span>
+                        <span>by Disease.sh.</span>
+                    </p>
+                    <p>
+                        <strong>John's Hopkins: </strong>
+                        <span>For being the source of many of the COVID stats provided</span>
+                        <span>by Disease.sh.</span>
                     </p>
                     <p>
                         <strong>The COVID Tracking Project: </strong>

@@ -945,12 +945,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@craigmiller160/web-config@^2.3.0":
-  version "2.3.0"
-  resolved "http://localhost:30000/@craigmiller160%2fweb-config/-/web-config-2.3.0.tgz#50094d1da838243ad8a56a9d72de5de6515fa9d0"
-  integrity sha512-eSesiA9b7nJ4HBMbDNXycIRmlGrGZ7DQd9YySZPr3jI06O/vQpEweW0YF7ZNkW40NHIzAdxNX+0AXQa11+bJRA==
+"@craigmiller160/react-web-config@^2.6.0":
+  version "2.6.0"
+  resolved "http://localhost:30000/@craigmiller160%2freact-web-config/-/react-web-config-2.6.0.tgz#a51f210e7da9cb96024de8d8926f93c7264bcfa9"
+  integrity sha512-ShgJCTD3SzPo2d5kP0ckXTN0w++hZmy1JswSgxim/AUDALA/Yd6PZmYAnqanAbroPPkc7RoJ9zYfHmVs0VYLyQ==
   dependencies:
     "@babel/core" "^7.12.3"
+    "@babel/plugin-proposal-class-properties" "^7.12.1"
     "@babel/plugin-transform-modules-commonjs" "^7.12.1"
     "@babel/plugin-transform-runtime" "^7.12.1"
     "@babel/preset-env" "^7.12.1"
@@ -975,6 +976,7 @@
     css-minimizer-webpack-plugin "^1.1.5"
     enzyme "^3.11.0"
     enzyme-adapter-react-16 "^1.15.5"
+    enzyme-to-json "^3.6.1"
     es-abstract "1.18.0-next.1"
     eslint "^7.12.1"
     eslint-config-airbnb "^18.2.0"
@@ -1423,6 +1425,13 @@
   version "0.22.22"
   resolved "http://localhost:30000/@types%2fcheerio/-/cheerio-0.22.22.tgz#ae71cf4ca59b8bbaf34c99af7a5d6c8894988f5f"
   integrity sha512-05DYX4zU96IBfZFY+t3Mh88nlwSMtmmzSYaQkKN48T495VV1dkHSah6qYyDTN5ngaS0i0VonH37m+RuzSM0YiA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/cheerio@^0.22.22":
+  version "0.22.23"
+  resolved "http://localhost:30000/@types%2fcheerio/-/cheerio-0.22.23.tgz#74bcfee9c5ee53f619711dca953a89fe5cfa4eb4"
+  integrity sha512-QfHLujVMlGqcS/ePSf3Oe5hK3H8wi/yN2JYuxSB1U10VvW1fO3K8C+mURQesFYS1Hn7lspOsTT75SKq/XtydQg==
   dependencies:
     "@types/node" "*"
 
@@ -3903,6 +3912,15 @@ enzyme-shallow-equal@^1.0.1, enzyme-shallow-equal@^1.0.4:
   dependencies:
     has "^1.0.3"
     object-is "^1.1.2"
+
+enzyme-to-json@^3.6.1:
+  version "3.6.1"
+  resolved "http://localhost:30000/enzyme-to-json/-/enzyme-to-json-3.6.1.tgz#d60740950bc7ca6384dfe6fe405494ec5df996bc"
+  integrity sha512-15tXuONeq5ORoZjV/bUo2gbtZrN2IH+Z6DvL35QmZyKHgbY1ahn6wcnLd9Xv9OjiwbAXiiP8MRZwbZrCv1wYNg==
+  dependencies:
+    "@types/cheerio" "^0.22.22"
+    lodash "^4.17.15"
+    react-is "^16.12.0"
 
 enzyme@^3.11.0:
   version "3.11.0"
@@ -8376,7 +8394,7 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-is@^16.13.1, react-is@^16.4.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
+react-is@^16.12.0, react-is@^16.13.1, react-is@^16.4.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"
   resolved "http://localhost:30000/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==

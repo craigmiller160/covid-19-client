@@ -36,6 +36,6 @@
     "lint": "web-config-scripts lint"
   },
   "devDependencies": {
-    "@craigmiller160/react-web-config": "^2.6.0"
+    "@craigmiller160/react-web-config": "^2.6.1"
   }
 }

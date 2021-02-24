@@ -1,7 +1,7 @@
 FROM craigmiller160.ddns.net:30004/nginx-base:1.1.0
 
 COPY build/covid-19-client-*.tgz /var/www/covid-19-client.tgz
-RUN unzip /var/www/covid-19-client.tgz -d /var/www/
+RUN tar xvf /var/www/covid-19-client.tgz -d /var/www/
 RUN rm /var/www/covid-19-client.tgz
 RUN cp -R /var/www/package/build/* /var/www/
 RUN rm -rf /var/www/package

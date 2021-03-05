@@ -40,6 +40,11 @@ const columnNames = [
     'Total Mortality Rate'
 ];
 
+const vaccineColumnNames = [
+    'New Vaccinated',
+    'Total Vaccinated'
+];
+
 const BaseHistoricalTable = (props) => {
     const {
         isState
@@ -47,8 +52,11 @@ const BaseHistoricalTable = (props) => {
     const { data } = useHistoryData({ isState });
 
     const fullData = [ ...data ];
+    let fullColumnNames = columnNames;
+    let hasVaccineData = false;
     if (fullData.length > 0) {
-        fullData.unshift({
+        hasVaccineData = fullData[0].totalVaccines !== undefined;
+        const currentItem = {
             _id: 'CURRENT',
             date: 'CURRENT',
             newCases: 'N/A',
@@ -56,12 +64,23 @@ const BaseHistoricalTable = (props) => {
             newDeaths: 'N/A',
             totalDeaths: data[0].totalDeaths,
             caseDoubleDays: data[0].caseDoubleDays
-        });
+        };
+        if (hasVaccineData) {
+            currentItem.newVaccines = 'N/A';
+            currentItem.totalVaccines = data[0].totalVaccines;
+
+            fullColumnNames = [
+                ...columnNames,
+                ...vaccineColumnNames
+            ];
+        }
+
+        fullData.unshift(currentItem);
     }
 
     return (
         <Table
-            columnNames={ columnNames }
+            columnNames={ fullColumnNames }
             data={ fullData }
             dataRow={ ({ record }) => (
                 <TableRow>
@@ -71,6 +90,13 @@ const BaseHistoricalTable = (props) => {
                     <TableCell>{ record.newDeaths?.toLocaleString() }</TableCell>
                     <TableCell>{ record.totalDeaths?.toLocaleString() }</TableCell>
                     <TableCell>{ calcMortality(record) }</TableCell>
+                    {
+                        hasVaccineData &&
+                        <>
+                            <TableCell>{ record.newVaccines.toLocaleString() }</TableCell>
+                            <TableCell>{ record.totalVaccines.toLocaleString() }</TableCell>
+                        </>
+                    }
                 </TableRow>
             ) }
         />

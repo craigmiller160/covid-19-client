@@ -30,11 +30,10 @@ import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, orderOptions, rankByOptions, STATE_COMPARE_FORM } from './compareTableConstants';
+import CompareSearch from './CompareSearch';
 
 const countrySelector = (state) => state.countryData.currentData;
 const stateSelector = (state) => state.stateData.currentData;
-const countryListSelector = (state) => state.countryData.countries;
-const stateListSelector = (state) => state.stateData.states;
 
 const createColumnNames = (isState) => ([
     'Rank',
@@ -50,20 +49,12 @@ const BaseCompareTable = (props) => {
     const {
         isState
     } = props;
-    const dispatch = useDispatch();
+
     const dataSelector = isState ? stateSelector : countrySelector;
-    const listSelector = isState ? stateListSelector : countryListSelector;
-    const locationFilterLabel = isState ? 'States' : 'Countries';
     const data = useSelector(dataSelector, shallowEqual);
-    const list = useSelector(listSelector, shallowEqual);
-    const listWithoutTotalElement = list.slice(1);
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
-    const countrySubmit = (value) => dispatch(loadCountryCurrentData(value));
-    const stateSubmit = (value) => dispatch(loadStateCurrentData(value));
-    const onSubmit = isState ? stateSubmit : countrySubmit;
-    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
 
     let filteredData = data;
     if (formValues.location?.length > 0) {
@@ -78,77 +69,10 @@ const BaseCompareTable = (props) => {
             direction="column"
             alignItems="center"
         >
-            <Form
-                className="FilterForm"
-                form={ formName }
-                destroyOnUnmount={ false }
-                onSubmit={ onSubmit }
-                initialValues={ {
-                    sortKey: rankByOptions[0],
-                    sortOrder: orderOptions[0],
-                    location: []
-                } }
-            >
-                <Paper>
-                    <Grid
-                        className="Filters"
-                        container
-                        direction="row"
-                        justify="space-around"
-                        alignItems="center"
-                    >
-                        <AutocompleteField
-                            className="FilterField spacing"
-                            options={ rankByOptions }
-                            getOptionLabel={ (option) => option.label ?? '' }
-                            onChange={ onChangeSubmit }
-                            renderInput={ (params) => (
-                                <TextField
-                                    { ...params }
-                                    label="Rank By"
-                                    variant="outlined"
-                                />
-                            ) }
-                            name="sortKey"
-                        />
-                        <AutocompleteField
-                            className="FilterField spacing"
-                            options={ orderOptions }
-                            getOptionLabel={ (option) => option.label ?? '' }
-                            onChange={ onChangeSubmit }
-                            renderInput={ (params) => (
-                                <TextField
-                                    { ...params }
-                                    label="Order"
-                                    variant="outlined"
-                                />
-                            ) }
-                            name="sortOrder"
-                        />
-                    </Grid>
-                    <Grid
-                        className="Filters"
-                        container
-                        direction="row"
-                        justify="space-around"
-                    >
-                        <AutocompleteField
-                            multiple
-                            className="FilterField long"
-                            options={ listWithoutTotalElement }
-                            getOptionLabel={ (option) => option?.label ?? [] }
-                            renderInput={ (params) => (
-                                <TextField
-                                    { ...params }
-                                    label={ locationFilterLabel }
-                                    variant="outlined"
-                                />
-                            ) }
-                            name="location"
-                        />
-                    </Grid>
-                </Paper>
-            </Form>
+            <CompareSearch
+                formName={ formName }
+                isState={ isState }
+            />
             <Table
                 rootClassName="Table"
                 data={ filteredData }

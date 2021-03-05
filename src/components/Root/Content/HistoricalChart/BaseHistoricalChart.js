@@ -108,7 +108,7 @@ const getChartKeys = (location) => {
     };
 };
 
-const isNotSupportedPath = (hasVaccineData, showMoreOptions, location, history) => {
+const isNotSupportedPath = (hasVaccineData, showMoreOptions, location) => {
     const isVaccinePath = location.pathname.endsWith(PATH_TOTAL_VACCINE) ||
         location.pathname.endsWith(PATH_NEW_VACCINE);
     const isMoreOptionsPath = location.pathname.endsWith(PATH_NEW_TESTS) ||
@@ -139,7 +139,7 @@ const BaseHistoricalChart = (props) => {
     const { dataKey, dataName } = getChartKeys(location);
 
     if (location.pathname.endsWith('/history/chart') ||
-        isNotSupportedPath(hasVaccineData, showMoreOptions, location, history)) {
+        isNotSupportedPath(hasVaccineData, showMoreOptions, location)) {
         return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
     }
 

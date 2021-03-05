@@ -119,7 +119,7 @@ const BaseHistoricalChart = (props) => {
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];
-    const hasVaccineData = chartData.length > 0 && !!chartData[0].totalVaccines;
+    const hasVaccineData = chartData.length > 0 && chartData[0].totalVaccines !== undefined;
     const showMoreOptions = isState && selectedLocation?.value !== null &&
         selectedLocation?.value !== 'United_States_of_America';
 

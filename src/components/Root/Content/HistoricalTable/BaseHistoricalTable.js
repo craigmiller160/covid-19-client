@@ -55,8 +55,7 @@ const BaseHistoricalTable = (props) => {
     let fullColumnNames = columnNames;
     let hasVaccineData = false;
     if (fullData.length > 0) {
-        hasVaccineData = !!fullData[0].totalVaccines;
-        console.log('InnerHasVaccineData', hasVaccineData, fullData[0]); // TODO delete this
+        hasVaccineData = fullData[0].totalVaccines !== undefined;
         const currentItem = {
             _id: 'CURRENT',
             date: 'CURRENT',

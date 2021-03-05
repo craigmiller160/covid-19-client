@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 import { orderOptions, rankByOptions } from './compareTableConstants';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { AutocompleteField, Form } from '../../../form';
+import { AutocompleteField, DateField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
 import { loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
@@ -58,6 +58,25 @@ const CompareSearch = (props) => {
             } }
         >
             <Paper>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    alignItems="center"
+                >
+                    <DateField
+                        name="startDate"
+                        label="Start Date"
+                        defaultValue="2019-11-30"
+                        onChange={ onChangeSubmit }
+                    />
+                    <DateField
+                        name="endDate"
+                        label="End Date"
+                        defaultValue="2021-12-31"
+                        onChange={ onChangeSubmit }
+                    />
+                </Grid>
                 <Grid
                     className="Filters"
                     container

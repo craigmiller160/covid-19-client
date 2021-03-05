@@ -121,7 +121,7 @@ const BaseHistoricalChart = (props) => {
     const chartData = data ? data.slice().reverse() : [];
     const hasVaccineData = chartData.length > 0 && chartData[0].totalVaccines !== undefined;
     const showMoreOptions = isState && selectedLocation?.value !== null &&
-        selectedLocation?.value !== 'United_States_of_America';
+        selectedLocation?.value !== 'USA';
 
     // const chartWidth = isNotPhone ? 800 : 390;
     const chartHeight = isNotPhone ? 500 : 300;

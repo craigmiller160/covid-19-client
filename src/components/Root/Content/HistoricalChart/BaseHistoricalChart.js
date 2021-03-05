@@ -34,6 +34,8 @@ const PATH_TOTAL_DEATHS = 'totaldeaths';
 const PATH_NEW_TESTS = 'newtests';
 const PATH_POS_TESTS = 'positivetests';
 const PATH_NEW_HOSPITAL = 'newhospital';
+const PATH_NEW_VACCINE = 'newvaccine';
+const PATH_TOTAL_VACCINE = 'totalvaccine';
 
 const DATA_KEY_NEW_CASES = 'newCases';
 const DATA_KEY_TOTAL_CASES = 'totalCases';
@@ -42,6 +44,8 @@ const DATA_KEY_TOTAL_DEATHS = 'totalDeaths';
 const DATA_KEY_NEW_TESTS = 'newTests';
 const DATA_KEY_POS_TESTS = 'newPositivePercent';
 const DATA_KEY_NEW_HOSPITAL = 'newHospitalized';
+const DATA_KEY_NEW_VACCINE = 'newVaccines';
+const DATA_KEY_TOTAL_VACCINE = 'totalVaccines';
 
 const DATA_NAME_NEW_CASES = 'New Cases';
 const DATA_NAME_TOTAL_CASES = 'Total Cases';
@@ -50,6 +54,8 @@ const DATA_NAME_TOTAL_DEATHS = 'Total Deaths';
 const DATA_NAME_NEW_TESTS = 'New Tests';
 const DATA_NAME_POS_TESTS = 'New Positive Test %';
 const DATA_NAME_NEW_HOSPITAL = 'New Hospital';
+const DATA_NAME_NEW_VACCINE = 'New Vaccinations';
+const DATA_NAME_TOTAL_VACCINE = 'Total Vaccinations';
 
 const getChartKeys = (location) => {
     const pathParts = location.pathname.split('/');
@@ -82,6 +88,14 @@ const getChartKeys = (location) => {
             dataKey = DATA_KEY_NEW_HOSPITAL;
             dataName = DATA_NAME_NEW_HOSPITAL;
             break;
+        case PATH_NEW_VACCINE:
+            dataKey = DATA_KEY_NEW_VACCINE;
+            dataName = DATA_NAME_NEW_VACCINE;
+            break;
+        case PATH_TOTAL_VACCINE:
+            dataKey = DATA_KEY_TOTAL_VACCINE;
+            dataName = DATA_NAME_TOTAL_VACCINE;
+            break;
         case PATH_TOTAL_CASES:
         default:
             dataKey = DATA_KEY_TOTAL_CASES;
@@ -105,6 +119,7 @@ const BaseHistoricalChart = (props) => {
     const theme = useTheme();
     const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
     const chartData = data ? data.slice().reverse() : [];
+    const hasVaccineData = chartData.length > 0 && !!chartData[0].totalVaccines;
     const showMoreOptions = isState && selectedLocation?.value !== null &&
         selectedLocation?.value !== 'United_States_of_America';
 
@@ -174,6 +189,30 @@ const BaseHistoricalChart = (props) => {
                         { DATA_NAME_NEW_DEATHS }
                     </Button>
                 </Grid>
+                {
+                    hasVaccineData &&
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        className="buttons"
+                    >
+                        <Button
+                            variant="contained"
+                            color={ dataKey === DATA_KEY_NEW_VACCINE ? 'primary' : 'default' }
+                            onClick={ () => history.push(`${basePath}/${PATH_NEW_VACCINE}`) }
+                        >
+                            { DATA_NAME_NEW_VACCINE }
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color={ dataKey === DATA_KEY_TOTAL_VACCINE ? 'primary' : 'default' }
+                            onClick={ () => history.push(`${basePath}/${PATH_TOTAL_VACCINE}`) }
+                        >
+                            { DATA_NAME_TOTAL_VACCINE }
+                        </Button>
+                    </Grid>
+                }
                 {
                     showMoreOptions &&
                     <Grid

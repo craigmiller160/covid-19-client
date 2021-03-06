@@ -23,7 +23,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { AutocompleteField, DateField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
-import { loadCountryCurrentData } from '../../../../store/countryData/actions';
+import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -36,8 +36,8 @@ const CompareSearch = (props) => {
         formName
     } = props;
     const dispatch = useDispatch();
-    const countrySubmit = (value) => dispatch(loadCountryCurrentData(value));
-    const stateSubmit = (value) => dispatch(loadStateCurrentData(value));
+    const countrySubmit = (value) => dispatch(loadCountryCompareData(value));
+    const stateSubmit = (value) => dispatch(loadStateCurrentData(value)); // TODO change this method
     const onSubmit = isState ? stateSubmit : countrySubmit;
     const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
     const locationFilterLabel = isState ? 'States' : 'Countries';
@@ -54,7 +54,9 @@ const CompareSearch = (props) => {
             initialValues={ {
                 sortKey: rankByOptions[0],
                 sortOrder: orderOptions[0],
-                location: []
+                location: [],
+                startDate: '2019-11-30',
+                endDate: '2021-12-31'
             } }
         >
             <Paper>

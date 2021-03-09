@@ -34,8 +34,7 @@ export const getStateCurrentData = (sortKey, sortOrder) =>
 export const getStateHistoricalData = (state, startDate, endDate) =>
     api.get(`/state/historical/${state}?${qs.stringify({ startDate, endDate })}`);
 
-export const getCountryCompareData = (startDate, endMonth, sortKey, sortOrder) =>
-    api.get(`/countries/compare?${qs.stringify({ startDate, endMonth, sortKey, sortOrder })}`);
+export const getCountryCompareData = () => api.get('/countries/compare');
 
 export const getCountriesList = () => api.get('/countries');
 

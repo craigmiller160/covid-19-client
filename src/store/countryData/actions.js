@@ -81,29 +81,10 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
 
 export const loadCountryCompareData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
-        if (field) {
-            dispatch(change(COUNTRY_COMPARE_FORM, field, value));
-        }
-
-        dispatch(coreSlice.actions.setLoading(true));
-        const { sortKey, sortOrder, startDate, endDate } = getState().form[COUNTRY_COMPARE_FORM]?.values ?? {};
-
-        const realSortKey = sortKey || rankByOptions[0];
-        const realSortOrder = sortOrder || orderOptions[0];
-
-        dispatch(change(COUNTRY_COMPARE_FORM, 'sortKey', realSortKey));
-        dispatch(change(COUNTRY_COMPARE_FORM, 'sortOrder', realSortOrder));
-
-        console.log('Dates', startDate, endDate); // TODO delete this
-
-        const res = await getCountryCompareData(startDate, endDate, realSortKey.value, realSortOrder.value);
-        const formattedData = res.data.map((record, index) => ({
-            ...record,
-            rank: index + 1
-        }));
-        dispatch(countryDataSlice.actions.setCurrentData(formattedData));
+        const res = await getCountryCompareData();
+        dispatch(countryDataSlice.actions.setCurrentData(res.data));
     } catch (ex) {
-        dispatch(handleError(ex, 'Error loading country current data'));
+        dispatch(handleError(ex, 'Error loading country compare data'));
     } finally {
         dispatch(coreSlice.actions.setLoading(false));
     }

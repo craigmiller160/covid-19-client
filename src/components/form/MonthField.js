@@ -16,23 +16,50 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from '@material-ui/pickers';
+import { Field } from 'redux-form';
+import format from 'date-fns/format/index';
 
 const MonthField = (props) => {
     const {
-        label
+        label,
+        name,
+        onChange
     } = props;
+
     return (
-        <DatePicker
-            variant="outlined"
-            label={ label }
+        <Field
+            name={ name }
+            onChange={ onChange }
+            component={ (rfProps) => {
+                const innerOnChange = (newValue) => {
+                    const formattedValue = format(newValue, 'yyyy-MM-dd');
+                    rfProps.input.onChange(formattedValue);
+                };
+
+                return (
+                    <DatePicker
+                        variant="outlined"
+                        label={ label }
+                        openTo="month"
+                        views={ [
+                            "year",
+                            "month"
+                        ] }
+                        onChange={ innerOnChange }
+                        value={ rfProps.value }
+                    />
+                );
+            } }
         />
     );
 };
 MonthField.propTypes = {
-    label: PropTypes.string
+    label: PropTypes.string,
+    name: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 export default MonthField;

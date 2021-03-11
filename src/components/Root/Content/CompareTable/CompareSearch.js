@@ -26,6 +26,7 @@ import TextField from '@material-ui/core/TextField';
 import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import MonthField from '../../../form/MonthField';
 
 const countryListSelector = (state) => state.countryData.countries;
 const stateListSelector = (state) => state.stateData.states;
@@ -66,13 +67,13 @@ const CompareSearch = (props) => {
                     justify="space-around"
                     alignItems="center"
                 >
-                    <DateField
+                    <MonthField
                         name="startDate"
                         label="Start Date"
                         defaultValue="2019-11-30"
                         onChange={ onChangeSubmit }
                     />
-                    <DateField
+                    <MonthField
                         name="endDate"
                         label="End Date"
                         defaultValue="2021-12-31"

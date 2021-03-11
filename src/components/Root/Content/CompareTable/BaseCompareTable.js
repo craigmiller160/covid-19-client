@@ -63,14 +63,25 @@ const BaseCompareTable = (props) => {
 
     let formattedData = useMemo(() => {
         console.log('Running', data.length, formValues.startDate, formValues.endDate); // TODO delete this
-        const startDateKey = moment(formValues.startDate).format('YYYYMM');
-        const endDateKey = moment(formValues.endDate).format('YYYYMM');
-        console.log('StartKey', startDateKey); // TODO delete this
-        console.log('EndKey', endDateKey); // TODO delete this
+        const startDate = moment(formValues.startDate);
+        const endDate = moment(formValues.endDate);
 
         // TODO the start date is before the earliest date, the end date is after the latest date... this is bad
 
         return data.map((record) => {
+            const firstDate = moment(record.firstDate);
+            const lastDate = moment(record.lastDate);
+
+            let startDateKey = startDate.format('YYYYMM');
+            if (firstDate.diff(startDate) > 0) {
+                startDateKey = firstDate.format('YYYYMM');
+            }
+
+            let endDateKey = endDate.format('YYYYMM');
+            if (lastDate.diff(endDate) < 0) {
+                endDateKey = lastDate.format('YYYYMM');
+            }
+
             const startTotalCases = record[`startTotalCases_${startDateKey}`];
             const endTotalCases = record[`endTotalCases_${endDateKey}`];
             const startTotalDeaths = record[`startTotalDeaths_${startDateKey}`];
@@ -90,7 +101,7 @@ const BaseCompareTable = (props) => {
                 totalDeathsPerMillion
             };
         });
-    }, [data, formValues.startDate, formValues.endDate]);
+    }, [data.length, formValues.startDate, formValues.endDate]);
 
     if (formValues.location?.length > 0) {
         formattedData = formattedData.filter((element) =>
@@ -110,12 +121,12 @@ const BaseCompareTable = (props) => {
             />
             <Table
                 rootClassName="Table"
-                data={ filteredData }
+                data={ formattedData }
                 columnNames={ columnNames }
                 dataRow={ ({ record }) => (
                     <TableRow>
                         <TableCell>{ record.rank }</TableCell>
-                        <TableCell>{ record.displayLocation }</TableCell>
+                        <TableCell>{ record.location }</TableCell>
                         <TableCell>{ record.population?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalCases.toLocaleString() }</TableCell>
                         <TableCell>{ record.totalDeaths.toLocaleString() }</TableCell>

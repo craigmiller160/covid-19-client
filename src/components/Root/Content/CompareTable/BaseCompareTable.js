@@ -61,7 +61,7 @@ const BaseCompareTable = (props) => {
         dispatch(loadFn());
     }, []);
 
-    const formattedData = useMemo(() => {
+    let formattedData = useMemo(() => {
         console.log('Running', data.length, formValues.startDate, formValues.endDate); // TODO delete this
         const startDateKey = moment(formValues.startDate).format('YYYYMM');
         const endDateKey = moment(formValues.endDate).format('YYYYMM');
@@ -92,9 +92,8 @@ const BaseCompareTable = (props) => {
         });
     }, [data, formValues.startDate, formValues.endDate]);
 
-    let filteredData = formattedData;
     if (formValues.location?.length > 0) {
-        filteredData = filteredData.filter((element) =>
+        formattedData = formattedData.filter((element) =>
             formValues.location.find((location) => location.value === element.location));
     }
 

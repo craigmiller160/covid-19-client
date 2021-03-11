@@ -37,7 +37,7 @@ const CompareSearch = (props) => {
         formName
     } = props;
     const dispatch = useDispatch();
-    const countrySubmit = (value) => dispatch(loadCountryCompareData(value));
+    const countrySubmit = () => dispatch(loadCountryCompareData());
     const stateSubmit = (value) => dispatch(loadStateCurrentData(value)); // TODO change this method
     const onSubmit = isState ? stateSubmit : countrySubmit;
     const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
@@ -69,13 +69,13 @@ const CompareSearch = (props) => {
                 >
                     <MonthField
                         name="startDate"
-                        label="Start Date"
+                        label="Start Month"
                         defaultValue="2019-11-30"
                         onChange={ onChangeSubmit }
                     />
                     <MonthField
                         name="endDate"
-                        label="End Date"
+                        label="End Month"
                         defaultValue="2021-12-31"
                         onChange={ onChangeSubmit }
                     />

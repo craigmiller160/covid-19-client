@@ -68,6 +68,8 @@ const BaseCompareTable = (props) => {
         console.log('StartKey', startDateKey); // TODO delete this
         console.log('EndKey', endDateKey); // TODO delete this
 
+        // TODO the start date is before the earliest date, the end date is after the latest date... this is bad
+
         return data.map((record) => {
             const startTotalCases = record[`startTotalCases_${startDateKey}`];
             const endTotalCases = record[`endTotalCases_${endDateKey}`];

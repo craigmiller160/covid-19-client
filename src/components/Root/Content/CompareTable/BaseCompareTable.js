@@ -16,23 +16,20 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import { AutocompleteField, Form } from '../../../form';
-import { loadCountryCurrentData } from '../../../../store/countryData/actions';
-import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import Table from '../../../ui/Table';
-import { COUNTRY_COMPARE_FORM, orderOptions, rankByOptions, STATE_COMPARE_FORM } from './compareTableConstants';
+import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
+import { loadStateCurrentData } from '../../../../store/stateData/actions';
+import { loadCountryCompareData } from '../../../../store/countryData/actions';
 
-const countrySelector = (state) => state.countryData.currentData;
+const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.currentData;
 
 const createColumnNames = (isState) => ([
@@ -50,13 +47,25 @@ const BaseCompareTable = (props) => {
         isState
     } = props;
 
+    const dispatch = useDispatch();
     const dataSelector = isState ? stateSelector : countrySelector;
     const data = useSelector(dataSelector, shallowEqual);
+    console.log('Data', data); // TODO delete this
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
+    const loadFn = isState ? loadStateCurrentData : loadCountryCompareData; // TODO fix the state value
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
-    let filteredData = data;
+    useEffect(() => {
+        dispatch(loadFn());
+    }, []);
+
+    const formattedData = useMemo(() => {
+        console.log('Running'); // TODO delete this
+        return data;
+    }, [data]);
+
+    let filteredData = formattedData;
     if (formValues.location?.length > 0) {
         filteredData = filteredData.filter((element) =>
             formValues.location.find((location) => location.value === element.location));

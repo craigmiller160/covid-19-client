@@ -82,7 +82,7 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
 export const loadCountryCompareData = ({ field, value } = {}) => async (dispatch, getState) => {
     try {
         const res = await getCountryCompareData();
-        dispatch(countryDataSlice.actions.setCurrentData(res.data));
+        dispatch(countryDataSlice.actions.setCompareData(res.data));
     } catch (ex) {
         dispatch(handleError(ex, 'Error loading country compare data'));
     } finally {

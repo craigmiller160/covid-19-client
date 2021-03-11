@@ -51,7 +51,6 @@ const BaseCompareTable = (props) => {
     const dispatch = useDispatch();
     const dataSelector = isState ? stateSelector : countrySelector;
     const data = useSelector(dataSelector, shallowEqual);
-    console.log('Data', data); // TODO delete this
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
     const loadFn = isState ? loadStateCurrentData : loadCountryCompareData; // TODO fix the state value
@@ -62,13 +61,10 @@ const BaseCompareTable = (props) => {
     }, []);
 
     let formattedData = useMemo(() => {
-        console.log('Running', data.length, formValues.startDate, formValues.endDate); // TODO delete this
         const startDate = moment(formValues.startDate);
         const endDate = moment(formValues.endDate);
 
-        console.log('Sort', formValues.sortKey, formValues.sortOrder); // TODO delete this
-
-        return data.map((record) => {
+        const formatSortData = data.map((record) => {
             const firstDate = moment(record.firstDate);
             const lastDate = moment(record.lastDate);
 
@@ -101,15 +97,22 @@ const BaseCompareTable = (props) => {
                 totalDeathsPerMillion,
                 _id: record._id
             };
-        });
+        })
+            .sort((one, two) => {
+                const diff = one[formValues.sortKey?.value] - two[formValues.sortKey?.value];
+                if (formValues.sortOrder?.value === 'desc') {
+                    return diff * -1;
+                }
+                return diff;
+            });
+        if (formValues.location?.length > 0) {
+            return formatSortData.filter((element) =>
+                formValues.location.find((location) => location.value === element.location));
+        }
+        return formatSortData;
     }, [data.length, formValues.startDate,
         formValues.endDate, formValues.sortKey,
-        formValues.sortOrder]);
-
-    if (formValues.location?.length > 0) {
-        formattedData = formattedData.filter((element) =>
-            formValues.location.find((location) => location.value === element.location));
-    }
+        formValues.sortOrder, formValues.location]);
 
     return (
         <Grid
@@ -126,9 +129,9 @@ const BaseCompareTable = (props) => {
                 rootClassName="Table"
                 data={ formattedData }
                 columnNames={ columnNames }
-                dataRow={ ({ record }) => (
+                dataRow={ ({ record, index }) => (
                     <TableRow>
-                        <TableCell>{ record.rank }</TableCell>
+                        <TableCell>{ index + 1 }</TableCell>
                         <TableCell>{ record.location }</TableCell>
                         <TableCell>{ record.population?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalCases.toLocaleString() }</TableCell>

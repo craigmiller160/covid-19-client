@@ -28,6 +28,7 @@ import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstant
 import CompareSearch from './CompareSearch';
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import { loadCountryCompareData } from '../../../../store/countryData/actions';
+import moment from 'moment';
 
 const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.currentData;
@@ -61,9 +62,33 @@ const BaseCompareTable = (props) => {
     }, []);
 
     const formattedData = useMemo(() => {
-        console.log('Running'); // TODO delete this
-        return data;
-    }, [data]);
+        console.log('Running', data.length, formValues.startDate, formValues.endDate); // TODO delete this
+        const startDateKey = moment(formValues.startDate).format('YYYYMM');
+        const endDateKey = moment(formValues.endDate).format('YYYYMM');
+        console.log('StartKey', startDateKey); // TODO delete this
+        console.log('EndKey', endDateKey); // TODO delete this
+
+        return data.map((record) => {
+            const startTotalCases = record[`startTotalCases_${startDateKey}`];
+            const endTotalCases = record[`endTotalCases_${endDateKey}`];
+            const startTotalDeaths = record[`startTotalDeaths_${startDateKey}`];
+            const endTotalDeaths = record[`endTotalDeaths_${endDateKey}`];
+
+            const totalCases = endTotalCases - startTotalCases;
+            const totalDeaths = endTotalDeaths - startTotalDeaths;
+            const totalCasesPerMillion = (totalCases / record.population) * 1_000_000;
+            const totalDeathsPerMillion = (totalDeaths / record.population) * 1_000_000;
+
+            return {
+                location: record.location,
+                population: record.population,
+                totalDeaths,
+                totalCases,
+                totalCasesPerMillion,
+                totalDeathsPerMillion
+            };
+        });
+    }, [data, formValues.startDate, formValues.endDate]);
 
     let filteredData = formattedData;
     if (formValues.location?.length > 0) {

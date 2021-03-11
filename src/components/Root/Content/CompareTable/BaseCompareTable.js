@@ -66,7 +66,7 @@ const BaseCompareTable = (props) => {
         const startDate = moment(formValues.startDate);
         const endDate = moment(formValues.endDate);
 
-        // TODO the start date is before the earliest date, the end date is after the latest date... this is bad
+        console.log('Sort', formValues.sortKey, formValues.sortOrder); // TODO delete this
 
         return data.map((record) => {
             const firstDate = moment(record.firstDate);
@@ -98,10 +98,13 @@ const BaseCompareTable = (props) => {
                 totalDeaths,
                 totalCases,
                 totalCasesPerMillion,
-                totalDeathsPerMillion
+                totalDeathsPerMillion,
+                _id: record._id
             };
         });
-    }, [data.length, formValues.startDate, formValues.endDate]);
+    }, [data.length, formValues.startDate,
+        formValues.endDate, formValues.sortKey,
+        formValues.sortOrder]);
 
     if (formValues.location?.length > 0) {
         formattedData = formattedData.filter((element) =>

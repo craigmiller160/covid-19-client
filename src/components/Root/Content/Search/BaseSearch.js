@@ -28,6 +28,7 @@ import { loadCountryHistoricalData } from '../../../../store/countryData/actions
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
 import { COUNTRY_SEARCH_FORM, STATE_SEARCH_FORM } from './searchConstants';
 import './BaseSearch.scss';
+import { DEFAULT_END_DATE, DEFAULT_START_DATE } from '../../../../util/defaultDates';
 
 const countriesSelector = (state) => state.countryData.countries;
 const statesSelector = (state) => state.stateData.states;
@@ -88,7 +89,7 @@ const BaseSearch = (props) => {
                             <DateField
                                 name="startDate"
                                 label="Start Date"
-                                defaultValue="2019-11-30"
+                                defaultValue={ DEFAULT_START_DATE }
                                 onChange={ onChangeSubmit }
                             />
                         </Grid>
@@ -96,7 +97,7 @@ const BaseSearch = (props) => {
                             <DateField
                                 name="endDate"
                                 label="End Date"
-                                defaultValue="2021-12-31"
+                                defaultValue={ DEFAULT_END_DATE }
                                 onChange={ onChangeSubmit }
                             />
                         </Grid>

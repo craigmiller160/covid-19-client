@@ -27,6 +27,7 @@ import { loadCountryCompareData, loadCountryCurrentData } from '../../../../stor
 import { loadStateCurrentData } from '../../../../store/stateData/actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import MonthField from '../../../form/MonthField';
+import { DEFAULT_END_DATE, DEFAULT_START_DATE } from '../../../../util/defaultDates';
 
 const countryListSelector = (state) => state.countryData.countries;
 const stateListSelector = (state) => state.stateData.states;
@@ -56,8 +57,8 @@ const CompareSearch = (props) => {
                 sortKey: rankByOptions[0],
                 sortOrder: orderOptions[0],
                 location: [],
-                startDate: '2019-11-30',
-                endDate: '2021-12-31'
+                startDate: DEFAULT_START_DATE,
+                endDate: DEFAULT_END_DATE
             } }
         >
             <Paper>
@@ -70,13 +71,13 @@ const CompareSearch = (props) => {
                     <MonthField
                         name="startDate"
                         label="Start Month"
-                        defaultValue="2019-11-30"
+                        defaultValue={ DEFAULT_START_DATE }
                         onChange={ onChangeSubmit }
                     />
                     <MonthField
                         name="endDate"
                         label="End Month"
-                        defaultValue="2021-12-31"
+                        defaultValue={ DEFAULT_END_DATE }
                         onChange={ onChangeSubmit }
                     />
                 </Grid>

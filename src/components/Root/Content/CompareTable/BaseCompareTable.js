@@ -16,9 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
@@ -27,8 +27,6 @@ import moment from 'moment';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
-import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
-import { loadCountryCompareData } from '../../../../store/countryData/actions';
 
 const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.compareData;
@@ -48,7 +46,6 @@ const BaseCompareTable = (props) => {
         isState
     } = props;
 
-    const dispatch = useDispatch();
     const dataSelector = isState ? stateSelector : countrySelector;
     const data = useSelector(dataSelector, shallowEqual);
     const columnNames = createColumnNames(isState);
@@ -91,7 +88,7 @@ const BaseCompareTable = (props) => {
                 totalCases,
                 totalCasesPerMillion,
                 totalDeathsPerMillion,
-                _id: record._id
+                _id: record._id // eslint-disable-line no-underscore-dangle
             };
         })
             .sort((one, two) => {

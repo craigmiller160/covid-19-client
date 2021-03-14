@@ -20,7 +20,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseCompareTable from './BaseCompareTable';
 import useLoading from '../../../hooks/useLoading';
-import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
+import { loadStateCompareData } from '../../../../store/stateData/actions';
 import stateSlice from '../../../../store/stateData/slice';
 
 const Component = () => <BaseCompareTable isState />;

@@ -19,7 +19,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseCompareTable from './BaseCompareTable';
-import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
+import { loadCountryCompareData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
 import countrySlice from '../../../../store/countryData/slice';
 

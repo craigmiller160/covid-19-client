@@ -18,14 +18,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { orderOptions, rankByOptions } from './compareTableConstants';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { AutocompleteField, DateField, Form } from '../../../form';
 import TextField from '@material-ui/core/TextField';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { orderOptions, rankByOptions } from './compareTableConstants';
+import { AutocompleteField, DateField, Form } from '../../../form';
 import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
 import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import MonthField from '../../../form/MonthField';
 import { DEFAULT_END_DATE, DEFAULT_START_DATE } from '../../../../util/defaultDates';
 

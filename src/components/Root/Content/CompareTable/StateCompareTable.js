@@ -33,11 +33,9 @@ const StateCompareTable = () => {
         component: Component
     });
 
-    useEffect(() => {
-        return () => {
+    useEffect(() => () => {
             dispatch(stateSlice.actions.setCompareData([]));
-        };
-    }, []);
+        }, []);
 
     return (
         <DisplayComponent />

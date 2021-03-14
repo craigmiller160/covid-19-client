@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from '@material-ui/pickers';
 import { Field } from 'redux-form';
@@ -60,8 +60,8 @@ const MonthField = (props) => {
                         label={ label }
                         openTo="month"
                         views={ [
-                            "year",
-                            "month"
+                            'year',
+                            'month'
                         ] }
                         onChange={ innerOnChange }
                         value={ value }

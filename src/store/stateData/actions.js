@@ -50,7 +50,7 @@ export const loadStates = () => async (dispatch) => {
     }
 };
 
-export const loadStateCompareData = () => async (dispatch, getState) => {
+export const loadStateCompareData = () => async (dispatch) => {
     try {
         dispatch(coreSlice.actions.setLoading(true));
 

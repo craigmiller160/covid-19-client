@@ -79,7 +79,7 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
     }
 };
 
-export const loadCountryCompareData = () => async (dispatch, getState) => {
+export const loadCountryCompareData = () => async (dispatch) => {
     try {
         dispatch(coreSlice.actions.setLoading(true));
 

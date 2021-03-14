@@ -39,11 +39,9 @@ const CountryHistoricalChart = () => {
         component: Component
     });
 
-    useEffect(() => {
-        return () => {
+    useEffect(() => () => {
             dispatch(countrySlice.actions.setHistoricalData([]));
-        };
-    }, []);
+        }, []);
 
     return (
         <DisplayComponent />

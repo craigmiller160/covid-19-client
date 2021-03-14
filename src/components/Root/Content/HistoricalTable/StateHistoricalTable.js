@@ -39,11 +39,9 @@ const StateHistoricalTable = () => {
         component: Component
     });
 
-    useEffect(() => {
-        return () => {
+    useEffect(() => () => {
             dispatch(stateSlice.actions.setHistoricalData([]));
-        };
-    }, []);
+        }, []);
 
     return (
         <DisplayComponent />

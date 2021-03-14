@@ -23,12 +23,12 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
+import moment from 'moment';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
 import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
 import { loadCountryCompareData } from '../../../../store/countryData/actions';
-import moment from 'moment';
 
 const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.compareData;
@@ -55,7 +55,7 @@ const BaseCompareTable = (props) => {
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
-    let formattedData = useMemo(() => {
+    const formattedData = useMemo(() => {
         const startDate = moment(formValues.startDate);
         const endDate = moment(formValues.endDate);
 
@@ -104,15 +104,15 @@ const BaseCompareTable = (props) => {
             .map((record, index) => ({
                 ...record,
                 rank: index + 1
-            }))
+            }));
         if (formValues.location?.length > 0) {
             return formatSortData.filter((element) =>
                 formValues.location.find((location) => location.value === element.location));
         }
         return formatSortData;
-    }, [data.length, formValues.startDate,
+    }, [ data.length, formValues.startDate,
         formValues.endDate, formValues.sortKey,
-        formValues.sortOrder, formValues.location]);
+        formValues.sortOrder, formValues.location ]);
 
     return (
         <Grid

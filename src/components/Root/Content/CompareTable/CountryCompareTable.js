@@ -33,11 +33,9 @@ const CountryCompareTable = () => {
         component: Component
     });
 
-    useEffect(() => {
-        return () => {
+    useEffect(() => () => {
             dispatch(countrySlice.actions.setCompareData([]));
-        };
-    }, []);
+        }, []);
 
     return (
         <DisplayComponent />

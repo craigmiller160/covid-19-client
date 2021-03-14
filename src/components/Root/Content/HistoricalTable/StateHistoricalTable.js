@@ -16,12 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseHistoricalTable from './BaseHistoricalTable';
 import StateSearch from '../Search/StateSearch';
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
 import useLoading from '../../../hooks/useLoading';
+import stateSlice from '../../../../store/stateData/slice';
 
 const Component = () => (
     <div>
@@ -37,6 +38,12 @@ const StateHistoricalTable = () => {
         loader,
         component: Component
     });
+
+    useEffect(() => {
+        return () => {
+            dispatch(stateSlice.actions.setHistoricalData([]));
+        };
+    }, []);
 
     return (
         <DisplayComponent />

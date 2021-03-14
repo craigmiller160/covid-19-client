@@ -16,12 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseHistoricalTable from './BaseHistoricalTable';
 import CountrySearch from '../Search/CountrySearch';
 import { loadCountryHistoricalData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
+import countrySlice from '../../../../store/countryData/slice';
 
 const Component = () => (
     <div>
@@ -37,6 +38,12 @@ const CountryHistoricalTable = () => {
         loader,
         component: Component
     });
+
+    useEffect(() => {
+        return () => {
+            dispatch(countrySlice.actions.setHistoricalData([]));
+        };
+    }, []);
 
     return (
         <DisplayComponent />

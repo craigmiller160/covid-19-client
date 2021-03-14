@@ -16,11 +16,12 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import BaseCompareTable from './BaseCompareTable';
 import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
 import useLoading from '../../../hooks/useLoading';
+import countrySlice from '../../../../store/countryData/slice';
 
 const Component = () => <BaseCompareTable />;
 
@@ -31,6 +32,12 @@ const CountryCompareTable = () => {
         loader,
         component: Component
     });
+
+    useEffect(() => {
+        return () => {
+            dispatch(countrySlice.actions.setCompareData([]));
+        };
+    }, []);
 
     return (
         <DisplayComponent />

@@ -20,8 +20,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from '@material-ui/pickers';
 import { Field } from 'redux-form';
-import moment from 'moment';
 import parse from 'date-fns/parse/index';
+import format from 'date-fns/format/index';
+import startOfMonth from 'date-fns/startOfMonth/index';
 
 const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -48,9 +49,7 @@ const MonthField = (props) => {
             component={ (rfProps) => {
                 const value = parseValue(rfProps.input.value, defaultValue);
                 const innerOnChange = (newValue) => {
-                    const formattedValue = moment(newValue)
-                        .startOf('month')
-                        .format('YYYY-MM-DD');
+                    const formattedValue = format(startOfMonth(newValue), DATE_FORMAT);
                     rfProps.input.onChange(formattedValue);
                 };
 

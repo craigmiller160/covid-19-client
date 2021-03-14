@@ -26,7 +26,7 @@ import './BaseCompareTable.scss';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
-import { loadStateCurrentData } from '../../../../store/stateData/actions';
+import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
 import { loadCountryCompareData } from '../../../../store/countryData/actions';
 import moment from 'moment';
 
@@ -53,7 +53,7 @@ const BaseCompareTable = (props) => {
     const data = useSelector(dataSelector, shallowEqual);
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
-    const loadFn = isState ? loadStateCurrentData : loadCountryCompareData; // TODO fix the state value
+    const loadFn = isState ? loadStateCompareData : loadCountryCompareData;
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
     useEffect(() => {

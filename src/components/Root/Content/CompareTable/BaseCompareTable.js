@@ -27,9 +27,14 @@ import moment from 'moment';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
+import format from 'date-fns/format/index';
+import parse from 'date-fns/parse/index';
+import compareAsc from 'date-fns/compareAsc/index';
 
 const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.compareData;
+
+const MONTH_FORMAT = 'yyyyMM';
 
 const createColumnNames = (isState) => ([
     'Rank',
@@ -57,17 +62,17 @@ const BaseCompareTable = (props) => {
         const endDate = moment(formValues.endDate);
 
         const formatSortData = data.map((record) => {
-            const firstDate = moment(record.firstDate);
-            const lastDate = moment(record.lastDate);
+            const firstDate = moment(record.firstDate); // TODO new Date()
+            const lastDate = moment(record.lastDate); // TODO new Date()
 
-            let startDateKey = startDate.format('YYYYMM');
-            if (firstDate.diff(startDate) > 0) {
-                startDateKey = firstDate.format('YYYYMM');
+            let startDateKey = startDate.format('YYYYMM'); // TODO format()
+            if (firstDate.diff(startDate) > 0) { // TODO compareAsc()
+                startDateKey = firstDate.format('YYYYMM'); // TODO format()
             }
 
-            let endDateKey = endDate.format('YYYYMM');
-            if (lastDate.diff(endDate) < 0) {
-                endDateKey = lastDate.format('YYYYMM');
+            let endDateKey = endDate.format('YYYYMM'); // TODO format()
+            if (lastDate.diff(endDate) < 0) { // TODO compareAsc
+                endDateKey = lastDate.format('YYYYMM'); // TODO format()
             }
 
             const startTotalCases = record[`startTotalCases_${startDateKey}`];

@@ -20,13 +20,25 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from '@material-ui/pickers';
 import { Field } from 'redux-form';
-import format from 'date-fns/format/index';
+import moment from 'moment';
+import parse from 'date-fns/parse/index';
+
+const DATE_FORMAT = 'yyyy-MM-dd';
+
+const parseValue = (value, defaultValue) => {
+    if (value) {
+        return parse(value, DATE_FORMAT, new Date());
+    }
+
+    return parse(defaultValue, DATE_FORMAT, new Date());
+};
 
 const MonthField = (props) => {
     const {
         label,
         name,
-        onChange
+        onChange,
+        defaultValue
     } = props;
 
     return (
@@ -34,8 +46,11 @@ const MonthField = (props) => {
             name={ name }
             onChange={ onChange }
             component={ (rfProps) => {
+                const value = parseValue(rfProps.input.value, defaultValue);
                 const innerOnChange = (newValue) => {
-                    const formattedValue = format(newValue, 'yyyy-MM-dd');
+                    const formattedValue = moment(newValue)
+                        .startOf('month')
+                        .format('YYYY-MM-DD');
                     rfProps.input.onChange(formattedValue);
                 };
 
@@ -49,7 +64,7 @@ const MonthField = (props) => {
                             "month"
                         ] }
                         onChange={ innerOnChange }
-                        value={ rfProps.value }
+                        value={ value }
                     />
                 );
             } }
@@ -59,7 +74,8 @@ const MonthField = (props) => {
 MonthField.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    defaultValue: PropTypes.string
 };
 
 export default MonthField;

@@ -55,7 +55,7 @@ export const loadStateCompareData = () => async (dispatch, getState) => {
         dispatch(coreSlice.actions.setLoading(true));
 
         const res = await getStateCompareData();
-        dispatch(stateDataSlice.setCompareData(res.data));
+        dispatch(stateDataSlice.actions.setCompareData(res.data));
     } catch (ex) {
         dispatch(handleError(ex, 'Error loading state compare data'));
     } finally {

@@ -57,6 +57,7 @@ const BaseCompareTable = (props) => {
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
     useEffect(() => {
+        console.log('UseEffect'); // TODO delete this
         dispatch(loadFn());
     }, []);
 

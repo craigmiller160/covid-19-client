@@ -31,7 +31,7 @@ import { loadCountryCompareData } from '../../../../store/countryData/actions';
 import moment from 'moment';
 
 const countrySelector = (state) => state.countryData.compareData;
-const stateSelector = (state) => state.stateData.currentData;
+const stateSelector = (state) => state.stateData.compareData;
 
 const createColumnNames = (isState) => ([
     'Rank',

@@ -68,12 +68,8 @@ const BaseCompareTable = (props) => {
             const firstDate = moment(record.firstDate);
             const lastDate = moment(record.lastDate);
 
-            console.log('FirstDate', firstDate.format('YYYY-MM-DD')); // TODO delete this
-            console.log('StartDate', startDate.format('YYYY-MM-DD')); // TODO delete this
-
             let startDateKey = startDate.format('YYYYMM');
             if (firstDate.diff(startDate) > 0) {
-                console.log('Using first date'); // TODO delete this
                 startDateKey = firstDate.format('YYYYMM');
             }
 

@@ -23,12 +23,12 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
-import Table from '../../../ui/Table';
-import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
-import CompareSearch from './CompareSearch';
 import format from 'date-fns/format/index';
 import parse from 'date-fns/parse/index';
 import compareAsc from 'date-fns/compareAsc/index';
+import Table from '../../../ui/Table';
+import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
+import CompareSearch from './CompareSearch';
 
 const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.compareData;

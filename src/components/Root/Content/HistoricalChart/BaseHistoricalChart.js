@@ -135,6 +135,9 @@ const BaseHistoricalChart = (props) => {
 
     // const chartWidth = isNotPhone ? 800 : 390;
     const chartHeight = isNotPhone ? 500 : 300;
+    const vaccineButtonStyles = isNotPhone ? {} : {
+        width: '40%'
+    };
 
     const { dataKey, dataName } = getChartKeys(location);
 
@@ -209,6 +212,7 @@ const BaseHistoricalChart = (props) => {
                         className="buttons"
                     >
                         <Button
+                            style={ vaccineButtonStyles }
                             variant="contained"
                             color={ dataKey === DATA_KEY_NEW_VACCINE ? 'primary' : 'default' }
                             onClick={ () => history.push(`${basePath}/${PATH_NEW_VACCINE}`) }
@@ -216,6 +220,7 @@ const BaseHistoricalChart = (props) => {
                             { DATA_NAME_NEW_VACCINE }
                         </Button>
                         <Button
+                            style={ vaccineButtonStyles }
                             variant="contained"
                             color={ dataKey === DATA_KEY_TOTAL_VACCINE ? 'primary' : 'default' }
                             onClick={ () => history.push(`${basePath}/${PATH_TOTAL_VACCINE}`) }

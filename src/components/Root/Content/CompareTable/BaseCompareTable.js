@@ -90,6 +90,7 @@ const BaseCompareTable = (props) => {
 
             return {
                 location: record.location,
+                displayLocation: record.displayLocation,
                 population: record.population,
                 totalDeaths,
                 totalCases,
@@ -118,8 +119,6 @@ const BaseCompareTable = (props) => {
         formValues.endDate, formValues.sortKey,
         formValues.sortOrder, formValues.location]);
 
-    // TODO country data doesn't have displayName
-
     return (
         <Grid
             className="CompareTable"
@@ -138,7 +137,7 @@ const BaseCompareTable = (props) => {
                 dataRow={ ({ record }) => (
                     <TableRow>
                         <TableCell>{ record.rank }</TableCell>
-                        <TableCell>{ record.location }</TableCell>
+                        <TableCell>{ record.displayLocation || record.location }</TableCell>
                         <TableCell>{ record.population?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalCases.toLocaleString() }</TableCell>
                         <TableCell>{ record.totalDeaths.toLocaleString() }</TableCell>

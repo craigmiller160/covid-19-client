@@ -104,7 +104,11 @@ const BaseCompareTable = (props) => {
                     return diff * -1;
                 }
                 return diff;
-            });
+            })
+            .map((record, index) => ({
+                ...record,
+                rank: index + 1
+            }))
         if (formValues.location?.length > 0) {
             return formatSortData.filter((element) =>
                 formValues.location.find((location) => location.value === element.location));
@@ -129,9 +133,9 @@ const BaseCompareTable = (props) => {
                 rootClassName="Table"
                 data={ formattedData }
                 columnNames={ columnNames }
-                dataRow={ ({ record, index }) => (
+                dataRow={ ({ record }) => (
                     <TableRow>
-                        <TableCell>{ index + 1 }</TableCell>
+                        <TableCell>{ record.rank }</TableCell>
                         <TableCell>{ record.location }</TableCell>
                         <TableCell>{ record.population?.toLocaleString() ?? 'N/A' }</TableCell>
                         <TableCell>{ record.totalCases.toLocaleString() }</TableCell>

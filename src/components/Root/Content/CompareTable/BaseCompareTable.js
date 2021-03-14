@@ -53,13 +53,13 @@ const BaseCompareTable = (props) => {
     const data = useSelector(dataSelector, shallowEqual);
     const columnNames = createColumnNames(isState);
     const formName = isState ? STATE_COMPARE_FORM : COUNTRY_COMPARE_FORM;
-    const loadFn = isState ? loadStateCompareData : loadCountryCompareData;
+    // const loadFn = isState ? loadStateCompareData : loadCountryCompareData;
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
-    useEffect(() => {
-        console.log('UseEffect'); // TODO delete this
-        dispatch(loadFn());
-    }, []);
+    // useEffect(() => {
+    //     console.log('UseEffect'); // TODO delete this
+    //     dispatch(loadFn());
+    // }, []);
 
     let formattedData = useMemo(() => {
         const startDate = moment(formValues.startDate);

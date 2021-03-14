@@ -41,7 +41,7 @@ const CountryHistoricalChart = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(countrySlice.actions.setCompareData([]));
+            dispatch(countrySlice.actions.setHistoricalData([]));
         };
     }, []);
 

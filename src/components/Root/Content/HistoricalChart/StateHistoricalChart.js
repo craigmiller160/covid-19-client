@@ -44,7 +44,9 @@ const StateHistoricalChart = () => {
     });
 
     useEffect(() => {
-        dispatch(stateSlice.actions.setCompareData([]));
+        return () => {
+            dispatch(stateSlice.actions.setHistoricalData([]));
+        };
     }, []);
 
     return (

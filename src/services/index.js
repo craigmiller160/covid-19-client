@@ -36,6 +36,8 @@ export const getStateHistoricalData = (state, startDate, endDate) =>
 
 export const getCountryCompareData = () => api.get('/countries/compare');
 
+export const getStateCompareData = () => api.get('/states/compare');
+
 export const getCountriesList = () => api.get('/countries');
 
 export const getStatesList = () => api.get('/states');

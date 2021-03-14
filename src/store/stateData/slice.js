@@ -19,6 +19,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    compareData: [],
     historicalData: [],
     currentData: [],
     states: []
@@ -36,12 +37,17 @@ const setCurrentData = (draft, action) => {
     draft.currentData = action.payload;
 };
 
+const setCompareData = (draft, action) => {
+    draft.compareData = action.payload;
+};
+
 export default createSlice({
     name: 'stateData',
     initialState,
     reducers: {
         setStates,
         setHistoricalData,
-        setCurrentData
+        setCurrentData,
+        setCompareData
     }
 });

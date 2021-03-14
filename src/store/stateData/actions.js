@@ -17,7 +17,13 @@
  */
 
 import { change } from 'redux-form';
-import { getCountryHistoricalData, getStateCurrentData, getStateHistoricalData, getStatesList } from '../../services';
+import {
+    getCountryHistoricalData,
+    getStateCompareData,
+    getStateCurrentData,
+    getStateHistoricalData,
+    getStatesList
+} from '../../services';
 import stateDataSlice from './slice';
 import { handleError } from '../utilityActions';
 import coreSlice from '../core/slice';
@@ -41,6 +47,19 @@ export const loadStates = () => async (dispatch) => {
         dispatch(stateDataSlice.actions.setStates(formatStateData(res.data)));
     } catch (ex) {
         dispatch(handleError(ex, 'Error loading state list'));
+    }
+};
+
+export const loadStateCompareData = () => async (dispatch, getState) => {
+    try {
+        dispatch(coreSlice.actions.setLoading(true));
+
+        const res = await getStateCompareData();
+        dispatch(stateDataSlice.actions.setCompareData(res.data));
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error loading state compare data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
     }
 };
 

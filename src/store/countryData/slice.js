@@ -21,7 +21,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     historicalData: [],
     currentData: [],
-    countries: []
+    countries: [],
+    compareData: []
 };
 
 const setCountries = (draft, action) => {
@@ -36,12 +37,17 @@ const setCurrentData = (draft, action) => {
     draft.currentData = action.payload;
 };
 
+const setCompareData = (draft, action) => {
+    draft.compareData = action.payload;
+};
+
 export default createSlice({
     name: 'countryData',
     initialState,
     reducers: {
         setCountries,
         setHistoricalData,
-        setCurrentData
+        setCurrentData,
+        setCompareData
     }
 });

@@ -1,6 +1,6 @@
 /*
  *     covid-19-client
- *     Copyright (C) 2020 Craig Miller
+ *     Copyright (C) 2021 Craig Miller
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,5 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import BaseCompareTable from './BaseCompareTable';
-import { loadCountryCompareData, loadCountryCurrentData } from '../../../../store/countryData/actions';
-import useLoading from '../../../hooks/useLoading';
-
-const Component = () => <BaseCompareTable />;
-
-const CountryCompareTable = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadCountryCompareData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
-
-    return (
-        <DisplayComponent />
-    );
-};
-
-export default CountryCompareTable;
+export const DEFAULT_START_DATE = '2020-01-01';
+export const DEFAULT_END_DATE = '2022-12-31';

@@ -18,7 +18,7 @@
 
 import { change } from 'redux-form';
 import {
-    getCountriesList,
+    getCountriesList, getCountryCompareData,
     getCountryCurrentData,
     getCountryHistoricalData,
     getWorldHistoricalData
@@ -74,6 +74,19 @@ export const loadCountryHistoricalData = ({ field, value } = {}) => async (dispa
         dispatch(countryDataSlice.actions.setHistoricalData(res.data));
     } catch (ex) {
         dispatch(handleError(ex, 'Error loading country historical data'));
+    } finally {
+        dispatch(coreSlice.actions.setLoading(false));
+    }
+};
+
+export const loadCountryCompareData = () => async (dispatch, getState) => {
+    try {
+        dispatch(coreSlice.actions.setLoading(true));
+
+        const res = await getCountryCompareData();
+        dispatch(countryDataSlice.actions.setCompareData(res.data));
+    } catch (ex) {
+        dispatch(handleError(ex, 'Error loading country compare data'));
     } finally {
         dispatch(coreSlice.actions.setLoading(false));
     }

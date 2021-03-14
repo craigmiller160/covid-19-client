@@ -20,13 +20,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import BaseCompareTable from './BaseCompareTable';
 import useLoading from '../../../hooks/useLoading';
-import { loadStateCurrentData } from '../../../../store/stateData/actions';
+import { loadStateCompareData, loadStateCurrentData } from '../../../../store/stateData/actions';
 
 const Component = () => <BaseCompareTable isState />;
 
 const StateCompareTable = () => {
     const dispatch = useDispatch();
-    const loader = () => dispatch(loadStateCurrentData());
+    const loader = () => dispatch(loadStateCompareData());
     const DisplayComponent = useLoading({
         loader,
         component: Component

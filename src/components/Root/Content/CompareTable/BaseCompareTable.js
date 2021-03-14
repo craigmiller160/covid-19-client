@@ -23,7 +23,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Grid from '@material-ui/core/Grid';
 import './BaseCompareTable.scss';
-import moment from 'moment';
 import Table from '../../../ui/Table';
 import { COUNTRY_COMPARE_FORM, STATE_COMPARE_FORM } from './compareTableConstants';
 import CompareSearch from './CompareSearch';
@@ -35,6 +34,7 @@ const countrySelector = (state) => state.countryData.compareData;
 const stateSelector = (state) => state.stateData.compareData;
 
 const MONTH_FORMAT = 'yyyyMM';
+const DATE_FORMAT = 'yyyy-MM-dd';
 
 const createColumnNames = (isState) => ([
     'Rank',
@@ -58,21 +58,21 @@ const BaseCompareTable = (props) => {
     const formValues = useSelector((state) => state.form[formName]?.values ?? {}, shallowEqual);
 
     const formattedData = useMemo(() => {
-        const startDate = moment(formValues.startDate);
-        const endDate = moment(formValues.endDate);
+        const startDate = parse(formValues.startDate, DATE_FORMAT, new Date());
+        const endDate = parse(formValues.endDate, DATE_FORMAT, new Date());
 
         const formatSortData = data.map((record) => {
-            const firstDate = moment(record.firstDate); // TODO new Date()
-            const lastDate = moment(record.lastDate); // TODO new Date()
+            const firstDate = new Date(record.firstDate);
+            const lastDate = new Date(record.lastDate);
 
-            let startDateKey = startDate.format('YYYYMM'); // TODO format()
-            if (firstDate.diff(startDate) > 0) { // TODO compareAsc()
-                startDateKey = firstDate.format('YYYYMM'); // TODO format()
+            let startDateKey = format(startDate, MONTH_FORMAT);
+            if (compareAsc(firstDate, startDate) > 0) {
+                startDateKey = format(firstDate, MONTH_FORMAT);
             }
 
-            let endDateKey = endDate.format('YYYYMM'); // TODO format()
-            if (lastDate.diff(endDate) < 0) { // TODO compareAsc
-                endDateKey = lastDate.format('YYYYMM'); // TODO format()
+            let endDateKey = format(endDate, MONTH_FORMAT);
+            if (compareAsc(lastDate, endDate) < 0) {
+                endDateKey = format(lastDate, MONTH_FORMAT);
             }
 
             const startTotalCases = record[`startTotalCases_${startDateKey}`];

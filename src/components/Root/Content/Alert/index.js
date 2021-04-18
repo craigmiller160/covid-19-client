@@ -24,26 +24,24 @@ import './Alert.scss';
 import coreSlice from '../../../../store/core/slice';
 
 const Alert = () => {
-    const dispatch = useDispatch();
-    const error = useSelector((state) => state.core.error, shallowEqual);
+	const dispatch = useDispatch();
+	const error = useSelector((state) => state.core.error, shallowEqual);
 
-    if (!error) {
-        return (
-            <div />
-        );
-    }
+	if (!error) {
+		return <div />;
+	}
 
-    return (
-        <MuiAlert
-            className="Alert"
-            severity="error"
-            variant="filled"
-            onClose={ () => dispatch(coreSlice.actions.setError(null)) }
-        >
-            <AlertTitle>{ error.title }</AlertTitle>
-            { error.details }
-        </MuiAlert>
-    );
+	return (
+		<MuiAlert
+			className="Alert"
+			severity="error"
+			variant="filled"
+			onClose={() => dispatch(coreSlice.actions.setError(null))}
+		>
+			<AlertTitle>{error.title}</AlertTitle>
+			{error.details}
+		</MuiAlert>
+	);
 };
 
 export default Alert;

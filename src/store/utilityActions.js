@@ -19,22 +19,22 @@
 import dataSlice from './core/slice';
 
 export const handleError = (ex, message) => (dispatch) => {
-    let errorPayload;
-    if (ex.response) {
-        let exMessage = ex.response.data;
-        if (typeof exMessage === 'object') {
-            exMessage = ex.response.data.message;
-        }
-        errorPayload = {
-            title: exMessage,
-            details: `Status: ${ex.response.status}. Message: ${exMessage}`
-        };
-    } else {
-        errorPayload = {
-            title: message,
-            details: ex.message
-        };
-    }
-    console.error(ex);
-    dispatch(dataSlice.actions.setError(errorPayload));
+	let errorPayload;
+	if (ex.response) {
+		let exMessage = ex.response.data;
+		if (typeof exMessage === 'object') {
+			exMessage = ex.response.data.message;
+		}
+		errorPayload = {
+			title: exMessage,
+			details: `Status: ${ex.response.status}. Message: ${exMessage}`
+		};
+	} else {
+		errorPayload = {
+			title: message,
+			details: ex.message
+		};
+	}
+	console.error(ex);
+	dispatch(dataSlice.actions.setError(errorPayload));
 };

@@ -25,42 +25,50 @@ import { loadCountries } from '../countryData/actions';
 import { loadStates } from '../stateData/actions';
 
 const formatDownloadDate = (downloadDate) => {
-    if (!downloadDate) {
-        return 'No Data';
-    }
-    const parsedDate = parse(downloadDate, 'yyyy-MM-dd HH:mm:ssXXX', new Date());
-    return format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
+	if (!downloadDate) {
+		return 'No Data';
+	}
+	const parsedDate = parse(
+		downloadDate,
+		'yyyy-MM-dd HH:mm:ssXXX',
+		new Date()
+	);
+	return format(parsedDate, 'yyyy-MM-dd HH:mm:ss');
 };
 
 export const loadLists = () => async (dispatch) => {
-    dispatch(coreSlice.actions.setLoading(true));
-    dispatch(loadCountries());
-    dispatch(loadStates());
-    dispatch(coreSlice.actions.setLoading(false));
+	dispatch(coreSlice.actions.setLoading(true));
+	dispatch(loadCountries());
+	dispatch(loadStates());
+	dispatch(coreSlice.actions.setLoading(false));
 };
 
 export const loadMetadata = () => async (dispatch) => {
-    try {
-        dispatch(coreSlice.actions.setLoading(true));
-        const metadataRes = await getMetadata();
-        dispatch(coreSlice.actions.setDownloadDate(formatDownloadDate(metadataRes.data.downloadDate)));
-    } catch (ex) {
-        dispatch(handleError(ex, 'Error getting metadata'));
-    } finally {
-        dispatch(coreSlice.actions.setLoading(false));
-    }
+	try {
+		dispatch(coreSlice.actions.setLoading(true));
+		const metadataRes = await getMetadata();
+		dispatch(
+			coreSlice.actions.setDownloadDate(
+				formatDownloadDate(metadataRes.data.downloadDate)
+			)
+		);
+	} catch (ex) {
+		dispatch(handleError(ex, 'Error getting metadata'));
+	} finally {
+		dispatch(coreSlice.actions.setLoading(false));
+	}
 };
 
 export const downloadNewData = () => async (dispatch) => {
-    try {
-        dispatch(coreSlice.actions.setLoading(true));
-        await downloadData();
+	try {
+		dispatch(coreSlice.actions.setLoading(true));
+		await downloadData();
 
-        dispatch(loadLists());
-        dispatch(loadMetadata());
-    } catch (ex) {
-        dispatch(handleError(ex, 'Error downloading data'));
-    } finally {
-        dispatch(coreSlice.actions.setLoading(false));
-    }
+		dispatch(loadLists());
+		dispatch(loadMetadata());
+	} catch (ex) {
+		dispatch(handleError(ex, 'Error downloading data'));
+	} finally {
+		dispatch(coreSlice.actions.setLoading(false));
+	}
 };

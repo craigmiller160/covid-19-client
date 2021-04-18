@@ -39,79 +39,80 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 const DATE_FORMAT = 'yyyy-MM-dd';
 
 const parseValue = (value, defaultValue) => {
-    if (value) {
-        return parse(value, DATE_FORMAT, new Date());
-    }
+	if (value) {
+		return parse(value, DATE_FORMAT, new Date());
+	}
 
-    return parse(defaultValue, DATE_FORMAT, new Date());
+	return parse(defaultValue, DATE_FORMAT, new Date());
 };
 
 const DateField = (props) => {
-    const {
-        name,
-        className,
-        label,
-        defaultValue,
-        onChange
-    } = props;
+	const { name, className, label, defaultValue, onChange } = props;
 
-    const focus = useRef(false);
+	const focus = useRef(false);
 
-    return (
-        <Field
-            name={ name }
-            onChange={ onChange }
-            component={ (rfProps) => {
-                const value = parseValue(rfProps.input.value, defaultValue);
+	return (
+		<Field
+			name={name}
+			onChange={onChange}
+			component={(rfProps) => {
+				const value = parseValue(rfProps.input.value, defaultValue);
 
-                const keyOnChange = (newValue) => {
-                    const parsedNewValue = parse(newValue, DATE_FORMAT, new Date());
-                    if (isValid(parsedNewValue) && !isEqual(value, parsedNewValue)) {
-                        rfProps.input.onChange(newValue);
-                    }
-                };
+				const keyOnChange = (newValue) => {
+					const parsedNewValue = parse(
+						newValue,
+						DATE_FORMAT,
+						new Date()
+					);
+					if (
+						isValid(parsedNewValue) &&
+						!isEqual(value, parsedNewValue)
+					) {
+						rfProps.input.onChange(newValue);
+					}
+				};
 
-                const innerOnChange = (newValue) => {
-                    if (!focus.current) {
-                        const formattedValue = format(newValue, 'yyyy-MM-dd');
-                        rfProps.input.onChange(formattedValue);
-                    }
-                };
+				const innerOnChange = (newValue) => {
+					if (!focus.current) {
+						const formattedValue = format(newValue, 'yyyy-MM-dd');
+						rfProps.input.onChange(formattedValue);
+					}
+				};
 
-                return (
-                    <KeyboardDatePicker
-                        className={ className }
-                        label={ label }
-                        format="yyyy-MM-dd"
-                        margin="normal"
-                        disableToolbar
-                        variant="outlined"
-                        value={ value }
-                        onBlur={ (event) => {
-                            focus.current = false;
-                            keyOnChange(event.target.value);
-                        } }
-                        onFocus={ () => {
-                            focus.current = true;
-                        } }
-                        onChange={ innerOnChange }
-                        onKeyDown={ (event) => {
-                            if (event.key === 'Enter') {
-                                keyOnChange(event.target.value);
-                            }
-                        } }
-                    />
-                );
-            } }
-        />
-    );
+				return (
+					<KeyboardDatePicker
+						className={className}
+						label={label}
+						format="yyyy-MM-dd"
+						margin="normal"
+						disableToolbar
+						variant="outlined"
+						value={value}
+						onBlur={(event) => {
+							focus.current = false;
+							keyOnChange(event.target.value);
+						}}
+						onFocus={() => {
+							focus.current = true;
+						}}
+						onChange={innerOnChange}
+						onKeyDown={(event) => {
+							if (event.key === 'Enter') {
+								keyOnChange(event.target.value);
+							}
+						}}
+					/>
+				);
+			}}
+		/>
+	);
 };
 DateField.propTypes = {
-    name: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    label: PropTypes.string,
-    defaultValue: PropTypes.string,
-    onChange: PropTypes.func
+	name: PropTypes.string.isRequired,
+	className: PropTypes.string,
+	label: PropTypes.string,
+	defaultValue: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 export default DateField;

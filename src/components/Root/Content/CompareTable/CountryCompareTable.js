@@ -26,20 +26,21 @@ import countrySlice from '../../../../store/countryData/slice';
 const Component = () => <BaseCompareTable />;
 
 const CountryCompareTable = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadCountryCompareData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
+	const dispatch = useDispatch();
+	const loader = () => dispatch(loadCountryCompareData());
+	const DisplayComponent = useLoading({
+		loader,
+		component: Component
+	});
 
-    useEffect(() => () => {
-            dispatch(countrySlice.actions.setCompareData([]));
-        }, []);
+	useEffect(
+		() => () => {
+			dispatch(countrySlice.actions.setCompareData([]));
+		},
+		[dispatch]
+	);
 
-    return (
-        <DisplayComponent />
-    );
+	return <DisplayComponent />;
 };
 
 export default CountryCompareTable;

@@ -24,13 +24,13 @@ import countryDataSlice from './countryData/slice';
 import stateDataSlice from './stateData/slice';
 
 const rootReducer = combineReducers({
-    core: coreSlice.reducer,
-    countryData: countryDataSlice.reducer,
-    stateData: stateDataSlice.reducer,
-    form: formReducer
+	core: coreSlice.reducer,
+	countryData: countryDataSlice.reducer,
+	stateData: stateDataSlice.reducer,
+	form: formReducer
 });
 
 export default configureStore({
-    reducer: rootReducer,
-    devTools: process.env.NODE_ENV !== 'production'
+	reducer: rootReducer,
+	devTools: process.env.NODE_ENV !== 'production'
 });

@@ -19,5 +19,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: '/covid-19/api'
+	baseURL: '/covid-19/api'
 });

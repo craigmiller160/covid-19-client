@@ -25,27 +25,28 @@ import useLoading from '../../../hooks/useLoading';
 import countrySlice from '../../../../store/countryData/slice';
 
 const Component = () => (
-    <div>
-        <CountrySearch />
-        <BaseHistoricalChart />
-    </div>
+	<div>
+		<CountrySearch />
+		<BaseHistoricalChart />
+	</div>
 );
 
 const CountryHistoricalChart = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadCountryHistoricalData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
+	const dispatch = useDispatch();
+	const loader = () => dispatch(loadCountryHistoricalData());
+	const DisplayComponent = useLoading({
+		loader,
+		component: Component
+	});
 
-    useEffect(() => () => {
-            dispatch(countrySlice.actions.setHistoricalData([]));
-        }, []);
+	useEffect(
+		() => () => {
+			dispatch(countrySlice.actions.setHistoricalData([]));
+		},
+		[dispatch]
+	);
 
-    return (
-        <DisplayComponent />
-    );
+	return <DisplayComponent />;
 };
 
 export default CountryHistoricalChart;

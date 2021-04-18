@@ -28,90 +28,88 @@ import { loadCountryHistoricalData } from '../../../../store/countryData/actions
 import { loadStateHistoricalData } from '../../../../store/stateData/actions';
 import { COUNTRY_SEARCH_FORM, STATE_SEARCH_FORM } from './searchConstants';
 import './BaseSearch.scss';
-import { DEFAULT_END_DATE, DEFAULT_START_DATE } from '../../../../util/defaultDates';
+import {
+	DEFAULT_END_DATE,
+	DEFAULT_START_DATE
+} from '../../../../util/defaultDates';
 
 const countriesSelector = (state) => state.countryData.countries;
 const statesSelector = (state) => state.stateData.states;
 
 const BaseSearch = (props) => {
-    const {
-        isState
-    } = props;
-    const dispatch = useDispatch();
-    const selector = isState ? statesSelector : countriesSelector;
-    const locations = useSelector(selector, shallowEqual);
-    const formName = isState ? STATE_SEARCH_FORM : COUNTRY_SEARCH_FORM;
-    const searchLabel = isState ? 'State' : 'Country';
-    const initialLocation = isState ? usOption : worldOption;
-    const countrySubmit = (value) => dispatch(loadCountryHistoricalData(value));
-    const stateSubmit = (value) => dispatch(loadStateHistoricalData(value));
-    const onSubmit = isState ? stateSubmit : countrySubmit;
-    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
+	const { isState } = props;
+	const dispatch = useDispatch();
+	const selector = isState ? statesSelector : countriesSelector;
+	const locations = useSelector(selector, shallowEqual);
+	const formName = isState ? STATE_SEARCH_FORM : COUNTRY_SEARCH_FORM;
+	const searchLabel = isState ? 'State' : 'Country';
+	const initialLocation = isState ? usOption : worldOption;
+	const countrySubmit = (value) => dispatch(loadCountryHistoricalData(value));
+	const stateSubmit = (value) => dispatch(loadStateHistoricalData(value));
+	const onSubmit = isState ? stateSubmit : countrySubmit;
+	const onChangeSubmit = (value, arg2, arg3, fieldName) =>
+		onSubmit({ field: fieldName, value });
 
-    return (
-        <Paper className="Search">
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-            >
-                <Form
-                    form={ formName }
-                    onSubmit={ onSubmit }
-                    destroyOnUnmount={ false }
-                    initialValues={ {
-                        location: initialLocation
-                    } }
-                >
-                    <Grid item className="search-box-wrapper">
-                        <AutocompleteField
-                            className="search-box"
-                            options={ locations }
-                            getOptionLabel={ (option) => option.label ?? '' }
-                            onChange={ onChangeSubmit }
-                            renderInput={ (params) => (
-                                <TextField
-                                    { ...params }
-                                    label={ searchLabel }
-                                    variant="outlined"
-                                />
-                            ) }
-                            name="location"
-                        />
-                    </Grid>
-                    <Grid
-                        container
-                        direction="row"
-                        justify="space-between"
-                        className="date-wrapper"
-                    >
-                        <Grid item className="date-item">
-                            <DateField
-                                name="startDate"
-                                label="Start Date"
-                                defaultValue={ DEFAULT_START_DATE }
-                                onChange={ onChangeSubmit }
-                            />
-                        </Grid>
-                        <Grid item className="date-item">
-                            <DateField
-                                name="endDate"
-                                label="End Date"
-                                defaultValue={ DEFAULT_END_DATE }
-                                onChange={ onChangeSubmit }
-                            />
-                        </Grid>
-                    </Grid>
-                </Form>
-            </Grid>
-        </Paper>
-    );
+	return (
+		<Paper className="Search">
+			<Grid container direction="column" alignItems="center">
+				<Form
+					form={formName}
+					onSubmit={onSubmit}
+					destroyOnUnmount={false}
+					initialValues={{
+						location: initialLocation
+					}}
+				>
+					<Grid item className="search-box-wrapper">
+						<AutocompleteField
+							className="search-box"
+							options={locations}
+							getOptionLabel={(option) => option.label ?? ''}
+							onChange={onChangeSubmit}
+							renderInput={(params) => (
+								<TextField
+									{...params}
+									label={searchLabel}
+									variant="outlined"
+								/>
+							)}
+							name="location"
+						/>
+					</Grid>
+					<Grid
+						container
+						direction="row"
+						justify="space-between"
+						className="date-wrapper"
+					>
+						<Grid item className="date-item">
+							<DateField
+								name="startDate"
+								label="Start Date"
+								defaultValue={DEFAULT_START_DATE}
+								onChange={onChangeSubmit}
+							/>
+						</Grid>
+						<Grid item className="date-item">
+							<DateField
+								name="endDate"
+								label="End Date"
+								defaultValue={DEFAULT_END_DATE}
+								onChange={onChangeSubmit}
+							/>
+						</Grid>
+					</Grid>
+				</Form>
+			</Grid>
+		</Paper>
+	);
 };
 BaseSearch.propTypes = {
-    isState: PropTypes.bool
+	isState: PropTypes.bool
 };
 BaseSearch.defaultProps = {
-    isState: false
+	isState: false
 };
 
 export default BaseSearch;

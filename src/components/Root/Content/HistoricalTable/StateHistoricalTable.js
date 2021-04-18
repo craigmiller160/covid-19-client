@@ -43,7 +43,7 @@ const StateHistoricalTable = () => {
 		() => () => {
 			dispatch(stateSlice.actions.setHistoricalData([]));
 		},
-		[]
+		[dispatch]
 	);
 
 	return <DisplayComponent />;

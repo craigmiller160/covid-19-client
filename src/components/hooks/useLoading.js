@@ -28,7 +28,7 @@ const useLoading = (props) => {
 
 	useEffect(() => {
 		loader();
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [loader]);
 
 	if (loading) {
 		return Loading;

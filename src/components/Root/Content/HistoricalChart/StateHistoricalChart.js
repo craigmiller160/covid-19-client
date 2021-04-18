@@ -50,7 +50,7 @@ const StateHistoricalChart = () => {
 		() => () => {
 			dispatch(stateSlice.actions.setHistoricalData([]));
 		},
-		[]
+		[dispatch]
 	);
 
 	return <DisplayComponent />;

@@ -43,7 +43,7 @@ const CountryHistoricalChart = () => {
 		() => () => {
 			dispatch(countrySlice.actions.setHistoricalData([]));
 		},
-		[]
+		[dispatch]
 	);
 
 	return <DisplayComponent />;

@@ -37,7 +37,7 @@ const StateCompareTable = () => {
 		() => () => {
 			dispatch(stateSlice.actions.setCompareData([]));
 		},
-		[]
+		[dispatch]
 	);
 
 	return <DisplayComponent />;

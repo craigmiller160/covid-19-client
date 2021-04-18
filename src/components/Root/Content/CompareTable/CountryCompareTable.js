@@ -37,7 +37,7 @@ const CountryCompareTable = () => {
 		() => () => {
 			dispatch(countrySlice.actions.setCompareData([]));
 		},
-		[]
+		[dispatch]
 	);
 
 	return <DisplayComponent />;

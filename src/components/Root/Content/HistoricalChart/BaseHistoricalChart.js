@@ -18,7 +18,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+	CartesianGrid,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis
+} from 'recharts';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -58,217 +66,284 @@ const DATA_NAME_NEW_VACCINE = 'New Vaccinations';
 const DATA_NAME_TOTAL_VACCINE = 'Total Vaccinations';
 
 const getChartKeys = (location) => {
-    const pathParts = location.pathname.split('/');
-    const chartType = pathParts[pathParts.length - 1];
+	const pathParts = location.pathname.split('/');
+	const chartType = pathParts[pathParts.length - 1];
 
-    let dataKey;
-    let dataName;
-    switch (chartType) {
-        case PATH_NEW_CASES:
-            dataKey = DATA_KEY_NEW_CASES;
-            dataName = DATA_NAME_NEW_CASES;
-            break;
-        case PATH_TOTAL_DEATHS:
-            dataKey = DATA_KEY_TOTAL_DEATHS;
-            dataName = DATA_NAME_TOTAL_DEATHS;
-            break;
-        case PATH_NEW_DEATHS:
-            dataKey = DATA_KEY_NEW_DEATHS;
-            dataName = DATA_NAME_NEW_DEATHS;
-            break;
-        case PATH_NEW_TESTS:
-            dataKey = DATA_KEY_NEW_TESTS;
-            dataName = DATA_NAME_NEW_TESTS;
-            break;
-        case PATH_POS_TESTS:
-            dataKey = DATA_KEY_POS_TESTS;
-            dataName = DATA_NAME_POS_TESTS;
-            break;
-        case PATH_NEW_HOSPITAL:
-            dataKey = DATA_KEY_NEW_HOSPITAL;
-            dataName = DATA_NAME_NEW_HOSPITAL;
-            break;
-        case PATH_NEW_VACCINE:
-            dataKey = DATA_KEY_NEW_VACCINE;
-            dataName = DATA_NAME_NEW_VACCINE;
-            break;
-        case PATH_TOTAL_VACCINE:
-            dataKey = DATA_KEY_TOTAL_VACCINE;
-            dataName = DATA_NAME_TOTAL_VACCINE;
-            break;
-        case PATH_TOTAL_CASES:
-        default:
-            dataKey = DATA_KEY_TOTAL_CASES;
-            dataName = DATA_NAME_TOTAL_CASES;
-            break;
-    }
-    return {
-        dataKey,
-        dataName
-    };
+	let dataKey;
+	let dataName;
+	switch (chartType) {
+		case PATH_NEW_CASES:
+			dataKey = DATA_KEY_NEW_CASES;
+			dataName = DATA_NAME_NEW_CASES;
+			break;
+		case PATH_TOTAL_DEATHS:
+			dataKey = DATA_KEY_TOTAL_DEATHS;
+			dataName = DATA_NAME_TOTAL_DEATHS;
+			break;
+		case PATH_NEW_DEATHS:
+			dataKey = DATA_KEY_NEW_DEATHS;
+			dataName = DATA_NAME_NEW_DEATHS;
+			break;
+		case PATH_NEW_TESTS:
+			dataKey = DATA_KEY_NEW_TESTS;
+			dataName = DATA_NAME_NEW_TESTS;
+			break;
+		case PATH_POS_TESTS:
+			dataKey = DATA_KEY_POS_TESTS;
+			dataName = DATA_NAME_POS_TESTS;
+			break;
+		case PATH_NEW_HOSPITAL:
+			dataKey = DATA_KEY_NEW_HOSPITAL;
+			dataName = DATA_NAME_NEW_HOSPITAL;
+			break;
+		case PATH_NEW_VACCINE:
+			dataKey = DATA_KEY_NEW_VACCINE;
+			dataName = DATA_NAME_NEW_VACCINE;
+			break;
+		case PATH_TOTAL_VACCINE:
+			dataKey = DATA_KEY_TOTAL_VACCINE;
+			dataName = DATA_NAME_TOTAL_VACCINE;
+			break;
+		case PATH_TOTAL_CASES:
+		default:
+			dataKey = DATA_KEY_TOTAL_CASES;
+			dataName = DATA_NAME_TOTAL_CASES;
+			break;
+	}
+	return {
+		dataKey,
+		dataName
+	};
 };
 
 const isNotSupportedPath = (hasVaccineData, showMoreOptions, location) => {
-    const isVaccinePath = location.pathname.endsWith(PATH_TOTAL_VACCINE) ||
-        location.pathname.endsWith(PATH_NEW_VACCINE);
-    const isMoreOptionsPath = location.pathname.endsWith(PATH_NEW_TESTS) ||
-        location.pathname.endsWith(PATH_POS_TESTS) ||
-        location.pathname.endsWith(PATH_NEW_HOSPITAL);
+	const isVaccinePath =
+		location.pathname.endsWith(PATH_TOTAL_VACCINE) ||
+		location.pathname.endsWith(PATH_NEW_VACCINE);
+	const isMoreOptionsPath =
+		location.pathname.endsWith(PATH_NEW_TESTS) ||
+		location.pathname.endsWith(PATH_POS_TESTS) ||
+		location.pathname.endsWith(PATH_NEW_HOSPITAL);
 
-    return (!hasVaccineData && isVaccinePath) || (!showMoreOptions && isMoreOptionsPath);
+	return (
+		(!hasVaccineData && isVaccinePath) ||
+		(!showMoreOptions && isMoreOptionsPath)
+	);
 };
 
 const BaseHistoricalChart = (props) => {
-    const {
-        isState
-    } = props;
-    const location = useLocation();
-    const history = useHistory();
-    const basePath = isState ? '/state/history/chart' : '/country/history/chart';
-    const { data, location: selectedLocation } = useHistoryData({ isState });
-    const theme = useTheme();
-    const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
-    const chartData = data ? data.slice().reverse() : [];
-    const hasVaccineData = chartData.length > 0 && chartData[0].totalVaccines !== undefined;
-    const showMoreOptions = isState && selectedLocation?.value !== null &&
-        selectedLocation?.value !== 'USA';
+	const { isState } = props;
+	const location = useLocation();
+	const history = useHistory();
+	const basePath = isState
+		? '/state/history/chart'
+		: '/country/history/chart';
+	const { data, location: selectedLocation } = useHistoryData({ isState });
+	const theme = useTheme();
+	const isNotPhone = useMediaQuery(theme.breakpoints.up('sm'));
+	const chartData = data ? data.slice().reverse() : [];
+	const hasVaccineData =
+		chartData.length > 0 && chartData[0].totalVaccines !== undefined;
+	const showMoreOptions =
+		isState &&
+		selectedLocation?.value !== null &&
+		selectedLocation?.value !== 'USA';
 
-    // const chartWidth = isNotPhone ? 800 : 390;
-    const chartHeight = isNotPhone ? 500 : 300;
-    const vaccineButtonStyles = isNotPhone ? {} : {
-        width: '40%'
-    };
+	// const chartWidth = isNotPhone ? 800 : 390;
+	const chartHeight = isNotPhone ? 500 : 300;
+	const vaccineButtonStyles = isNotPhone
+		? {}
+		: {
+				width: '40%'
+		  };
 
-    const { dataKey, dataName } = getChartKeys(location);
+	const { dataKey, dataName } = getChartKeys(location);
 
-    if (location.pathname.endsWith('/history/chart') ||
-        isNotSupportedPath(hasVaccineData, showMoreOptions, location)) {
-        return <Redirect to={ `${basePath}/${PATH_TOTAL_CASES}` } />;
-    }
+	if (
+		location.pathname.endsWith('/history/chart') ||
+		isNotSupportedPath(hasVaccineData, showMoreOptions, location)
+	) {
+		return <Redirect to={`${basePath}/${PATH_TOTAL_CASES}`} />;
+	}
 
-    return (
-        <Grid
-            container
-            direction="column"
-            alignItems="center"
-            justify="center"
-            className="Chart"
-        >
-            <ResponsiveContainer
-                height={ chartHeight }
-            >
-                <LineChart
-                    data={ chartData }
-                >
-                    <XAxis dataKey="date" name="Dates" />
-                    <YAxis dataKey={ dataKey } name={ dataName } width={ 70 } />
-                    <Tooltip />
-                    <CartesianGrid stroke="#f5f5f5" />
-                    <Line type="monotone" dataKey={ dataKey } stroke="#ff7300" yAxisId={ 0 } />
-                </LineChart>
-            </ResponsiveContainer>
-            <div className="ButtonContainer">
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    className="buttons"
-                >
-                    <Button
-                        variant="contained"
-                        color={ dataKey === DATA_KEY_TOTAL_CASES ? 'primary' : 'default' }
-                        onClick={ () => history.push(`${basePath}/${PATH_TOTAL_CASES}`) }
-                    >
-                        { DATA_NAME_TOTAL_CASES }
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color={ dataKey === DATA_KEY_NEW_CASES ? 'primary' : 'default' }
-                        onClick={ () => history.push(`${basePath}/${PATH_NEW_CASES}`) }
-                    >
-                        { DATA_NAME_NEW_CASES }
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color={ dataKey === DATA_KEY_TOTAL_DEATHS ? 'primary' : 'default' }
-                        onClick={ () => history.push(`${basePath}/${PATH_TOTAL_DEATHS}`) }
-                    >
-                        { DATA_NAME_TOTAL_DEATHS }
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color={ dataKey === DATA_KEY_NEW_DEATHS ? 'primary' : 'default' }
-                        onClick={ () => history.push(`${basePath}/${PATH_NEW_DEATHS}`) }
-                    >
-                        { DATA_NAME_NEW_DEATHS }
-                    </Button>
-                </Grid>
-                {
-                    hasVaccineData &&
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        className="buttons"
-                    >
-                        <Button
-                            style={ vaccineButtonStyles }
-                            variant="contained"
-                            color={ dataKey === DATA_KEY_NEW_VACCINE ? 'primary' : 'default' }
-                            onClick={ () => history.push(`${basePath}/${PATH_NEW_VACCINE}`) }
-                        >
-                            { DATA_NAME_NEW_VACCINE }
-                        </Button>
-                        <Button
-                            style={ vaccineButtonStyles }
-                            variant="contained"
-                            color={ dataKey === DATA_KEY_TOTAL_VACCINE ? 'primary' : 'default' }
-                            onClick={ () => history.push(`${basePath}/${PATH_TOTAL_VACCINE}`) }
-                        >
-                            { DATA_NAME_TOTAL_VACCINE }
-                        </Button>
-                    </Grid>
-                }
-                {
-                    showMoreOptions &&
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        className="buttons"
-                    >
-                        <Button
-                            variant="contained"
-                            color={ dataKey === DATA_KEY_NEW_TESTS ? 'primary' : 'default' }
-                            onClick={ () => history.push(`${basePath}/${PATH_NEW_TESTS}`) }
-                        >
-                            { DATA_NAME_NEW_TESTS }
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color={ dataKey === DATA_KEY_POS_TESTS ? 'primary' : 'default' }
-                            onClick={ () => history.push(`${basePath}/${PATH_POS_TESTS}`) }
-                        >
-                            { DATA_NAME_POS_TESTS }
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color={ dataKey === DATA_KEY_NEW_HOSPITAL ? 'primary' : 'default' }
-                            onClick={ () => history.push(`${basePath}/${PATH_NEW_HOSPITAL}`) }
-                        >
-                            { DATA_NAME_NEW_HOSPITAL }
-                        </Button>
-                    </Grid>
-                }
-            </div>
-        </Grid>
-    );
+	return (
+		<Grid
+			container
+			direction="column"
+			alignItems="center"
+			justify="center"
+			className="Chart"
+		>
+			<ResponsiveContainer height={chartHeight}>
+				<LineChart data={chartData}>
+					<XAxis dataKey="date" name="Dates" />
+					<YAxis dataKey={dataKey} name={dataName} width={70} />
+					<Tooltip />
+					<CartesianGrid stroke="#f5f5f5" />
+					<Line
+						type="monotone"
+						dataKey={dataKey}
+						stroke="#ff7300"
+						yAxisId={0}
+					/>
+				</LineChart>
+			</ResponsiveContainer>
+			<div className="ButtonContainer">
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					className="buttons"
+				>
+					<Button
+						variant="contained"
+						color={
+							dataKey === DATA_KEY_TOTAL_CASES
+								? 'primary'
+								: 'default'
+						}
+						onClick={() =>
+							history.push(`${basePath}/${PATH_TOTAL_CASES}`)
+						}
+					>
+						{DATA_NAME_TOTAL_CASES}
+					</Button>
+					<Button
+						variant="contained"
+						color={
+							dataKey === DATA_KEY_NEW_CASES
+								? 'primary'
+								: 'default'
+						}
+						onClick={() =>
+							history.push(`${basePath}/${PATH_NEW_CASES}`)
+						}
+					>
+						{DATA_NAME_NEW_CASES}
+					</Button>
+					<Button
+						variant="contained"
+						color={
+							dataKey === DATA_KEY_TOTAL_DEATHS
+								? 'primary'
+								: 'default'
+						}
+						onClick={() =>
+							history.push(`${basePath}/${PATH_TOTAL_DEATHS}`)
+						}
+					>
+						{DATA_NAME_TOTAL_DEATHS}
+					</Button>
+					<Button
+						variant="contained"
+						color={
+							dataKey === DATA_KEY_NEW_DEATHS
+								? 'primary'
+								: 'default'
+						}
+						onClick={() =>
+							history.push(`${basePath}/${PATH_NEW_DEATHS}`)
+						}
+					>
+						{DATA_NAME_NEW_DEATHS}
+					</Button>
+				</Grid>
+				{hasVaccineData && (
+					<Grid
+						container
+						direction="row"
+						justify="center"
+						className="buttons"
+					>
+						<Button
+							style={vaccineButtonStyles}
+							variant="contained"
+							color={
+								dataKey === DATA_KEY_NEW_VACCINE
+									? 'primary'
+									: 'default'
+							}
+							onClick={() =>
+								history.push(`${basePath}/${PATH_NEW_VACCINE}`)
+							}
+						>
+							{DATA_NAME_NEW_VACCINE}
+						</Button>
+						<Button
+							style={vaccineButtonStyles}
+							variant="contained"
+							color={
+								dataKey === DATA_KEY_TOTAL_VACCINE
+									? 'primary'
+									: 'default'
+							}
+							onClick={() =>
+								history.push(
+									`${basePath}/${PATH_TOTAL_VACCINE}`
+								)
+							}
+						>
+							{DATA_NAME_TOTAL_VACCINE}
+						</Button>
+					</Grid>
+				)}
+				{showMoreOptions && (
+					<Grid
+						container
+						direction="row"
+						justify="center"
+						className="buttons"
+					>
+						<Button
+							variant="contained"
+							color={
+								dataKey === DATA_KEY_NEW_TESTS
+									? 'primary'
+									: 'default'
+							}
+							onClick={() =>
+								history.push(`${basePath}/${PATH_NEW_TESTS}`)
+							}
+						>
+							{DATA_NAME_NEW_TESTS}
+						</Button>
+						<Button
+							variant="contained"
+							color={
+								dataKey === DATA_KEY_POS_TESTS
+									? 'primary'
+									: 'default'
+							}
+							onClick={() =>
+								history.push(`${basePath}/${PATH_POS_TESTS}`)
+							}
+						>
+							{DATA_NAME_POS_TESTS}
+						</Button>
+						<Button
+							variant="contained"
+							color={
+								dataKey === DATA_KEY_NEW_HOSPITAL
+									? 'primary'
+									: 'default'
+							}
+							onClick={() =>
+								history.push(`${basePath}/${PATH_NEW_HOSPITAL}`)
+							}
+						>
+							{DATA_NAME_NEW_HOSPITAL}
+						</Button>
+					</Grid>
+				)}
+			</div>
+		</Grid>
+	);
 };
 BaseHistoricalChart.propTypes = {
-    isState: PropTypes.bool
+	isState: PropTypes.bool
 };
 BaseHistoricalChart.defaultProps = {
-    isState: false
+	isState: false
 };
 
 export default BaseHistoricalChart;

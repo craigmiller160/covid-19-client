@@ -28,59 +28,54 @@ import createMenuItems from './menuItems';
 import './MobileMenu.scss';
 
 const MobileMenu = (props) => {
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const {
-        isMenuOpen,
-        handleMenuClose
-    } = props;
+	const dispatch = useDispatch();
+	const location = useLocation();
+	const { isMenuOpen, handleMenuClose } = props;
 
-    const menuItems = createMenuItems(dispatch, location.pathname, handleMenuClose);
-    const mergedMenuItems = [ ...menuItems.left, ...menuItems.right ];
+	const menuItems = createMenuItems(
+		dispatch,
+		location.pathname,
+		handleMenuClose
+	);
+	const mergedMenuItems = [...menuItems.left, ...menuItems.right];
 
-    return (
-        <Drawer
-            className="MobileMenu"
-            open={ isMenuOpen }
-            onClose={ handleMenuClose }
-        >
-            <NavLink
-                to="/"
-                exact
-                className="NavLink"
-            >
-                <Typography
-                    className="title"
-                    variant="h6"
-                    noWrap
-                    onClick={ handleMenuClose }
-                >
-                    COVID-19 Data
-                </Typography>
-            </NavLink>
-            {
-                mergedMenuItems.map((item) => (
-                    <ListItem
-                        key={ item.to }
-                        className={ `item ${item.active ? 'active' : ''}` }
-                        onClick={ item.onClick }
-                    >
-                        <NavLink
-                            to={ item.to }
-                            exact={ item.exact }
-                            className="NavLink"
-                        >
-                            <ListItemText>{ item.label }</ListItemText>
-                        </NavLink>
-                    </ListItem>
-                ))
-            }
-        </Drawer>
-    );
+	return (
+		<Drawer
+			className="MobileMenu"
+			open={isMenuOpen}
+			onClose={handleMenuClose}
+		>
+			<NavLink to="/" exact className="NavLink">
+				<Typography
+					className="title"
+					variant="h6"
+					noWrap
+					onClick={handleMenuClose}
+				>
+					COVID-19 Data
+				</Typography>
+			</NavLink>
+			{mergedMenuItems.map((item) => (
+				<ListItem
+					key={item.to}
+					className={`item ${item.active ? 'active' : ''}`}
+					onClick={item.onClick}
+				>
+					<NavLink
+						to={item.to}
+						exact={item.exact}
+						className="NavLink"
+					>
+						<ListItemText>{item.label}</ListItemText>
+					</NavLink>
+				</ListItem>
+			))}
+		</Drawer>
+	);
 };
 MobileMenu.propTypes = {
-    isMenuOpen: PropTypes.bool,
-    handleMenuClose: PropTypes.func.isRequired
+	isMenuOpen: PropTypes.bool,
+	handleMenuClose: PropTypes.func.isRequired
 };
 
 export default MobileMenu;

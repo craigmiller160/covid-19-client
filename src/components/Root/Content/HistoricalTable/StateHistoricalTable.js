@@ -25,27 +25,28 @@ import useLoading from '../../../hooks/useLoading';
 import stateSlice from '../../../../store/stateData/slice';
 
 const Component = () => (
-    <div>
-        <StateSearch />
-        <BaseHistoricalTable isState />
-    </div>
+	<div>
+		<StateSearch />
+		<BaseHistoricalTable isState />
+	</div>
 );
 
 const StateHistoricalTable = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadStateHistoricalData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
+	const dispatch = useDispatch();
+	const loader = () => dispatch(loadStateHistoricalData());
+	const DisplayComponent = useLoading({
+		loader,
+		component: Component
+	});
 
-    useEffect(() => () => {
-            dispatch(stateSlice.actions.setHistoricalData([]));
-        }, []);
+	useEffect(
+		() => () => {
+			dispatch(stateSlice.actions.setHistoricalData([]));
+		},
+		[]
+	);
 
-    return (
-        <DisplayComponent />
-    );
+	return <DisplayComponent />;
 };
 
 export default StateHistoricalTable;

@@ -31,71 +31,65 @@ import TableCell from '@material-ui/core/TableCell';
 const rowsPerPage = 20;
 
 const Table = (props) => {
-    const {
-        data,
-        columnNames,
-        dataRow,
-        rootClassName
-    } = props;
-    const [ state, setState ] = useState({
-        page: 0
-    });
+	const { data, columnNames, dataRow, rootClassName } = props;
+	const [state, setState] = useState({
+		page: 0
+	});
 
-    const onChangePage = (event, page) => {
-        setState((prevState) => ({
-            ...prevState,
-            page
-        }));
-    };
+	const onChangePage = (event, page) => {
+		setState((prevState) => ({
+			...prevState,
+			page
+		}));
+	};
 
-    const dataToDisplay = data.slice(state.page * rowsPerPage, state.page * rowsPerPage + rowsPerPage);
-    const DataRow = dataRow;
+	const dataToDisplay = data.slice(
+		state.page * rowsPerPage,
+		state.page * rowsPerPage + rowsPerPage
+	);
+	const DataRow = dataRow;
 
-    return (
-        <Paper className={ rootClassName }>
-            <TableContainer>
-                <TableComp>
-                    <TableHead>
-                        <TableRow>
-                            {
-                                columnNames.map((name) => (
-                                    <TableCell key={ name }>{ name }</TableCell>
-                                ))
-                            }
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            dataToDisplay.map((record, index) => (
-                                <DataRow
-                                    key={ record._id } // eslint-disable-line no-underscore-dangle
-                                    index={ index }
-                                    record={ record }
-                                />
-                            ))
-                        }
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPage={ rowsPerPage }
-                                rowsPerPageOptions={ [ rowsPerPage ] }
-                                count={ data.length }
-                                page={ state.page }
-                                onChangePage={ onChangePage }
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </TableComp>
-            </TableContainer>
-        </Paper>
-    );
+	return (
+		<Paper className={rootClassName}>
+			<TableContainer>
+				<TableComp>
+					<TableHead>
+						<TableRow>
+							{columnNames.map((name) => (
+								<TableCell key={name}>{name}</TableCell>
+							))}
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{dataToDisplay.map((record, index) => (
+							<DataRow
+								key={record._id} // eslint-disable-line no-underscore-dangle
+								index={index}
+								record={record}
+							/>
+						))}
+					</TableBody>
+					<TableFooter>
+						<TableRow>
+							<TablePagination
+								rowsPerPage={rowsPerPage}
+								rowsPerPageOptions={[rowsPerPage]}
+								count={data.length}
+								page={state.page}
+								onChangePage={onChangePage}
+							/>
+						</TableRow>
+					</TableFooter>
+				</TableComp>
+			</TableContainer>
+		</Paper>
+	);
 };
 Table.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.any).isRequired,
-    columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-    dataRow: PropTypes.elementType.isRequired,
-    rootClassName: PropTypes.string
+	data: PropTypes.arrayOf(PropTypes.any).isRequired,
+	columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+	dataRow: PropTypes.elementType.isRequired,
+	rootClassName: PropTypes.string
 };
 
 export default Table;

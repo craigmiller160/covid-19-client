@@ -25,13 +25,13 @@ import store from '../store';
 import Root from './Root';
 
 const App = () => (
-    <ReduxProvider store={ store }>
-        <BrowserRouter basename="/covid-19">
-            <MuiPickersUtilsProvider utils={ DateFnsUtils }>
-                <Root />
-            </MuiPickersUtilsProvider>
-        </BrowserRouter>
-    </ReduxProvider>
+	<ReduxProvider store={store}>
+		<BrowserRouter basename="/covid-19">
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<Root />
+			</MuiPickersUtilsProvider>
+		</BrowserRouter>
+	</ReduxProvider>
 );
 
 export default App;

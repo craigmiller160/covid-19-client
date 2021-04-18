@@ -20,13 +20,13 @@ export const COUNTRY_COMPARE_FORM = 'countryCompare';
 export const STATE_COMPARE_FORM = 'stateCompare';
 
 export const rankByOptions = [
-    { label: 'Total Cases', value: 'totalCases' },
-    { label: 'Total Deaths', value: 'totalDeaths' },
-    { label: 'Cases Per-Million', value: 'totalCasesPerMillion' },
-    { label: 'Deaths Per-Million', value: 'totalDeathsPerMillion' }
+	{ label: 'Total Cases', value: 'totalCases' },
+	{ label: 'Total Deaths', value: 'totalDeaths' },
+	{ label: 'Cases Per-Million', value: 'totalCasesPerMillion' },
+	{ label: 'Deaths Per-Million', value: 'totalDeathsPerMillion' }
 ];
 
 export const orderOptions = [
-    { label: 'Highest to Lowest', value: 'desc' },
-    { label: 'Lowest to Highest', value: 'asc' }
+	{ label: 'Highest to Lowest', value: 'desc' },
+	{ label: 'Lowest to Highest', value: 'asc' }
 ];

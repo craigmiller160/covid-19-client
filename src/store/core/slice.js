@@ -19,29 +19,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    loading: false,
-    error: null,
-    downloadDate: null
+	loading: false,
+	error: null,
+	downloadDate: null
 };
 
 const setLoading = (draft, action) => {
-    draft.loading = action.payload;
+	draft.loading = action.payload;
 };
 
 const setError = (draft, action) => {
-    draft.error = action.payload;
+	draft.error = action.payload;
 };
 
 const setDownloadDate = (draft, action) => {
-    draft.downloadDate = action.payload;
+	draft.downloadDate = action.payload;
 };
 
 export default createSlice({
-    name: 'core',
-    initialState,
-    reducers: {
-        setLoading,
-        setError,
-        setDownloadDate
-    }
+	name: 'core',
+	initialState,
+	reducers: {
+		setLoading,
+		setError,
+		setDownloadDate
+	}
 });

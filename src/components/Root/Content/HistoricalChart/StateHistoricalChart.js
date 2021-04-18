@@ -25,31 +25,35 @@ import useLoading from '../../../hooks/useLoading';
 import stateSlice from '../../../../store/stateData/slice';
 
 const Component = () => (
-    <div>
-        <StateSearch />
-        <p>
-            <span>Additional data is available for states that is not available nationally. </span>
-            <span>Please select an individual state to see it.</span>
-        </p>
-        <BaseHistoricalChart isState />
-    </div>
+	<div>
+		<StateSearch />
+		<p>
+			<span>
+				Additional data is available for states that is not available
+				nationally.{' '}
+			</span>
+			<span>Please select an individual state to see it.</span>
+		</p>
+		<BaseHistoricalChart isState />
+	</div>
 );
 
 const StateHistoricalChart = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadStateHistoricalData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
+	const dispatch = useDispatch();
+	const loader = () => dispatch(loadStateHistoricalData());
+	const DisplayComponent = useLoading({
+		loader,
+		component: Component
+	});
 
-    useEffect(() => () => {
-            dispatch(stateSlice.actions.setHistoricalData([]));
-        }, []);
+	useEffect(
+		() => () => {
+			dispatch(stateSlice.actions.setHistoricalData([]));
+		},
+		[]
+	);
 
-    return (
-        <DisplayComponent />
-    );
+	return <DisplayComponent />;
 };
 
 export default StateHistoricalChart;

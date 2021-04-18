@@ -19,7 +19,4 @@
 const worldOption = { label: 'World', value: 'World' };
 const usOption = { label: 'USA', value: 'USA' };
 
-export {
-    worldOption,
-    usOption
-};
+export { worldOption, usOption };

@@ -26,20 +26,21 @@ import stateSlice from '../../../../store/stateData/slice';
 const Component = () => <BaseCompareTable isState />;
 
 const StateCompareTable = () => {
-    const dispatch = useDispatch();
-    const loader = () => dispatch(loadStateCompareData());
-    const DisplayComponent = useLoading({
-        loader,
-        component: Component
-    });
+	const dispatch = useDispatch();
+	const loader = () => dispatch(loadStateCompareData());
+	const DisplayComponent = useLoading({
+		loader,
+		component: Component
+	});
 
-    useEffect(() => () => {
-            dispatch(stateSlice.actions.setCompareData([]));
-        }, []);
+	useEffect(
+		() => () => {
+			dispatch(stateSlice.actions.setCompareData([]));
+		},
+		[]
+	);
 
-    return (
-        <DisplayComponent />
-    );
+	return <DisplayComponent />;
 };
 
 export default StateCompareTable;

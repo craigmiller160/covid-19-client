@@ -22,50 +22,56 @@ import { Field } from 'redux-form';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const AutocompleteField = (props) => {
-    const {
-        className,
-        options,
-        getOptionLabel,
-        renderInput,
-        name,
-        multiple,
-        onChange
-    } = props;
+	const {
+		className,
+		options,
+		getOptionLabel,
+		renderInput,
+		name,
+		multiple,
+		onChange
+	} = props;
 
-    return (
-        <Field
-            name={ name }
-            onChange={ onChange }
-            component={ (rfProps) => (
-                <Autocomplete
-                    multiple={ multiple }
-                    filterSelectedOptions={ multiple }
-                    className={ className }
-                    options={ options }
-                    getOptionLabel={ getOptionLabel }
-                    renderInput={ renderInput }
-                    onChange={ (event, newValue) => rfProps.input.onChange(newValue) }
-                    value={ rfProps.input.value }
-                    getOptionSelected={ (option, value) => option.value === value.value }
-                />
-            ) }
-        />
-    );
+	return (
+		<Field
+			name={name}
+			onChange={onChange}
+			component={(rfProps) => (
+				<Autocomplete
+					multiple={multiple}
+					filterSelectedOptions={multiple}
+					className={className}
+					options={options}
+					getOptionLabel={getOptionLabel}
+					renderInput={renderInput}
+					onChange={(event, newValue) =>
+						rfProps.input.onChange(newValue)
+					}
+					value={rfProps.input.value}
+					getOptionSelected={(option, value) =>
+						option.value === value.value
+					}
+				/>
+			)}
+		/>
+	);
 };
 AutocompleteField.propTypes = {
-    className: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.shape({
-        value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-        label: PropTypes.string
-    })).isRequired,
-    getOptionLabel: PropTypes.func.isRequired,
-    renderInput: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    multiple: PropTypes.bool,
-    onChange: PropTypes.func
+	className: PropTypes.string,
+	options: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+			label: PropTypes.string
+		})
+	).isRequired,
+	getOptionLabel: PropTypes.func.isRequired,
+	renderInput: PropTypes.func.isRequired,
+	name: PropTypes.string.isRequired,
+	multiple: PropTypes.bool,
+	onChange: PropTypes.func
 };
 AutocompleteField.defaultProps = {
-    multiple: false
+	multiple: false
 };
 
 export default AutocompleteField;

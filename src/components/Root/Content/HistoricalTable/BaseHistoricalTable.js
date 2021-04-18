@@ -24,89 +24,86 @@ import Table from '../../../ui/Table';
 import useHistoryData from '../../../hooks/useHistoryData';
 
 const calcMortality = (entry) => {
-    if (entry.totalCases === 0) {
-        return '0.00%';
-    }
-    const value = (entry.totalDeaths / entry.totalCases) * 100;
-    return `${value.toFixed(2)}%`;
+	if (entry.totalCases === 0) {
+		return '0.00%';
+	}
+	const value = (entry.totalDeaths / entry.totalCases) * 100;
+	return `${value.toFixed(2)}%`;
 };
 
 const columnNames = [
-    'Date',
-    'New Cases',
-    'Total Cases',
-    'New Deaths',
-    'Total Deaths',
-    'Total Mortality Rate'
+	'Date',
+	'New Cases',
+	'Total Cases',
+	'New Deaths',
+	'Total Deaths',
+	'Total Mortality Rate'
 ];
 
-const vaccineColumnNames = [
-    'New Vaccinated',
-    'Total Vaccinated'
-];
+const vaccineColumnNames = ['New Vaccinated', 'Total Vaccinated'];
 
 const BaseHistoricalTable = (props) => {
-    const {
-        isState
-    } = props;
-    const { data } = useHistoryData({ isState });
+	const { isState } = props;
+	const { data } = useHistoryData({ isState });
 
-    const fullData = [ ...data ];
-    let fullColumnNames = columnNames;
-    let hasVaccineData = false;
-    if (fullData.length > 0) {
-        hasVaccineData = fullData[0].totalVaccines !== undefined;
-        const currentItem = {
-            _id: 'CURRENT',
-            date: 'CURRENT',
-            newCases: 'N/A',
-            totalCases: data[0].totalCases,
-            newDeaths: 'N/A',
-            totalDeaths: data[0].totalDeaths,
-            caseDoubleDays: data[0].caseDoubleDays
-        };
-        if (hasVaccineData) {
-            currentItem.newVaccines = 'N/A';
-            currentItem.totalVaccines = data[0].totalVaccines;
+	const fullData = [...data];
+	let fullColumnNames = columnNames;
+	let hasVaccineData = false;
+	if (fullData.length > 0) {
+		hasVaccineData = fullData[0].totalVaccines !== undefined;
+		const currentItem = {
+			_id: 'CURRENT',
+			date: 'CURRENT',
+			newCases: 'N/A',
+			totalCases: data[0].totalCases,
+			newDeaths: 'N/A',
+			totalDeaths: data[0].totalDeaths,
+			caseDoubleDays: data[0].caseDoubleDays
+		};
+		if (hasVaccineData) {
+			currentItem.newVaccines = 'N/A';
+			currentItem.totalVaccines = data[0].totalVaccines;
 
-            fullColumnNames = [
-                ...columnNames,
-                ...vaccineColumnNames
-            ];
-        }
+			fullColumnNames = [...columnNames, ...vaccineColumnNames];
+		}
 
-        fullData.unshift(currentItem);
-    }
+		fullData.unshift(currentItem);
+	}
 
-    return (
-        <Table
-            columnNames={ fullColumnNames }
-            data={ fullData }
-            dataRow={ ({ record }) => (
-                <TableRow>
-                    <TableCell>{ record.date }</TableCell>
-                    <TableCell>{ record.newCases?.toLocaleString() }</TableCell>
-                    <TableCell>{ record.totalCases?.toLocaleString() }</TableCell>
-                    <TableCell>{ record.newDeaths?.toLocaleString() }</TableCell>
-                    <TableCell>{ record.totalDeaths?.toLocaleString() }</TableCell>
-                    <TableCell>{ calcMortality(record) }</TableCell>
-                    {
-                        hasVaccineData &&
-                        <>
-                            <TableCell>{ record.newVaccines.toLocaleString() }</TableCell>
-                            <TableCell>{ record.totalVaccines.toLocaleString() }</TableCell>
-                        </>
-                    }
-                </TableRow>
-            ) }
-        />
-    );
+	return (
+		<Table
+			columnNames={fullColumnNames}
+			data={fullData}
+			dataRow={({ record }) => (
+				<TableRow>
+					<TableCell>{record.date}</TableCell>
+					<TableCell>{record.newCases?.toLocaleString()}</TableCell>
+					<TableCell>{record.totalCases?.toLocaleString()}</TableCell>
+					<TableCell>{record.newDeaths?.toLocaleString()}</TableCell>
+					<TableCell>
+						{record.totalDeaths?.toLocaleString()}
+					</TableCell>
+					<TableCell>{calcMortality(record)}</TableCell>
+					{hasVaccineData && (
+						<>
+							<TableCell>
+								{record.newVaccines.toLocaleString()}
+							</TableCell>
+							<TableCell>
+								{record.totalVaccines.toLocaleString()}
+							</TableCell>
+						</>
+					)}
+				</TableRow>
+			)}
+		/>
+	);
 };
 BaseHistoricalTable.propTypes = {
-    isState: PropTypes.bool
+	isState: PropTypes.bool
 };
 BaseHistoricalTable.defaultProps = {
-    isState: false
+	isState: false
 };
 
 export default BaseHistoricalTable;

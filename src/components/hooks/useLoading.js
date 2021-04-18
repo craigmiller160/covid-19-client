@@ -21,23 +21,20 @@ import { useSelector } from 'react-redux';
 import Loading from '../Root/Content/Loading';
 
 const useLoading = (props) => {
-    const {
-        loader,
-        component
-    } = props;
-    const loading = useSelector((state) => state.core.loading);
+	const { loader, component } = props;
+	const loading = useSelector((state) => state.core.loading);
 
-    const Component = component;
+	const Component = component;
 
-    useEffect(() => {
-        loader();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+	useEffect(() => {
+		loader();
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    if (loading) {
-        return Loading;
-    }
+	if (loading) {
+		return Loading;
+	}
 
-    return Component;
+	return Component;
 };
 
 export default useLoading;

@@ -32,75 +32,77 @@ import createMenuItems from './menuItems';
 import MobileMenu from './MobileMenu';
 
 const NavBar = () => {
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const loading = useSelector((state) => state.core.loading);
-    const [ isMenuOpen, setMenuOpen ] = useState(false);
-    const theme = useTheme();
-    const isNotPhone = useMediaQuery(theme.breakpoints.up('md'));
+	const dispatch = useDispatch();
+	const location = useLocation();
+	const loading = useSelector((state) => state.core.loading);
+	const [isMenuOpen, setMenuOpen] = useState(false);
+	const theme = useTheme();
+	const isNotPhone = useMediaQuery(theme.breakpoints.up('md'));
 
-    const handleMenuOpen = () => {
-        setMenuOpen(true);
-    };
+	const handleMenuOpen = () => {
+		setMenuOpen(true);
+	};
 
-    const handleMenuClose = () => {
-        setMenuOpen(false);
-    };
+	const handleMenuClose = () => {
+		setMenuOpen(false);
+	};
 
-    const menuItems = createMenuItems(dispatch, location.pathname);
+	const menuItems = createMenuItems(dispatch, location.pathname);
 
-    return (
-        <div>
-            <AppBar position="static" className="NavBar">
-                <Toolbar>
-                    {
-                        !isNotPhone && !loading &&
-                        <IconButton edge="start" color="inherit" onClick={ handleMenuOpen }>
-                            <MenuIcon />
-                        </IconButton>
-                    }
-                    <Button variant="text" color="inherit">
-                        <NavLink
-                            to="/"
-                            exact
-                            className="NavLink"
-                        >
-                            <Typography className="title" variant="h6" noWrap>COVID-19 Data</Typography>
-                        </NavLink>
-                    </Button>
-                    {
-                        !loading && isNotPhone &&
-                        <>
-                            <div className="left">
-                                {
-                                    menuItems.left.map((item) => (
-                                        <Button
-                                            key={ item.to }
-                                            variant={ item.active ? 'contained' : 'text' }
-                                            color={ item.active ? 'default' : 'inherit' }
-                                            onClick={ item.onClick }
-                                        >
-                                            <NavLink
-                                                to={ item.to }
-                                                exact={ item.exact }
-                                                className="NavLink"
-                                            >
-                                                { item.label }
-                                            </NavLink>
-                                        </Button>
-                                    ))
-                                }
-                            </div>
-                        </>
-                    }
-                </Toolbar>
-            </AppBar>
-            <MobileMenu
-                isMenuOpen={ isMenuOpen && !loading }
-                handleMenuClose={ handleMenuClose }
-            />
-        </div>
-    );
+	return (
+		<div>
+			<AppBar position="static" className="NavBar">
+				<Toolbar>
+					{!isNotPhone && !loading && (
+						<IconButton
+							edge="start"
+							color="inherit"
+							onClick={handleMenuOpen}
+						>
+							<MenuIcon />
+						</IconButton>
+					)}
+					<Button variant="text" color="inherit">
+						<NavLink to="/" exact className="NavLink">
+							<Typography className="title" variant="h6" noWrap>
+								COVID-19 Data
+							</Typography>
+						</NavLink>
+					</Button>
+					{!loading && isNotPhone && (
+						<>
+							<div className="left">
+								{menuItems.left.map((item) => (
+									<Button
+										key={item.to}
+										variant={
+											item.active ? 'contained' : 'text'
+										}
+										color={
+											item.active ? 'default' : 'inherit'
+										}
+										onClick={item.onClick}
+									>
+										<NavLink
+											to={item.to}
+											exact={item.exact}
+											className="NavLink"
+										>
+											{item.label}
+										</NavLink>
+									</Button>
+								))}
+							</div>
+						</>
+					)}
+				</Toolbar>
+			</AppBar>
+			<MobileMenu
+				isMenuOpen={isMenuOpen && !loading}
+				handleMenuClose={handleMenuClose}
+			/>
+		</div>
+	);
 };
 
 export default NavBar;

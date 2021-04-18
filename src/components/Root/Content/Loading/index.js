@@ -21,14 +21,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import './Loading.scss';
 
 const spinnerStyle = {
-    width: '100%',
-    height: '100%'
+	width: '100%',
+	height: '100%'
 };
 
 const Loading = () => (
-    <div className="Loading">
-        <CircularProgress style={ spinnerStyle } />
-    </div>
+	<div className="Loading">
+		<CircularProgress style={spinnerStyle} />
+	</div>
 );
 
 export default Loading;

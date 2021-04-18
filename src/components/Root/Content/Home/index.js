@@ -23,60 +23,64 @@ import './Home.scss';
 import covidImg from '../../../../assets/images/2760147.svg';
 
 const Home = () => (
-        <Grid
-            className="Home"
-            container
-            direction="row"
-        >
-            <Grid
-                className="Section"
-                item
-                sm={ 5 }
-            >
-                <Paper>
-                    <h1>Welcome to COVID 19 Statistics</h1>
-                    <h3>
-                        <span>This application presents accurate data, both raw statistics </span>
-                        <span>and analysis on the COVID 19 pandemic.</span>
-                    </h3>
-                    <img className="CovidImg" src={ covidImg } alt="COVID Icon" />
-                </Paper>
-            </Grid>
-            <Grid item sm={ 2 } />
-            <Grid
-                className="Section"
-                item
-                sm={ 5 }
-            >
-                <Paper>
-                    <h1>Sources</h1>
-                    <h3>This application would not be possible without data from the following sources.</h3>
-                    <p>
-                        <strong>Disease.sh: </strong>
-                        <span>for providing the API for all COVID stats, population data,</span>
-                        <span>etc worldwide.</span>
-                    </p>
-                    <p>
-                        <strong>Worldometers: </strong>
-                        <span>For being the source of many of the COVID stats provided</span>
-                        <span>by Disease.sh.</span>
-                    </p>
-                    <p>
-                        <strong>John&apos;s Hopkins: </strong>
-                        <span>For being the source of many of the COVID stats provided</span>
-                        <span>by Disease.sh.</span>
-                    </p>
-                    <p>
-                        <strong>The COVID Tracking Project: </strong>
-                        <span>for providing the raw COVID case statistics for US states.</span>
-                    </p>
-                    <p>
-                        <strong>US Census Bureau: </strong>
-                        <span>for providing US state population data.</span>
-                    </p>
-                </Paper>
-            </Grid>
-        </Grid>
-    );
+	<Grid className="Home" container direction="row">
+		<Grid className="Section" item sm={5}>
+			<Paper>
+				<h1>Welcome to COVID 19 Statistics</h1>
+				<h3>
+					<span>
+						This application presents accurate data, both raw
+						statistics{' '}
+					</span>
+					<span>and analysis on the COVID 19 pandemic.</span>
+				</h3>
+				<img className="CovidImg" src={covidImg} alt="COVID Icon" />
+			</Paper>
+		</Grid>
+		<Grid item sm={2} />
+		<Grid className="Section" item sm={5}>
+			<Paper>
+				<h1>Sources</h1>
+				<h3>
+					This application would not be possible without data from the
+					following sources.
+				</h3>
+				<p>
+					<strong>Disease.sh: </strong>
+					<span>
+						for providing the API for all COVID stats, population
+						data,
+					</span>
+					<span>etc worldwide.</span>
+				</p>
+				<p>
+					<strong>Worldometers: </strong>
+					<span>
+						For being the source of many of the COVID stats provided
+					</span>
+					<span>by Disease.sh.</span>
+				</p>
+				<p>
+					<strong>John&apos;s Hopkins: </strong>
+					<span>
+						For being the source of many of the COVID stats provided
+					</span>
+					<span>by Disease.sh.</span>
+				</p>
+				<p>
+					<strong>The COVID Tracking Project: </strong>
+					<span>
+						for providing the raw COVID case statistics for US
+						states.
+					</span>
+				</p>
+				<p>
+					<strong>US Census Bureau: </strong>
+					<span>for providing US state population data.</span>
+				</p>
+			</Paper>
+		</Grid>
+	</Grid>
+);
 
 export default Home;

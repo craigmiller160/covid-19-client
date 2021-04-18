@@ -27,54 +27,49 @@ import startOfMonth from 'date-fns/startOfMonth/index';
 const DATE_FORMAT = 'yyyy-MM-dd';
 
 const parseValue = (value, defaultValue) => {
-    if (value) {
-        return parse(value, DATE_FORMAT, new Date());
-    }
+	if (value) {
+		return parse(value, DATE_FORMAT, new Date());
+	}
 
-    return parse(defaultValue, DATE_FORMAT, new Date());
+	return parse(defaultValue, DATE_FORMAT, new Date());
 };
 
 const MonthField = (props) => {
-    const {
-        label,
-        name,
-        onChange,
-        defaultValue
-    } = props;
+	const { label, name, onChange, defaultValue } = props;
 
-    return (
-        <Field
-            name={ name }
-            onChange={ onChange }
-            component={ (rfProps) => {
-                const value = parseValue(rfProps.input.value, defaultValue);
-                const innerOnChange = (newValue) => {
-                    const formattedValue = format(startOfMonth(newValue), DATE_FORMAT);
-                    rfProps.input.onChange(formattedValue);
-                };
+	return (
+		<Field
+			name={name}
+			onChange={onChange}
+			component={(rfProps) => {
+				const value = parseValue(rfProps.input.value, defaultValue);
+				const innerOnChange = (newValue) => {
+					const formattedValue = format(
+						startOfMonth(newValue),
+						DATE_FORMAT
+					);
+					rfProps.input.onChange(formattedValue);
+				};
 
-                return (
-                    <DatePicker
-                        variant="outlined"
-                        label={ label }
-                        openTo="month"
-                        views={ [
-                            'year',
-                            'month'
-                        ] }
-                        onChange={ innerOnChange }
-                        value={ value }
-                    />
-                );
-            } }
-        />
-    );
+				return (
+					<DatePicker
+						variant="outlined"
+						label={label}
+						openTo="month"
+						views={['year', 'month']}
+						onChange={innerOnChange}
+						value={value}
+					/>
+				);
+			}}
+		/>
+	);
 };
 MonthField.propTypes = {
-    label: PropTypes.string,
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    defaultValue: PropTypes.string
+	label: PropTypes.string,
+	name: PropTypes.string,
+	onChange: PropTypes.func,
+	defaultValue: PropTypes.string
 };
 
 export default MonthField;

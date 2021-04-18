@@ -19,35 +19,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    historicalData: [],
-    currentData: [],
-    countries: [],
-    compareData: []
+	historicalData: [],
+	currentData: [],
+	countries: [],
+	compareData: []
 };
 
 const setCountries = (draft, action) => {
-    draft.countries = action.payload;
+	draft.countries = action.payload;
 };
 
 const setHistoricalData = (draft, action) => {
-    draft.historicalData = action.payload;
+	draft.historicalData = action.payload;
 };
 
 const setCurrentData = (draft, action) => {
-    draft.currentData = action.payload;
+	draft.currentData = action.payload;
 };
 
 const setCompareData = (draft, action) => {
-    draft.compareData = action.payload;
+	draft.compareData = action.payload;
 };
 
 export default createSlice({
-    name: 'countryData',
-    initialState,
-    reducers: {
-        setCountries,
-        setHistoricalData,
-        setCurrentData,
-        setCompareData
-    }
+	name: 'countryData',
+	initialState,
+	reducers: {
+		setCountries,
+		setHistoricalData,
+		setCurrentData,
+		setCompareData
+	}
 });

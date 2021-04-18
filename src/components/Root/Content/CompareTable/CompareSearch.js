@@ -27,124 +27,125 @@ import { AutocompleteField, Form } from '../../../form';
 import { loadCountryCompareData } from '../../../../store/countryData/actions';
 import { loadStateCompareData } from '../../../../store/stateData/actions';
 import MonthField from '../../../form/MonthField';
-import { DEFAULT_END_DATE, DEFAULT_START_DATE } from '../../../../util/defaultDates';
+import {
+	DEFAULT_END_DATE,
+	DEFAULT_START_DATE
+} from '../../../../util/defaultDates';
 
 const countryListSelector = (state) => state.countryData.countries;
 const stateListSelector = (state) => state.stateData.states;
 
 const CompareSearch = (props) => {
-    const {
-        isState,
-        formName
-    } = props;
-    const dispatch = useDispatch();
-    const countrySubmit = () => dispatch(loadCountryCompareData());
-    const stateSubmit = () => dispatch(loadStateCompareData());
-    const onSubmit = isState ? stateSubmit : countrySubmit;
-    const onChangeSubmit = (value, arg2, arg3, fieldName) => onSubmit({ field: fieldName, value });
-    const locationFilterLabel = isState ? 'States' : 'Countries';
-    const listSelector = isState ? stateListSelector : countryListSelector;
-    const list = useSelector(listSelector, shallowEqual);
-    const listWithoutTotalElement = list.slice(1);
+	const { isState, formName } = props;
+	const dispatch = useDispatch();
+	const countrySubmit = () => dispatch(loadCountryCompareData());
+	const stateSubmit = () => dispatch(loadStateCompareData());
+	const onSubmit = isState ? stateSubmit : countrySubmit;
+	const onChangeSubmit = (value, arg2, arg3, fieldName) =>
+		onSubmit({ field: fieldName, value });
+	const locationFilterLabel = isState ? 'States' : 'Countries';
+	const listSelector = isState ? stateListSelector : countryListSelector;
+	const list = useSelector(listSelector, shallowEqual);
+	const listWithoutTotalElement = list.slice(1);
 
-    return (
-        <Form
-            className="FilterForm"
-            form={ formName }
-            destroyOnUnmount={ false }
-            onSubmit={ onSubmit }
-            initialValues={ {
-                sortKey: rankByOptions[0],
-                sortOrder: orderOptions[0],
-                location: [],
-                startDate: DEFAULT_START_DATE,
-                endDate: DEFAULT_END_DATE
-            } }
-        >
-            <Paper>
-                <Grid
-                    container
-                    direction="row"
-                    justify="space-around"
-                    alignItems="center"
-                >
-                    <MonthField
-                        name="startDate"
-                        label="Start Month"
-                        defaultValue={ DEFAULT_START_DATE }
-                        onChange={ onChangeSubmit }
-                    />
-                    <MonthField
-                        name="endDate"
-                        label="End Month"
-                        defaultValue={ DEFAULT_END_DATE }
-                        onChange={ onChangeSubmit }
-                    />
-                </Grid>
-                <Grid
-                    className="Filters"
-                    container
-                    direction="row"
-                    justify="space-around"
-                    alignItems="center"
-                >
-                    <AutocompleteField
-                        className="FilterField spacing"
-                        options={ rankByOptions }
-                        getOptionLabel={ (option) => option.label ?? '' }
-                        onChange={ onChangeSubmit }
-                        renderInput={ (params) => (
-                            <TextField
-                                { ...params }
-                                label="Rank By"
-                                variant="outlined"
-                            />
-                        ) }
-                        name="sortKey"
-                    />
-                    <AutocompleteField
-                        className="FilterField spacing"
-                        options={ orderOptions }
-                        getOptionLabel={ (option) => option.label ?? '' }
-                        onChange={ onChangeSubmit }
-                        renderInput={ (params) => (
-                            <TextField
-                                { ...params }
-                                label="Order"
-                                variant="outlined"
-                            />
-                        ) }
-                        name="sortOrder"
-                    />
-                </Grid>
-                <Grid
-                    className="Filters"
-                    container
-                    direction="row"
-                    justify="space-around"
-                >
-                    <AutocompleteField
-                        multiple
-                        className="FilterField long"
-                        options={ listWithoutTotalElement }
-                        getOptionLabel={ (option) => option?.label ?? [] }
-                        renderInput={ (params) => (
-                            <TextField
-                                { ...params }
-                                label={ locationFilterLabel }
-                                variant="outlined"
-                            />
-                        ) }
-                        name="location"
-                    />
-                </Grid>
-            </Paper>
-        </Form>
-    );
+	return (
+		<Form
+			className="FilterForm"
+			form={formName}
+			destroyOnUnmount={false}
+			onSubmit={onSubmit}
+			initialValues={{
+				sortKey: rankByOptions[0],
+				sortOrder: orderOptions[0],
+				location: [],
+				startDate: DEFAULT_START_DATE,
+				endDate: DEFAULT_END_DATE
+			}}
+		>
+			<Paper>
+				<Grid
+					container
+					direction="row"
+					justify="space-around"
+					alignItems="center"
+				>
+					<MonthField
+						name="startDate"
+						label="Start Month"
+						defaultValue={DEFAULT_START_DATE}
+						onChange={onChangeSubmit}
+					/>
+					<MonthField
+						name="endDate"
+						label="End Month"
+						defaultValue={DEFAULT_END_DATE}
+						onChange={onChangeSubmit}
+					/>
+				</Grid>
+				<Grid
+					className="Filters"
+					container
+					direction="row"
+					justify="space-around"
+					alignItems="center"
+				>
+					<AutocompleteField
+						className="FilterField spacing"
+						options={rankByOptions}
+						getOptionLabel={(option) => option.label ?? ''}
+						onChange={onChangeSubmit}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label="Rank By"
+								variant="outlined"
+							/>
+						)}
+						name="sortKey"
+					/>
+					<AutocompleteField
+						className="FilterField spacing"
+						options={orderOptions}
+						getOptionLabel={(option) => option.label ?? ''}
+						onChange={onChangeSubmit}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label="Order"
+								variant="outlined"
+							/>
+						)}
+						name="sortOrder"
+					/>
+				</Grid>
+				<Grid
+					className="Filters"
+					container
+					direction="row"
+					justify="space-around"
+				>
+					<AutocompleteField
+						multiple
+						className="FilterField long"
+						options={listWithoutTotalElement}
+						getOptionLabel={(option) => option?.label ?? []}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								label={locationFilterLabel}
+								variant="outlined"
+							/>
+						)}
+						name="location"
+					/>
+				</Grid>
+			</Paper>
+		</Form>
+	);
 };
 CompareSearch.propTypes = {
-    isState: PropTypes.bool,
-    formName: PropTypes.string
+	isState: PropTypes.bool,
+	formName: PropTypes.string
 };
 
 export default CompareSearch;

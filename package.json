@@ -10,7 +10,6 @@
   },
   "author": "craigmiller160",
   "dependencies": {
-    "@craigmiller160/es-lint-config": "file:.yalc/@craigmiller160/es-lint-config",
     "@date-io/date-fns": "v1.x",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -43,6 +42,7 @@
     "lint": "es-lint-scripts react-js"
   },
   "devDependencies": {
-    "@craigmiller160/react-web-config": "file:.yalc/@craigmiller160/react-web-config"
+    "@craigmiller160/es-lint-config": "^1.0.0",
+    "@craigmiller160/react-web-config": "^2.10.0"
   }
 }

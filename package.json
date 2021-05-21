@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "@craigmiller160/es-lint-config": "^1.0.0",
-    "@craigmiller160/react-web-config": "^2.10.0"
+    "@craigmiller160/react-web-config": "^2.10.0",
+    "node-sass": "npm:sass",
+    "sass": "^1.33.0"
   }
 }
